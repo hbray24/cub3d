@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvignes <mvignes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/18 11:00:34 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/18 16:20:45 by mmusquer         ###   ########.fr       */
+/*   Created: 2025/11/15 15:22:07 by mvignes           #+#    #+#             */
+/*   Updated: 2026/03/17 13:43:17 by mvignes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../includes/libft.h"
 
-void	error_end(char *msg, t_para *para)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	
+	if (lst->content)
+		del(lst->content);
+	if (lst)
+		del(lst);
 }

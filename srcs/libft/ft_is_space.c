@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   ft_is_space.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvignes <mvignes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/18 11:00:34 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/18 16:20:45 by mmusquer         ###   ########.fr       */
+/*   Created: 2026/04/18 13:46:14 by mvignes           #+#    #+#             */
+/*   Updated: 2026/04/18 13:49:29 by mvignes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../includes/libft.h"
 
-void	error_end(char *msg, t_para *para)
+int	ft_is_space(int c)
 {
-	
+	if ((c >= 7 && c <= 13) || c == 32)
+		return (1);
+	return (0);
 }
