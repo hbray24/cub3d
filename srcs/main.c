@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 13:58:29 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/18 17:48:40 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/19 10:53:03 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ static int	setup(int ac, char **av, t_para *para)
 	int		i;
 	
 	if (ac != 2)
-		error_end("Error: too many arguments\n", para);
+		error_pars("Error: too many arguments\n", para);
 	para->path = av[1];
 	i = ft_strlen(para->path);
 	if (i < 5)
-		error_end("Usage: path/name_map.cub\n", para);
+		error_pars("Usage: path/name_map.cub\n", para);
 	if (ft_strncmp(para->path + i - 4, ".cub", 4) != 0)
-		error_end("Usage: path/name_map.cub\n", para);
+		error_pars("Usage: path/name_map.cub\n", para);
 	if (para->path[i - 5] == '/')
-		error_end("Usage: path/name_map.cub\n", para);
+		error_pars("Usage: path/name_map.cub\n", para);
 	ft_memset(para, 0, sizeof(t_para));
 	para->floor_c = -1;
 	para->ceiling_c = -1;
