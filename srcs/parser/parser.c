@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:21 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/19 15:19:52 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/20 10:30:09 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,26 @@ static void	check_stock(t_para *para)
 	i = 0;
 	while (para->stock[i])
 	{
-		if (mode == SPRITE)
+		if (mode == 10)
 		{
 			if (is_line_space(para->stock[i]))
+			{
 				i++;
-			else if (is_header(i, para))
+				continue ;
+			}
+			else if (is_header(i, para) > 0)
+			{
 				pars_header();
-			else if (is_only_map_char(i, para->stock[i]) && is_header_complete(para))
-				mode = MAP;
+				i++;
+				continue ;
+			}
+			else if (is_only_map_char(i, para->stock[i]))
+			{
+				if (is_header_complete(para))
+					mode = MAP;
+				else
+					error_pars("Error: missing header\n", para);
+			}
 			else
 				error_pars("Error: invalid line\n", para);
 		}
@@ -44,7 +56,7 @@ static void	check_stock(t_para *para)
 		}
 		i++;
 	}
-	if (mode != MAP)
+	if (mode != 20)
 		error_pars("Error: no map\n", para);
 	if (para->map == NULL)
 		error_pars("Error: no map\n", para);

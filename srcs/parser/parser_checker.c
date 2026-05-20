@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:08:39 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/19 15:09:47 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/20 10:23:29 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,20 @@ int	is_header(int i, t_para *para)
 		j++;
 	if (para->stock[i][j] == 'N' && para->stock[i][j + 1] == 'O'
 		&& para->stock[i][j + 2] == ' ')
-		return (1);
+		return (para->header = NO);
 	else if (para->stock[i][j] == 'S' && para->stock[i][j + 1] == 'O'
 		&& para->stock[i][j + 2] == ' ')
-		return (1);
+		return (para->header = SO);
 	else if (para->stock[i][j] == 'W' && para->stock[i][j + 1] == 'E'
 		&& para->stock[i][j + 2] == ' ')
-		return (1);
+		return (para->header = WE);
 	else if (para->stock[i][j] == 'E' && para->stock[i][j + 1] == 'A'
 		&& para->stock[i][j + 2] == ' ')
-		return (1);
+		return (para->header = EA);
 	else if (para->stock[i][j] == 'F' && para->stock[i][j + 1] == ' ')
-		return (1);
+		return (para->header = F);
 	else if (para->stock[i][j] == 'C' && para->stock[i][j + 1] == ' ')
-		return (1);
+		return (para->header =  C);
 	return (0);
 }
 
