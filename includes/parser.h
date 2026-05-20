@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:03 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/20 11:24:03 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/20 11:42:17 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef enum e_type
 
 void		parsing(char **av, t_para *para);
 void		do_gnl(t_para *para);
+void		check_stock(t_para *para);
 
 int			is_only_map_char(int i, t_para *para);
 int			is_header(int i, t_para *para);

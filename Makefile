@@ -101,7 +101,7 @@ SRCS	= \
 		srcs/parser/parser.c
 		srcs/parser/parser_checker.c
 		srcs/parser/parser_utils.c
-		srcs/parser/readline.c
+		srcs/parser/parser_dispatch.c
 		\
 		srcs/exec/exec.c
 		srcs/exec/exec_utils.c

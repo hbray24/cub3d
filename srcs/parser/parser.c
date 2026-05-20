@@ -6,60 +6,61 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:21 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/20 10:30:09 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/20 11:37:55 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-
-static void	check_stock(t_para *para)
+static int	count_line(char *path, t_para *para)
 {
-	int	i;
-	int	mode;
+	int		fd;
+	char	*line;
+	int		n_line;
 
-	mode = SPRITE;
-	i = 0;
-	while (para->stock[i])
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		error_pars("Error: cannot open file\n", para);
+	n_line = 0;
+	line = get_next_line(fd);
+	while (line)
 	{
-		if (mode == 10)
-		{
-			if (is_line_space(para->stock[i]))
-			{
-				i++;
-				continue ;
-			}
-			else if (is_header(i, para) > 0)
-			{
-				pars_header();
-				i++;
-				continue ;
-			}
-			else if (is_only_map_char(i, para->stock[i]))
-			{
-				if (is_header_complete(para))
-					mode = MAP;
-				else
-					error_pars("Error: missing header\n", para);
-			}
-			else
-				error_pars("Error: invalid line\n", para);
-		}
-		if (mode == MAP)
-		{
-			if (is_line_space(para->stock[i]))
-				error_pars("Error: empty line in map\n", para);
-			else if (is_only_map_char(i, para->stock[i]))
-				add_line_map(para->stock[i], para);
-			else
-				error_pars("Error: wrong character\n", para);
-		}
+		n_line++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+	if (n_line == 0)
+		error_pars("Error: empty file\n", para);
+	return (n_line);
+}
+
+void	do_gnl(t_para *para)
+{
+	int		fd;
+	char	*line;
+	int		i;
+	int		len;
+
+	i = 0;
+	para->stock = malloc(sizeof(char *) * (count_line(para->path, para) + 1));
+	if (!para->stock)
+		error_pars("Error: malloc fail\n", para);
+	fd = open(para->path, O_RDONLY);
+	if (fd < 0)
+		error_pars("Error: cannot open file\n", para);
+	line = get_next_line(fd);
+	while (line)
+	{
+		len = ft_strlen(line);
+		if (len > 0 && line[len - 1] == '\n')
+			line[len - 1] = '\0';
+		para->stock[i] = line;
+		line = get_next_line(fd);
 		i++;
 	}
-	if (mode != 20)
-		error_pars("Error: no map\n", para);
-	if (para->map == NULL)
-		error_pars("Error: no map\n", para);
+	para->stock[i] = NULL;
+	close(fd);
 }
 
 void	parsing(char **av, t_para *para)
