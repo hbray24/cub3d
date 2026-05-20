@@ -6,38 +6,38 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:01:08 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/20 09:34:26 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/20 16:44:29 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "../../includes/cub.h"
 
 void	init_dda_step(float start_x, t_dda *dda, t_player *player)
 {
-	dda->ray_x = cos(start_x);
-	dda->ray_y = sin(start_x);
+	dda->angle_x = cos(start_x);
+	dda->angle_y = sin(start_x);
 	dda->pos_x = player->x / 64;
 	dda->pos_y = player->y / 64;
 	dda->map_x = (int)dda->pos_x;
 	dda->map_y = (int)dda->pos_y;
-	dda->delta_dist_x = fabs(1 / dda->ray_x);
-	dda->delta_dist_y = fabs(1 / dda->ray_y);
-	if (dda->ray_x < 0)
+	dda->delta_dist_x = fabs(1 / dda->angle_x);
+	dda->delta_dist_y = fabs(1 / dda->angle_y);
+	if (dda->angle_x < 0)
 		dda->step_x = -1;
 	else
 		dda->step_x = 1;
-	if (dda->ray_y < 0)
+	if (dda->angle_y < 0)
 		dda->step_y = -1;
 	else
 		dda->step_y = 1;
-	if (dda->ray_x < 0)
+	if (dda->angle_x < 0)
 		dda->side_dist_x = (dda->pos_x - dda->map_x) * dda->delta_dist_x;
 	else
-		dda->side_dist_x = (dda->pos_x + 1.0 - dda->pos_x) * dda->delta_dist_x;
-	if (dda->ray_y < 0)
+		dda->side_dist_x = (dda->map_x + 1.0 - dda->pos_x) * dda->delta_dist_x;
+	if (dda->angle_y < 0)
 		dda->side_dist_y = (dda->pos_y - dda->map_y) * dda->delta_dist_y;
 	else
-		dda->side_dist_y = (dda->pos_y + 1.0 - dda->pos_y) * dda->delta_dist_y;
+		dda->side_dist_y = (dda->map_y + 1.0 - dda->pos_y) * dda->delta_dist_y;
 }
 
 void	run_dda(t_dda *dda, t_cub *cub)
@@ -66,6 +66,31 @@ void	run_dda(t_dda *dda, t_cub *cub)
 			touch = 1;
 	}
 }
+
+void	draw_direction_ray(t_cub *cub)
+{
+	float	start_x;
+	float	start_y;
+	float	dir_x;
+	float	dir_y;
+	int		length;
+	int		i;
+
+	start_x = cub->player->x + 5;
+	start_y = cub->player->y + 5;
+	dir_x = cos(cub->player->angle);
+	dir_y = sin(cub->player->angle);
+	length = 30;
+	i = 0;
+	while (i < length)
+	{
+		put_pixel((int)start_x, (int)start_y, 0xFF0000, cub);
+		start_x += dir_x;
+		start_y += dir_y;
+		i++;
+	}
+}
+
 
 void	draw_line(t_player *player, t_cub *cub, float start_x, int i)
 {
