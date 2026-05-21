@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvignes <mvignes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/18 11:00:34 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/19 16:03:07 by mmusquer         ###   ########.fr       */
+/*   Created: 2025/11/05 18:24:53 by mvignes           #+#    #+#             */
+/*   Updated: 2026/01/30 13:50:54 by mvignes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../includes/libft.h"
 
-int is_line_space(char *str)
+int	ft_isalnum(int c)
 {
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (ft_is_space(str[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-void	error_pars(char *msg, t_para *para)
-{
-	
+	if ((c > 64 && c < 91) || (c > 96 && c < 123) || (c > 47 && c < 58))
+		return (1);
+	return (0);
 }

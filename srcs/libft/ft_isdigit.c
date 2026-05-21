@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvignes <mvignes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/18 11:00:34 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/19 16:03:07 by mmusquer         ###   ########.fr       */
+/*   Created: 2025/11/05 18:22:40 by mvignes           #+#    #+#             */
+/*   Updated: 2026/01/30 13:50:58 by mvignes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../includes/libft.h"
 
-int is_line_space(char *str)
+int	ft_isdigit(int n)
 {
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (ft_is_space(str[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-void	error_pars(char *msg, t_para *para)
-{
-	
+	if (n >= '0' && n <= '9')
+		return (1);
+	return (0);
 }

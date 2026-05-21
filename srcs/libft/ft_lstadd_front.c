@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvignes <mvignes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/18 11:00:34 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/19 16:03:07 by mmusquer         ###   ########.fr       */
+/*   Created: 2025/11/15 13:38:44 by mvignes           #+#    #+#             */
+/*   Updated: 2026/01/30 13:51:05 by mvignes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../includes/libft.h"
 
-int is_line_space(char *str)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (ft_is_space(str[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-void	error_pars(char *msg, t_para *para)
-{
-	
+	new->next = *lst;
+	*lst = new;
 }

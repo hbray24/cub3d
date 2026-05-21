@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   ft_print_char.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvignes <mvignes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/18 11:00:34 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/19 16:03:07 by mmusquer         ###   ########.fr       */
+/*   Created: 2025/11/18 08:26:42 by mvignes           #+#    #+#             */
+/*   Updated: 2026/01/30 13:51:26 by mvignes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../includes/libft.h"
 
-int is_line_space(char *str)
+int	ft_putchar_printf(char c)
 {
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (ft_is_space(str[i]))
-			return (0);
-		i++;
-	}
+	write(1, &c, 1);
 	return (1);
 }
 
-void	error_pars(char *msg, t_para *para)
+int	ft_putstr_printf(char *s)
 {
-	
+	int	i;
+
+	if (!s)
+		s = "(null)";
+	i = 0;
+	while (s[i] != '\0')
+	{
+		ft_putchar_printf(s[i]);
+		i++;
+	}
+	return (i);
 }

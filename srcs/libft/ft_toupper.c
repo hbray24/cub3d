@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvignes <mvignes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/18 11:00:34 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/19 16:03:07 by mmusquer         ###   ########.fr       */
+/*   Created: 2025/11/10 20:31:52 by mvignes           #+#    #+#             */
+/*   Updated: 2026/01/30 13:52:04 by mvignes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../includes/libft.h"
 
-int is_line_space(char *str)
+int	ft_toupper(int c)
 {
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (ft_is_space(str[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-void	error_pars(char *msg, t_para *para)
-{
-	
+	if (c > 96 && c < 123)
+		c -= 32;
+	return (c);
 }
