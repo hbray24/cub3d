@@ -3,21 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:06 by mmusquer          #+#    #+#             */
-<<<<<<< HEAD:includes/cub3d.h
-/*   Updated: 2026/05/18 16:38:04 by mmusquer         ###   ########.fr       */
-=======
-/*   Updated: 2026/05/20 16:45:31 by hbray            ###   ########.fr       */
->>>>>>> origin/main:includes/cub.h
+/*   Updated: 2026/05/21 15:13:57 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-<<<<<<< HEAD:includes/cub3d.h
 # include "libft.h"
 # include "mlx.h"
 # include "parser.h"
@@ -30,8 +25,6 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-#endif
-=======
 # define WIDTH 1280
 # define HEIGHT 720
 
@@ -111,4 +104,3 @@ int				draw_loop(t_cub *cub);
 
 
 #endif
->>>>>>> origin/main:includes/cub.h

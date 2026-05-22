@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:38:28 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/20 16:02:17 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/21 16:39:35 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub.h"
+#include "../../includes/cub3d.h"
 
 void	*ft_memset(void *b, int c, size_t len)
 {

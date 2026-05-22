@@ -6,11 +6,11 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:08:39 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/20 10:23:29 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/21 16:40:11 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../includes/cub3d.h"
 
 int	is_only_map_char(int i, t_para *para)
 {

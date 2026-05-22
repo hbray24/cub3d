@@ -6,11 +6,11 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:21 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/20 11:37:55 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/21 16:40:37 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../includes/cub3d.h"
 
 static int	count_line(char *path, t_para *para)
 {
@@ -66,5 +66,5 @@ void	do_gnl(t_para *para)
 void	parsing(char **av, t_para *para)
 {
 	do_gnl(para);
-	check_stock(para);
+	do_parsing(para);
 }

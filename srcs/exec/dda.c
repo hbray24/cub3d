@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:01:08 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/20 16:44:29 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/21 16:40:00 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub.h"
+#include "../../includes/cub3d.h"
 
 void	init_dda_step(float start_x, t_dda *dda, t_player *player)
 {

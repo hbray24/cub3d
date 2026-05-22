@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   parser_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/18 11:00:34 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/21 16:40:31 by mmusquer         ###   ########.fr       */
+/*   Created: 2026/05/21 16:18:44 by mmusquer          #+#    #+#             */
+/*   Updated: 2026/05/21 17:02:36 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int is_line_space(char *str)
+void    malloc_map(char **line, int i, t_para *para)
 {
-	int i;
+    int n;
 
-	i = 0;
-	while (str[i])
-	{
-		if (ft_is_space(str[i]))
-			return (0);
-		i++;
-	}
-	return (1);
+    n = 0;
+    while(line[i])
+    {
+        i++;
+        n++;
+    }    
+    para->cub->map = ft_calloc(n + 1, sizeof(char *));
+    if (!para->cub->map)
+        error_pars("Error: malloc failed\n", para);
 }
 
-void	error_pars(char *msg, t_para *para)
+void add_line_map(char *line, t_para *para)
 {
-	
+    
 }
