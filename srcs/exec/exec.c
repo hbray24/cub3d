@@ -6,97 +6,54 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:33:40 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/20 16:48:23 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/26 11:03:36 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub.h"
-
-void	rotate_player(t_player *player)
-{
-	if (player->rotate_left)
-		player->angle -= ANGLE_SPEED;
-	if (player->rotate_right)
-		player->angle += ANGLE_SPEED;
-}
-
-void	translate_player(t_player *player, float cos_angle, float sin_angle)
-{
-	if (player->key_up)
-	{
-		player->x += cos_angle * SPEED;
-		player->y += sin_angle * SPEED;
-	}
-	if (player->key_down)
-	{
-		player->x -= cos_angle * SPEED;
-		player->y -= sin_angle * SPEED;
-	}
-	if (player->key_left)
-	{
-		player->x += sin_angle * SPEED;
-		player->y -= cos_angle * SPEED;
-	}
-	if (player->key_right)
-	{
-		player->x -= sin_angle * SPEED;
-		player->y += cos_angle * SPEED;
-	}
-}
-
-void	move_player(t_player *player)
-{
-	float	cos_angle;
-	float	sin_angle;
-
-	cos_angle = cos(player->angle);
-	sin_angle = sin(player->angle);
-	rotate_player(player);
-	translate_player(player, cos_angle, sin_angle);
-}
+#include "../../includes/cub3d.h"
 
 void	put_pixel(int x, int y, int color, t_cub *cub)
 {
-	int	index;
+	char	*dst;
 
-	if( x >= WIDTH || y >= HEIGHT || x < 0 || y < 0)
-		return;
-	index = y * cub->size_line + x * cub->bpp / 8;
-	cub->data[index] = color & 0xFF;
-	cub->data[index + 1] = (color >> 8) & 0xFF;
-	cub->data[index + 2] = (color >> 16) & 0xFF;
+	if (x > 0 && y > 0 && cub->width > x && cub->height > y)
+	{
+		dst = cub->data + (y * cub->size_line + x * (cub->bpp / 8));
+		*(unsigned int *)dst = color;
+	}
 }
 
 void	clear_image(t_cub *cub)
 {
-	ft_memset(cub->data,0, HEIGHT * cub->size_line);
+	ft_memset(cub->data, 0, cub->height * cub->size_line);
 }
 
 void	draw_square(int x, int y, int size, int color, t_cub *cub)
 {
 	int	i;
+	int	a;
 
-	i = -1;
-	while (++i < size)
-		put_pixel(x + i, y, color, cub);
-	i = -1;
-	while (++i < size)
-		put_pixel(x, y + i, color, cub);
-	i = -1;
-	while (++i < size)
-		put_pixel(x + size, y + i, color, cub);
-	i = -1;
-	while (++i < size)
-		put_pixel(x + i, y + size, color, cub);
+	i = 0;
+	a = 0;
+	while (i < size)
+	{
+		a = 0;
+		while (a < size)
+		{
+			put_pixel(x + a, y + i, color, cub);
+			a++;
+		}
+		i++;
+	}
 }
 
 void	draw_map(t_cub *cub)
 {
-	char	**map = cub->map;
-	int		color = 0x0000FF;
+	char	**map;
 	int		y;
 	int		x;
 
+	map = cub->map;
 	y = 0;
 	while (map[y])
 	{
@@ -104,7 +61,11 @@ void	draw_map(t_cub *cub)
 		while (map[y][x])
 		{
 			if (map[y][x] == '1')
-				draw_square(x * 64, y * 64, 64, color, cub);
+			{
+				draw_square(x * 64, y * 64, 64, 0x0000FF, cub);
+			}
+			if (map[y][x] == '0')
+				draw_square(x * 64, y * 64, 64, 0xFFFFFF, cub);
 			x++;
 		}
 		y++;
@@ -113,14 +74,26 @@ void	draw_map(t_cub *cub)
 
 int	draw_loop(t_cub *cub)
 {
-	t_player 	*player;
+	t_player	*player;
+	float		fraction;
+	float		start_x;
+	int			i;
 
+	i = 0;
 	player = cub->player;
-	move_player(player);
+	move_player(cub);
 	clear_image(cub);
-	draw_square(player->x, player->y, 10, 0x00FF00, cub);
-	draw_map(cub);
-	draw_direction_ray(cub);
+	fraction = PI / 3 / cub->width;
+	start_x = player->angle - PI / 6;
+	while (i < cub->width)
+	{
+		draw_line(player, cub, start_x, i);
+		start_x += fraction;
+		i++;
+	}
+	// draw_map(cub);
+	// draw_square(player->x - 5, player->y - 5, 10, 0x00FF00, cub);
+	// draw_direction_ray(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img, 0, 0);
 	return (0);
 }

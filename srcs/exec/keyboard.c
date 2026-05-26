@@ -6,14 +6,19 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 10:58:27 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/20 16:02:17 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/21 15:54:09 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub.h"
+#include "../../includes/cub3d.h"
 
-int	key_press(int keycode, t_player *player)
+int	key_press(int keycode, t_cub *cub)
 {
+	t_player	*player;
+
+	player = cub->player;
+	if (keycode == ESC)
+		close_win(cub);
 	if (keycode == W)
 		player->key_up = true;
 	if (keycode == S)
@@ -29,7 +34,7 @@ int	key_press(int keycode, t_player *player)
 	return (0);
 }
 
-int	key_release(int	keycode, t_player *player)
+int	key_release(int keycode, t_player *player)
 {
 	if (keycode == W)
 		player->key_up = false;

@@ -6,22 +6,19 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:06 by mmusquer          #+#    #+#             */
-<<<<<<< HEAD:includes/cub3d.h
-/*   Updated: 2026/05/18 16:38:04 by mmusquer         ###   ########.fr       */
-=======
-/*   Updated: 2026/05/20 16:45:31 by hbray            ###   ########.fr       */
->>>>>>> origin/main:includes/cub.h
+/*   Updated: 2026/05/26 10:39:11 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-<<<<<<< HEAD:includes/cub3d.h
+# include "../minilibx-linux/mlx.h"
 # include "libft.h"
-# include "mlx.h"
 # include "parser.h"
 # include <fcntl.h>
+# include <math.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -30,27 +27,24 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-#endif
-=======
-# define WIDTH 1280
-# define HEIGHT 720
-
+# define ESC 65307
 # define W 119
 # define A 97
 # define S 115
 # define D 100
 # define LEFT 65361
 # define RIGHT 65363
-# define SPEED 2
-# define ANGLE_SPEED 0.05
+# define SPEED 8
+# define ANGLE_SPEED 0.1
 # define PI 3.14159265359
 
-# include "minilibx-linux/mlx.h"
-# include <math.h>
-# include <stdbool.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+typedef enum s_dir
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST,
+}				t_dir;
 
 typedef struct s_dda
 {
@@ -67,6 +61,7 @@ typedef struct s_dda
 	int			map_x;
 	int			map_y;
 	int			side;
+	int			texture;
 }				t_dda;
 
 typedef struct s_player
@@ -85,6 +80,7 @@ typedef struct s_player
 typedef struct s_cub
 {
 	t_player	*player;
+	t_dda		dda;
 	void		*mlx;
 	void		*win;
 	void		*img;
@@ -92,6 +88,8 @@ typedef struct s_cub
 	int			bpp;
 	int			size_line;
 	int			endian;
+	int			width;
+	int			height;
 	char		**map;
 }				t_cub;
 
@@ -101,14 +99,13 @@ void			all_free(t_cub **cub, t_player **player);
 void			open_win(t_cub *cub);
 void			put_pixel(int x, int y, int color, t_cub *cub);
 void			draw_line(t_player *player, t_cub *cub, float start_x, int i);
-void			*ft_memset(void *b, int c, size_t len);
 void			draw_square(int x, int y, int size, int color, t_cub *cub);
 void			draw_direction_ray(t_cub *cub);
+void			move_player(t_cub *cub);
+int				draw_minimap(t_cub *cub);
 int				close_win(t_cub *cub);
-int				key_press(int keycode, t_player *player);
+int				key_press(int keycode, t_cub *cub);
 int				key_release(int keycode, t_player *player);
 int				draw_loop(t_cub *cub);
 
-
 #endif
->>>>>>> origin/main:includes/cub.h

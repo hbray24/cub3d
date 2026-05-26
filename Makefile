@@ -24,6 +24,8 @@ CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror -g3
 VALGRIND	= valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes
 RM			= rm -f
+LFLAGS = -L./minilibx-linux -lmlx -lXext -lX11 -lm -lz
+MLX_LIB = ./minilibx-linux/libmlx.a
 
 MAKEFLAGS	+= --no-print-directory
 
@@ -98,13 +100,12 @@ SRCS	= \
 		\
 		srcs/main.c\
 		\
-		srcs/parser/parser.c
-		srcs/parser/parser_checker.c
-		srcs/parser/parser_utils.c
-		srcs/parser/parser_dispatch.c
-		\
-		srcs/exec/exec.c
-		srcs/exec/exec_utils.c
+		srcs/exec/dda.c \
+		srcs/exec/exec.c \
+		srcs/exec/free.c \
+		srcs/exec/keyboard.c \
+		srcs/exec/mouvement.c \
+		srcs/exec/setup.c \
 
 
 SRCS_BONUS	= \
@@ -134,7 +135,7 @@ all:
 
 $(NAME): $(OBJS)
 	@printf "\n"
-	@if $(CC) $(CFLAGS) $(OBJS) -lreadline -o $(NAME); then \
+	@if $(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(MLX_LIB) $(LFLAGS); then \
 		$(MAKE) name_ascii; \
 		$(MAKE) user42; \
 		printf "$(GREEN)$(GRAS)👌 Compilation terminée !$(RESET)\n\n"; \
