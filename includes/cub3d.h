@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/21 15:13:57 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/26 17:06:05 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ typedef struct s_cub
 	int			bpp;
 	int			size_line;
 	int			endian;
-	char		**map;
+	t_para		*para;
 }				t_cub;
 
 t_cub			*create_cub(void);

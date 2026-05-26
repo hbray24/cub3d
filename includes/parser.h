@@ -6,16 +6,18 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:03 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/21 17:02:10 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/26 17:07:58 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
+# include "cub3d.h"
 typedef struct e_para
 {
 	char		**stock;
+	char		**map;
 	char		*no_t;
 	char		*so_t;
 	char		*we_t;
@@ -24,7 +26,12 @@ typedef struct e_para
 	int			ceiling_c;
 	char		*path;
 	int			header;
-	t_cub		*cub;
+	int			i_map;
+	int			nb_player;
+	int			nb_collec;
+	int			ff_collec;
+	int			nb_exit;
+	int			ff_exit;
 	t_player	*player;
 }				t_para;
 
@@ -54,15 +61,24 @@ int				is_header(int i, t_para *para);
 int				is_header_complete(t_para *para);
 
 void			pars_header(char *line, t_para *para);
-void			pars_color(char *line, char **color, t_para *para);
+void			pars_color(char *line, char *color, t_para *para);
 void			pars_texture(char *line, char **path, t_para *para);
 int				color_split(char *tmp, t_para *para);
+
+void			map_validation(t_para *para);
+void			flood_fill(t_para *para);
 
 int				count_comma(char *str, char c);
 void			verif_color(char **tab, t_para *para);
 void			end_split_color(char **tab, t_para *para);
+void			pars_texture_cut(char *line, char *tmp, int i, t_para *para);
+void			pars_color_cut(char *line, char *tmp, int i, t_para *para);
 
 void			add_line_map(char *line, t_para *para);
+void			malloc_map(char **line, int i, t_para *para);
+
+int				is_player(char c);
+float			convert_angle(char c);
 
 void			error_pars(char *msg, t_para *para);
 int				is_line_space(char *str);

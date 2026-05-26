@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:33:40 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/21 16:39:53 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/26 17:10:17 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	draw_square(int x, int y, int size, int color, t_cub *cub)
 
 void	draw_map(t_cub *cub)
 {
-	char	**map = cub->map;
+	char	**map = cub->para->map;
 	int		color = 0x0000FF;
 	int		y;
 	int		x;

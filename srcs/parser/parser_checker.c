@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:08:39 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/21 16:40:11 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/26 10:53:14 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,7 @@ int	is_only_map_char(int i, t_para *para)
 	j = 0;
 	while (para->stock[i][j])
 	{
-		if (para->stock[i][j] == '0')
-			j++;
-		else if (para->stock[i][j] == '1')
-			j++;
-		else if (para->stock[i][j] == 'N')
-			j++;
-		else if (para->stock[i][j] == 'S')
-			j++;
-		else if (para->stock[i][j] == 'W')
-			j++;
-		else if (para->stock[i][j] == 'E')
-			j++;
-		else if (para->stock[i][j] == ' ')
+		if (ft_strchr("01NSWE DRX", para->stock[i][j]))
 			j++;
 		else
 			return (0);

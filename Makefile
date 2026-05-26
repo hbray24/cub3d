@@ -99,6 +99,10 @@ SRCS	= \
 		srcs/main.c\
 		\
 		srcs/parser/parser.c
+		srcs/parser/parser_map.c
+		srcs/parser/parser_validation.c
+		srcs/parser/parser_validation_utils.c
+		srcs/parser/parser_flood.c
 		srcs/parser/parser_checker.c
 		srcs/parser/parser_utils.c
 		srcs/parser/parser_dispatch.c

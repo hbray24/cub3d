@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_map.c                                       :+:      :+:    :+:   */
+/*   parser_validation_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/21 16:18:44 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/26 12:57:34 by mmusquer         ###   ########.fr       */
+/*   Created: 2026/05/26 13:44:52 by mmusquer          #+#    #+#             */
+/*   Updated: 2026/05/26 16:45:12 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void    malloc_map(char **line, int i, t_para *para)
+int is_player(char c)
 {
-    int n;
-
-    n = 0;
-    while(line[i + n])
-        n++;
-    para->map = ft_calloc(n + 1, sizeof(char *));
-    if (!para->map)
-        error_pars("Error: malloc failed\n", para);
+    if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
+        return (1);
+    return (0);
 }
 
-void add_line_map(char *line, t_para *para)
+float   convert_angle(char c)
 {
-    para->map[para->i_map] = ft_strdup(line);
-    if (!para->map[para->i_map])
-        error_pars("Error: malloc failed\n", para);
-    para->i_map++;
-}
+    float i;
 
+    i = 0;
+    if (c == 'N')
+        i = 3 * PI / 2;
+    if (c == 'S')
+        i = PI / 2;
+    if (c == 'W')
+        i = PI;
+    if (c == 'E')
+        i = PI * 2;
+    return (i);
+}

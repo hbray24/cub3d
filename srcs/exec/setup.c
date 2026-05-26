@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:38:28 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/21 16:39:35 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/26 17:09:48 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char **get_map(void)
 void	open_win(t_cub *cub)
 {
 	init_player(cub->player);
-	cub->map = get_map();
+	cub->para->map = get_map();
 	cub->mlx = mlx_init();
 	if (!cub->mlx)
 	{
