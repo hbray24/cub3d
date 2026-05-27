@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 10:13:18 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/27 13:54:12 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/27 14:54:04 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	all_free(t_para **para)
 {
 	if (!para || !*para)
 		return ;
-	if ((*para)->player)
-		free_player(&(*para)->player);
+	if ((*para)->cub->player)
+		free_player(&(*para)->cub->player);
 	if ((*para)->cub)
 		free_cub(&(*para)->cub);
 	free_para(para);

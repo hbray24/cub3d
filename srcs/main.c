@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 13:58:29 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/27 13:55:43 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/27 14:53:36 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	para->cub = cub;
-	para->player = cub->player;
+	cub->para = para;
 	setup(ac, av, para);
 	parsing(para);
 	if (!cub)
