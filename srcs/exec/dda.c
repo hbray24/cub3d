@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:01:08 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/26 11:06:32 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/27 10:45:04 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,43 +88,39 @@ void	draw_direction_ray(t_cub *cub)
 	}
 }
 
-void	draw_wall(float start_x, int i, float ray_dist, t_cub *cub)
+void	calcul_wall(float ray_dist, t_cub *cub, float start_x, int i)
 {
 	float	dist;
 	int		start_y;
-	float	height;
 	int		end;
 
 	dist = ray_dist * 64;
 	dist = dist * cos(start_x - cub->player->angle);
 	if (dist < 0.1)
 		dist = 0.1;
-	height = (64 / dist) * (cub->width / 2);
-	start_y = (cub->height - height) / 2;
-	end = start_y + height;
-	while (start_y < end)
-	{
-		if (cub->dda.texture == NORTH)
-			put_pixel(i, start_y, 0x0000FF, cub);
-		else if (cub->dda.texture == SOUTH)
-			put_pixel(i, start_y, 0x0066FF, cub);
-		else if (cub->dda.texture == WEST)
-			put_pixel(i, start_y, 0x00FF00, cub);
-		else if (cub->dda.texture == EAST)
-			put_pixel(i, start_y, 0x009900, cub);
-		start_y++;
-	}
+	cub->dda.wall_height = (64 / dist) * (cub->screen.width / 2);
+	start_y = (cub->screen.height - cub->dda.wall_height) / 2;
+	end = start_y + cub->dda.wall_height;
+	if (start_y < 0)
+		start_y = 0;
+	if (end > cub->screen.height)
+		end = cub->screen.height;
+	draw_ceiling(start_y, i, cub);
+	draw_wall(start_y, end, i, cub);
+	draw_floor(end, i, cub);
 }
 
 void	draw_line(t_player *player, t_cub *cub, float start_x, int i)
 {
 	float	ray_dist;
+	float	wall_x;
 
 	init_dda_step(start_x, &cub->dda, player);
 	run_dda(&cub->dda, cub);
 	if (cub->dda.side == 0)
 	{
 		ray_dist = cub->dda.side_dist_x - cub->dda.delta_dist_x;
+		wall_x = cub->dda.pos_y + ray_dist * cub->dda.angle_y;
 		if (cub->dda.step_x > 0)
 			cub->dda.texture = WEST;
 		else
@@ -133,10 +129,13 @@ void	draw_line(t_player *player, t_cub *cub, float start_x, int i)
 	else
 	{
 		ray_dist = cub->dda.side_dist_y - cub->dda.delta_dist_y;
+		wall_x = cub->dda.pos_x + ray_dist * cub->dda.angle_x;
 		if (cub->dda.step_y > 0)
 			cub->dda.texture = NORTH;
 		else
 			cub->dda.texture = SOUTH;
 	}
-	draw_wall(start_x, i, ray_dist, cub);
+	wall_x -= floor(wall_x);
+	cub->dda.texture_x = (int)(wall_x * 64);
+	calcul_wall(ray_dist, cub, start_x, i);
 }

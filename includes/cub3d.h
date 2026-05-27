@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/26 10:39:11 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/26 16:31:43 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,14 @@ typedef struct s_dda
 	float		angle_y;
 	float		pos_x;
 	float		pos_y;
+	float		wall_height;
 	int			step_x;
 	int			step_y;
 	int			map_x;
 	int			map_y;
 	int			side;
 	int			texture;
+	int			texture_x;
 }				t_dda;
 
 typedef struct s_player
@@ -77,19 +79,26 @@ typedef struct s_player
 	bool		rotate_right;
 }				t_player;
 
+typedef	struct s_img
+{
+	void	*img;
+	char	*data;
+	int		bpp;
+	int		size_line;
+	int		endian;
+	int		width;
+	int		height;
+}			t_img;
+
+
 typedef struct s_cub
 {
 	t_player	*player;
 	t_dda		dda;
+	t_img		texture[4];
+	t_img		screen;
 	void		*mlx;
 	void		*win;
-	void		*img;
-	char		*data;
-	int			bpp;
-	int			size_line;
-	int			endian;
-	int			width;
-	int			height;
 	char		**map;
 }				t_cub;
 
@@ -102,7 +111,9 @@ void			draw_line(t_player *player, t_cub *cub, float start_x, int i);
 void			draw_square(int x, int y, int size, int color, t_cub *cub);
 void			draw_direction_ray(t_cub *cub);
 void			move_player(t_cub *cub);
-int				draw_minimap(t_cub *cub);
+void			draw_wall(int end, int start_y, int i, t_cub *cub);
+void			draw_floor(int end, int i, t_cub *cub);
+void			draw_ceiling(int start_y, int i, t_cub *cub);
 int				close_win(t_cub *cub);
 int				key_press(int keycode, t_cub *cub);
 int				key_release(int keycode, t_player *player);

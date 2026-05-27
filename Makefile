@@ -100,6 +100,7 @@ SRCS	= \
 		\
 		srcs/main.c\
 		\
+		srcs/exec/color.c \
 		srcs/exec/dda.c \
 		srcs/exec/exec.c \
 		srcs/exec/free.c \
