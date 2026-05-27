@@ -6,25 +6,11 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:38:28 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/26 17:09:48 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/27 10:51:00 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-void	*ft_memset(void *b, int c, size_t len)
-{
-	unsigned char	*tmp;
-
-	tmp = (unsigned char *) b;
-	while (len > 0)
-	{
-		*tmp = (unsigned char) c;
-		tmp++;
-		len--;
-	}
-	return (b);
-}
 
 void	init_player(t_player *player)
 {

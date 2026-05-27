@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:21 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/26 15:57:07 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/27 10:37:24 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	do_gnl(t_para *para)
 	close(fd);
 }
 
-void	parsing(char **av, t_para *para)
+void	parsing(t_para *para)
 {
 	do_gnl(para);
 	do_parsing(para);

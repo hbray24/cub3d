@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 15:02:33 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/26 16:40:17 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/27 10:41:13 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char **copy_map(char **map, t_para *para)
 
 static void flood_fill_exec(char **map_cpy, int x, int y, t_para *para)
 {
-    if (x < 0 || y < 0 || y >= count_line(map_cpy) || x >= ft_strlen(map_cpy[y]) || map_cpy[y][x] == ' ')
+    if (x < 0 || y < 0 || y >= count_line(map_cpy) || (size_t)x >= ft_strlen(map_cpy[y]) || map_cpy[y][x] == ' ')
     {
         free_tab(map_cpy);
         error_pars("Error: invalid map\n", para);

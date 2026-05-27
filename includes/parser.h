@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:03 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/26 17:07:58 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/27 10:37:55 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef enum e_type
 	MAP,
 }				t_type;
 
-void			parsing(char **av, t_para *para);
+void			parsing(t_para *para);
 void			do_gnl(t_para *para);
 void			do_parsing(t_para *para);
 
@@ -61,7 +61,7 @@ int				is_header(int i, t_para *para);
 int				is_header_complete(t_para *para);
 
 void			pars_header(char *line, t_para *para);
-void			pars_color(char *line, char *color, t_para *para);
+void			pars_color(char *line, int *color, t_para *para);
 void			pars_texture(char *line, char **path, t_para *para);
 int				color_split(char *tmp, t_para *para);
 

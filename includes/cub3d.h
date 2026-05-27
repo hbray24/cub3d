@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/26 17:06:05 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/27 10:34:12 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 # include "libft.h"
 # include "mlx.h"
-# include "parser.h"
 # include <fcntl.h>
+# include <math.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -25,9 +26,10 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
+
+
 # define WIDTH 1280
 # define HEIGHT 720
-
 # define W 119
 # define A 97
 # define S 115
@@ -38,12 +40,7 @@
 # define ANGLE_SPEED 0.05
 # define PI 3.14159265359
 
-# include "minilibx-linux/mlx.h"
-# include <math.h>
-# include <stdbool.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+
 
 typedef struct s_dda
 {
@@ -74,6 +71,8 @@ typedef struct s_player
 	bool		rotate_left;
 	bool		rotate_right;
 }				t_player;
+
+# include "parser.h"
 
 typedef struct s_cub
 {
