@@ -6,46 +6,42 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 13:58:29 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/26 10:44:48 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/27 11:36:51 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-// static int	setup(int ac, char **av, t_para *para)
-// {
-// 	int		fd;
-// 	int		i;
+static void	setup(int ac, char **av, t_para *para)
+{
+	int		i;
 
-// 	if (ac != 2)
-// 		error_pars("Error: too many arguments\n", para);
-// 	para->path = av[1];
-// 	i = ft_strlen(para->path);
-// 	if (i < 5)
-// 		error_pars("Usage: path/name_map.cub\n", para);
-// 	if (ft_strncmp(para->path + i - 4, ".cub", 4) != 0)
-// 		error_pars("Usage: path/name_map.cub\n", para);
-// 	if (para->path[i - 5] == '/')
-// 		error_pars("Usage: path/name_map.cub\n", para);
-// 	ft_memset(para, 0, sizeof(t_para));
-// 	para->floor_c = -1;
-// 	para->ceiling_c = -1;
-// 	return (fd);
-// }
+	ft_memset(para, 0, sizeof(t_para));
+	para->floor_c = -1;
+	para->ceiling_c = -1;
+	if (ac != 2)
+		error_pars("Error: too many arguments\n", para);
+	para->path = av[1];
+	i = ft_strlen(para->path);
+	if (i < 5)
+		error_pars("Usage: path/name_map.cub\n", para);
+	if (ft_strncmp(para->path + i - 4, ".cub", 4) != 0)
+		error_pars("Usage: path/name_map.cub\n", para);
+	if (para->path[i - 5] == '/')
+		error_pars("Usage: path/name_map.cub\n", para);
 
-// int	main(int ac, char **av)
-// {
-// 	t_para	para;
+}
 
-// 	setup(ac, av, &para);
-// 	parsing(av, &para);
-// }
 
-int	main(void)
+
+int	main(int ac, char **av)
 {
 	t_cub	*cub;
+	t_para	para;
 
 	cub = create_cub();
+	setup(ac, av, &para);
+	parsing(&para);
 	if (!cub)
 		return (1);
 	open_win(cub);

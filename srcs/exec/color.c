@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 11:27:53 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/27 10:36:14 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/27 11:43:32 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	get_color(t_img *img, int x, int y)
 	if (x > 0 && y > 0 && img->width > x && img->height > y)
 	{
 		src = img->data + (y * img->size_line + x * img->bpp / 8);
-		return (*(int*)src);
+		return (*(int *)src);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 10:13:18 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/26 15:50:17 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/27 11:28:12 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	free_cub(t_cub **cub)
 {
 	if (!cub || !(*cub))
 		return ;
-	free_map((*cub)->map);
+	free_map((*cub)->para->map);
 	free(*cub);
 	*cub = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/26 16:31:43 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/27 11:34:24 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "../minilibx-linux/mlx.h"
 # include "libft.h"
-# include "parser.h"
 # include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>
@@ -28,6 +27,9 @@
 # include <unistd.h>
 
 # define ESC 65307
+
+# define WIDTH 1280
+# define HEIGHT 720
 # define W 119
 # define A 97
 # define S 115
@@ -90,6 +92,7 @@ typedef	struct s_img
 	int		height;
 }			t_img;
 
+# include "parser.h"
 
 typedef struct s_cub
 {
@@ -97,9 +100,9 @@ typedef struct s_cub
 	t_dda		dda;
 	t_img		texture[4];
 	t_img		screen;
+	t_para		*para;
 	void		*mlx;
 	void		*win;
-	char		**map;
 }				t_cub;
 
 t_cub			*create_cub(void);

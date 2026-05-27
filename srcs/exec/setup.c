@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:38:28 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/27 10:35:05 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/27 11:30:05 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,28 +43,27 @@ void	init_win(t_cub *cub)
 			&cub->texture[3].endian);
 }
 
-char	**get_map(void)
-{
-	char	**map;
+// char	**get_map(void)
+// {
+// 	char	**map;
 
-	map = malloc(sizeof(char *) * 10);
-	map[0] = ft_strdup("11111111111");
-	map[1] = ft_strdup("10000000001");
-	map[2] = ft_strdup("10111111101");
-	map[3] = ft_strdup("10100000101");
-	map[4] = ft_strdup("10101110101");
-	map[5] = ft_strdup("10100010101");
-	map[6] = ft_strdup("10111010101");
-	map[7] = ft_strdup("10000010001");
-	map[8] = ft_strdup("11111111111");
-	map[9] = NULL;
-	return (map);
-}
+// 	map = malloc(sizeof(char *) * 10);
+// 	map[0] = ft_strdup("11111111111");
+// 	map[1] = ft_strdup("10000000001");
+// 	map[2] = ft_strdup("10111111101");
+// 	map[3] = ft_strdup("10100000101");
+// 	map[4] = ft_strdup("10101110101");
+// 	map[5] = ft_strdup("10100010101");
+// 	map[6] = ft_strdup("10111010101");
+// 	map[7] = ft_strdup("10000010001");
+// 	map[8] = ft_strdup("11111111111");
+// 	map[9] = NULL;
+// 	return (map);
+// }
 
 void	open_win(t_cub *cub)
 {
 	init_win(cub);
-	cub->map = get_map();
 	cub->mlx = mlx_init();
 	if (!cub->mlx)
 	{

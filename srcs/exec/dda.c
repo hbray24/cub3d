@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:01:08 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/27 10:45:04 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/27 11:34:04 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	run_dda(t_dda *dda, t_cub *cub)
 		if (dda->map_x < 0 || dda->map_x >= 10 || dda->map_y < 0
 			|| dda->map_y >= 10)
 			break ;
-		if (cub->map[dda->map_y][dda->map_x] == '1')
+		if (cub->para->map[dda->map_y][dda->map_x] == '1')
 			touch = 1;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 15:51:54 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/26 11:03:50 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/27 11:38:58 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int	wall(t_cub *cub, float x, float y)
 	int	marge;
 
 	marge = 10;
-	if (cub->map[(int)(y - (marge / 2)) / 64][(int)(x - (marge / 2))
-		/ 64] == '1' || cub->map[(int)(y - (marge / 2)) / 64][(int)(x + (marge
-				/ 2)) / 64] == '1' || cub->map[(int)(y + (marge / 2))
-		/ 64][(int)(x - (marge / 2)) / 64] == '1' || cub->map[(int)(y + (marge
-				/ 2)) / 64][(int)(x + (marge / 2)) / 64] == '1')
+	if (cub->para->map[(int)(y - (marge / 2)) / 64][(int)(x - (marge / 2))
+		/ 64] == '1' || cub->para->map[(int)(y - (marge / 2)) / 64][(int)(x
+			+ (marge / 2)) / 64] == '1' || cub->para->map[(int)(y + (marge / 2))
+		/ 64][(int)(x - (marge / 2)) / 64] == '1' || cub->para->map[(int)(y
+			+ (marge / 2)) / 64][(int)(x + (marge / 2)) / 64] == '1')
 		return (1);
 	return (0);
 }

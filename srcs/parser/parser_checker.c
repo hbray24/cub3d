@@ -6,11 +6,11 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:08:39 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/21 11:56:42 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/27 11:34:44 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../includes/cub3d.h"
 
 int	is_only_map_char(int i, t_para *para)
 {
@@ -19,19 +19,7 @@ int	is_only_map_char(int i, t_para *para)
 	j = 0;
 	while (para->stock[i][j])
 	{
-		if (para->stock[i][j] == '0')
-			j++;
-		else if (para->stock[i][j] == '1')
-			j++;
-		else if (para->stock[i][j] == 'N')
-			j++;
-		else if (para->stock[i][j] == 'S')
-			j++;
-		else if (para->stock[i][j] == 'W')
-			j++;
-		else if (para->stock[i][j] == 'E')
-			j++;
-		else if (para->stock[i][j] == ' ')
+		if (ft_strchr("01NSWE DRX", para->stock[i][j]))
 			j++;
 		else
 			return (0);
@@ -61,7 +49,7 @@ int	is_header(int i, t_para *para)
 	else if (para->stock[i][j] == 'F' && para->stock[i][j + 1] == ' ')
 		return (para->header = F);
 	else if (para->stock[i][j] == 'C' && para->stock[i][j + 1] == ' ')
-		return (para->header =  C);
+		return (para->header = C);
 	return (0);
 }
 

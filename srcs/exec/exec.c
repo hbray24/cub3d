@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:33:40 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/27 10:12:54 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/27 11:44:29 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,16 @@ void	put_pixel(int x, int y, int color, t_cub *cub)
 
 	if (x > 0 && y > 0 && cub->screen.width > x && cub->screen.height > y)
 	{
-		dst = cub->screen.data + (y * cub->screen.size_line + x * (cub->screen.bpp / 8));
+		dst = cub->screen.data + (y * cub->screen.size_line + x
+				* (cub->screen.bpp / 8));
 		*(unsigned int *)dst = color;
 	}
 }
 
 void	clear_image(t_cub *cub)
 {
-	ft_memset(cub->texture->data, 0, cub->texture->height * cub->screen.size_line);
+	ft_memset(cub->texture->data, 0, cub->texture->height
+		* cub->screen.size_line);
 }
 
 void	draw_square(int x, int y, int size, int color, t_cub *cub)
@@ -53,7 +55,7 @@ void	draw_map(t_cub *cub)
 	int		y;
 	int		x;
 
-	map = cub->map;
+	map = cub->para->map;
 	y = 0;
 	while (map[y])
 	{
