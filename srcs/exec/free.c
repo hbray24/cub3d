@@ -3,36 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 10:13:18 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/26 17:10:00 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/27 11:28:12 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	close_win(t_cub *cub)
-{
-	if (!cub->img)
-		mlx_destroy_image(cub->mlx, cub->img);
-	if(!cub->win)
-		mlx_destroy_window(cub->mlx, cub->win);
-	if (!cub->mlx)
-		mlx_destroy_display(cub->mlx);
-	free(cub->mlx);
-	exit(0);
-}
-
 void	free_map(char **str)
 {
 	int	i;
 
-	i = -1;
-	if (!str)
+	i = 0;
+	if (!str || !(*str))
 		return ;
-	while (str && str[++i])
+	while (str && str[i])
+	{
 		free(str[i]);
+		i++;
+	}
 	free(str);
 }
 
@@ -57,4 +48,17 @@ void	all_free(t_cub **cub, t_player **player)
 {
 	free_player(player);
 	free_cub(cub);
+}
+
+int	close_win(t_cub *cub)
+{
+	if (cub->texture->img)
+		mlx_destroy_image(cub->mlx, cub->texture->img);
+	if (cub->win)
+		mlx_destroy_window(cub->mlx, cub->win);
+	if (cub->mlx)
+		mlx_destroy_display(cub->mlx);
+	free(cub->mlx);
+	all_free(&cub, &cub->player);
+	exit(0);
 }

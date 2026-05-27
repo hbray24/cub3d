@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/27 10:34:12 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/27 11:34:24 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include "../minilibx-linux/mlx.h"
 # include "libft.h"
-# include "mlx.h"
 # include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>
@@ -26,7 +26,7 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-
+# define ESC 65307
 
 # define WIDTH 1280
 # define HEIGHT 720
@@ -36,11 +36,17 @@
 # define D 100
 # define LEFT 65361
 # define RIGHT 65363
-# define SPEED 2
-# define ANGLE_SPEED 0.05
+# define SPEED 8
+# define ANGLE_SPEED 0.1
 # define PI 3.14159265359
 
-
+typedef enum s_dir
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST,
+}				t_dir;
 
 typedef struct s_dda
 {
@@ -52,11 +58,14 @@ typedef struct s_dda
 	float		angle_y;
 	float		pos_x;
 	float		pos_y;
+	float		wall_height;
 	int			step_x;
 	int			step_y;
 	int			map_x;
 	int			map_y;
 	int			side;
+	int			texture;
+	int			texture_x;
 }				t_dda;
 
 typedef struct s_player
@@ -72,19 +81,28 @@ typedef struct s_player
 	bool		rotate_right;
 }				t_player;
 
+typedef	struct s_img
+{
+	void	*img;
+	char	*data;
+	int		bpp;
+	int		size_line;
+	int		endian;
+	int		width;
+	int		height;
+}			t_img;
+
 # include "parser.h"
 
 typedef struct s_cub
 {
 	t_player	*player;
+	t_dda		dda;
+	t_img		texture[4];
+	t_img		screen;
+	t_para		*para;
 	void		*mlx;
 	void		*win;
-	void		*img;
-	char		*data;
-	int			bpp;
-	int			size_line;
-	int			endian;
-	t_para		*para;
 }				t_cub;
 
 t_cub			*create_cub(void);
@@ -93,13 +111,15 @@ void			all_free(t_cub **cub, t_player **player);
 void			open_win(t_cub *cub);
 void			put_pixel(int x, int y, int color, t_cub *cub);
 void			draw_line(t_player *player, t_cub *cub, float start_x, int i);
-void			*ft_memset(void *b, int c, size_t len);
 void			draw_square(int x, int y, int size, int color, t_cub *cub);
 void			draw_direction_ray(t_cub *cub);
+void			move_player(t_cub *cub);
+void			draw_wall(int end, int start_y, int i, t_cub *cub);
+void			draw_floor(int end, int i, t_cub *cub);
+void			draw_ceiling(int start_y, int i, t_cub *cub);
 int				close_win(t_cub *cub);
-int				key_press(int keycode, t_player *player);
+int				key_press(int keycode, t_cub *cub);
 int				key_release(int keycode, t_player *player);
 int				draw_loop(t_cub *cub);
-
 
 #endif
