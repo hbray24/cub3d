@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:03 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/27 13:02:59 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/27 14:52:36 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct e_para
 	int					nb_exit;
 	int					ff_exit;
 	t_cub				*cub;
-	t_player			*player;
 }						t_para;
 
 typedef enum e_head

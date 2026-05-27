@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 15:02:33 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/27 11:15:22 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/27 14:53:12 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	flood_fill(t_para *para)
 	map_cpy = copy_map(para->map, para);
 	if (!map_cpy)
 		error_pars("Error: map copy failed\n", para);
-	flood_fill_exec(map_cpy, para->player->x, para->player->y, para);
+	flood_fill_exec(map_cpy, para->cub->player->x, para->cub->player->y, para);
 	if (para->ff_collec != para->nb_collec)
 		error_pars("Error: collectible unreachable\n", para);
 	if (para->ff_exit != para->nb_exit)

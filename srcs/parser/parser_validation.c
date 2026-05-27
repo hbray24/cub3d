@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 13:21:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/27 11:16:50 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/27 14:52:52 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void	player_info(int i, int j, t_para *para)
 {
-	para->player->y = i;
-	para->player->x = j;
-	para->player->angle = convert_angle(para->map[i][j]);
+	para->cub->player->y = i;
+	para->cub->player->x = j;
+	para->cub->player->angle = convert_angle(para->map[i][j]);
 	para->map[i][j] = '0';
 	para->nb_player++;
 }

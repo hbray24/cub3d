@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:34 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/27 16:33:29 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/27 16:47:08 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	is_line_space(char *str)
 {
 	int	i;
+	int j;
 
 	i = 0;
 	while (!ft_is_space(str[i]))
