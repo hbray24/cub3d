@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:08:39 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/26 10:53:14 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/27 11:15:09 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	is_header(int i, t_para *para)
 	else if (para->stock[i][j] == 'F' && para->stock[i][j + 1] == ' ')
 		return (para->header = F);
 	else if (para->stock[i][j] == 'C' && para->stock[i][j + 1] == ' ')
-		return (para->header =  C);
+		return (para->header = C);
 	return (0);
 }
 

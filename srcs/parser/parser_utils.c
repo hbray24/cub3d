@@ -6,15 +6,15 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:34 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/26 17:03:02 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/27 11:16:06 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int is_line_space(char *str)
+int	is_line_space(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])

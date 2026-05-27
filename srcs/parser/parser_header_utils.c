@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 17:00:15 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/21 16:40:21 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/27 11:15:52 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ int	count_comma(char *str, char c)
 
 void	verif_color(char **tab, t_para *para)
 {
-	int i;
-	int j;
-	
+	int	i;
+	int	j;
+
 	i = 0;
 	while (tab[i])
 		i++;
@@ -91,7 +91,7 @@ void	pars_color_cut(char *line, char *tmp, int i, t_para *para)
 	}
 }
 
-void end_split_color(char **tab, t_para *para)
+void	end_split_color(char **tab, t_para *para)
 {
 	free_tab(tab);
 	error_pars("Error: wrong color format\n", para);

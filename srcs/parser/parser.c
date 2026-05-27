@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:21 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/27 10:37:24 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/27 11:14:58 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	do_gnl(t_para *para)
 	int		len;
 
 	i = 0;
-	para->stock = malloc(sizeof(char *) * (count_line_fd(para->path, para) + 1));
+	para->stock = malloc(sizeof(char *) * (count_line_fd(para->path, para)
+				+ 1));
 	if (!para->stock)
 		error_pars("Error: malloc fail\n", para);
 	fd = open(para->path, O_RDONLY);
