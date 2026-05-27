@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:38:28 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/27 12:09:26 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/27 16:25:33 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,25 @@ void	init_win(t_cub *cub)
 	cub->player->y = 3 * 64 + 32;
 	cub->player->angle = 3 * PI / 2;
 	cub->texture[0].img = mlx_xpm_file_to_image(cub->mlx,
-			"path_to_the_north_texture", &cub->texture[0].width,
+			"sprites/path_to_the_north_texture.xpm", &cub->texture[0].width,
 			&cub->texture[0].height);
 	cub->texture[0].data = mlx_get_data_addr(cub->texture[0].img,
 			&cub->texture[0].bpp, &cub->texture[0].size_line,
 			&cub->texture[0].endian);
 	cub->texture[1].img = mlx_xpm_file_to_image(cub->mlx,
-			"path_to_the_south_texture", &cub->texture[1].width,
+			"sprites/path_to_the_south_texture.xpm", &cub->texture[1].width,
 			&cub->texture[1].height);
 	cub->texture[1].data = mlx_get_data_addr(cub->texture[1].img,
 			&cub->texture[1].bpp, &cub->texture[1].size_line,
 			&cub->texture[1].endian);
 	cub->texture[2].img = mlx_xpm_file_to_image(cub->mlx,
-			"path_to_the_west_texture", &cub->texture[2].width,
+			"sprites/path_to_the_west_texture.xpm", &cub->texture[2].width,
 			&cub->texture[2].height);
 	cub->texture[2].data = mlx_get_data_addr(cub->texture[2].img,
 			&cub->texture[2].bpp, &cub->texture[2].size_line,
 			&cub->texture[2].endian);
 	cub->texture[3].img = mlx_xpm_file_to_image(cub->mlx,
-			"path_to_the_east_texture", &cub->texture[3].width,
+			"sprites/path_to_the_east_texture.xpm", &cub->texture[3].width,
 			&cub->texture[3].height);
 	cub->texture[3].data = mlx_get_data_addr(cub->texture[3].img,
 			&cub->texture[3].bpp, &cub->texture[3].size_line,
@@ -63,31 +63,31 @@ void	init_win(t_cub *cub)
 
 void	open_win(t_cub *cub)
 {
-	init_win(cub);
 	cub->mlx = mlx_init();
 	if (!cub->mlx)
 	{
 		write(2, "Error: MLX initialization failed\n", 34);
 		close_win(cub);
 	}
-	mlx_get_screen_size(cub->mlx, &cub->texture->width, &cub->texture->height);
-	cub->win = mlx_new_window(cub->mlx, cub->texture->width,
-			cub->texture->height, "Cub3d");
+	init_win(cub);
+	mlx_get_screen_size(cub->mlx, &cub->screen.width, &cub->screen.height);
+	cub->win = mlx_new_window(cub->mlx, cub->screen.width,
+			cub->screen.height, "Cub3d");
 	if (!cub->win)
 	{
 		write(2, "Error: Window creation failed\n", 31);
 		close_win(cub);
 	}
-	cub->texture->img = mlx_new_image(cub->mlx, cub->texture->width,
-			cub->texture->height);
-	if (!cub->texture->img)
+	cub->screen.img = mlx_new_image(cub->mlx, cub->screen.width,
+			cub->screen.height);
+	if (!cub->screen.img)
 	{
 		write(2, "Error: Image creation failed\n", 30);
 		close_win(cub);
 	}
-	cub->texture->data = mlx_get_data_addr(cub->texture->img,
-			&cub->texture->bpp, &cub->texture->size_line,
-			&cub->texture->endian);
+	cub->screen.data = mlx_get_data_addr(cub->screen.img,
+			&cub->screen.bpp, &cub->screen.size_line,
+			&cub->screen.endian);
 }
 
 t_cub	*create_cub(void)

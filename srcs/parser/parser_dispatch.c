@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_dispatch.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 11:35:25 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/27 10:36:57 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/27 16:40:57 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	dispatch_sprite(int i, int *mode, t_para *para)
 	}
 	else if (is_only_map_char(i, para))
 	{
-		if (is_header_complete(para))
+		if (!is_header_complete(para))
 		{
 			malloc_map(para->stock, i, para);
 			*mode = MAP;

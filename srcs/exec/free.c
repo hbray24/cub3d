@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 10:13:18 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/27 13:54:12 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/27 16:04:45 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	all_free(t_para **para)
 
 int	close_win(t_cub *cub)
 {
-	if (cub->texture->img)
-		mlx_destroy_image(cub->mlx, cub->texture->img);
+	if (cub->screen.img)
+		mlx_destroy_image(cub->mlx, cub->screen.img);
 	if (cub->win)
 		mlx_destroy_window(cub->mlx, cub->win);
 	if (cub->mlx)
