@@ -3,28 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 10:13:18 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/27 11:28:12 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/27 13:54:12 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	free_map(char **str)
+void	free_para(t_para **para)
 {
-	int	i;
-
-	i = 0;
-	if (!str || !(*str))
+	if (!para || !(*para))
 		return ;
-	while (str && str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
+	free_tab((*para)->stock);
+	(*para)->stock = NULL;
+	free_tab((*para)->map);
+	(*para)->map = NULL;
+	free((*para)->no_t);
+	(*para)->no_t = NULL;
+	free((*para)->so_t);
+	(*para)->so_t = NULL;
+	free((*para)->we_t);
+	(*para)->we_t = NULL;
+	free((*para)->ea_t);
+	(*para)->ea_t = NULL;
+	free(*para);
+	*para = NULL;
 }
 
 void	free_player(t_player **player)
@@ -39,15 +44,19 @@ void	free_cub(t_cub **cub)
 {
 	if (!cub || !(*cub))
 		return ;
-	free_map((*cub)->para->map);
 	free(*cub);
 	*cub = NULL;
 }
 
-void	all_free(t_cub **cub, t_player **player)
+void	all_free(t_para **para)
 {
-	free_player(player);
-	free_cub(cub);
+	if (!para || !*para)
+		return ;
+	if ((*para)->player)
+		free_player(&(*para)->player);
+	if ((*para)->cub)
+		free_cub(&(*para)->cub);
+	free_para(para);
 }
 
 int	close_win(t_cub *cub)
@@ -59,6 +68,6 @@ int	close_win(t_cub *cub)
 	if (cub->mlx)
 		mlx_destroy_display(cub->mlx);
 	free(cub->mlx);
-	all_free(&cub, &cub->player);
+	all_free(&cub->para);
 	exit(0);
 }

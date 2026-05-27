@@ -6,35 +6,37 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:03 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/27 11:13:09 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/27 13:02:59 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "cub3d.h"
+typedef struct s_cub	t_cub;
+typedef struct s_player	t_player;
 
 typedef struct e_para
 {
-	char		**stock;
-	char		**map;
-	char		*no_t;
-	char		*so_t;
-	char		*we_t;
-	char		*ea_t;
-	int			floor_c;
-	int			ceiling_c;
-	char		*path;
-	int			header;
-	int			i_map;
-	int			nb_player;
-	int			nb_collec;
-	int			ff_collec;
-	int			nb_exit;
-	int			ff_exit;
-	t_player	*player;
-}				t_para;
+	char				**stock;
+	char				**map;
+	char				*no_t;
+	char				*so_t;
+	char				*we_t;
+	char				*ea_t;
+	int					floor_c;
+	int					ceiling_c;
+	char				*path;
+	int					header;
+	int					i_map;
+	int					nb_player;
+	int					nb_collec;
+	int					ff_collec;
+	int					nb_exit;
+	int					ff_exit;
+	t_cub				*cub;
+	t_player			*player;
+}						t_para;
 
 typedef enum e_head
 {
@@ -45,43 +47,45 @@ typedef enum e_head
 	EA,
 	F,
 	C,
-}				t_head;
+}						t_head;
 
 typedef enum e_type
 {
 	SPRITE,
 	MAP,
-}				t_type;
+}						t_type;
 
-void			parsing(t_para *para);
-void			do_gnl(t_para *para);
-void			do_parsing(t_para *para);
+void					parsing(t_para *para);
+void					do_gnl(t_para *para);
+void					do_parsing(t_para *para);
 
-int				is_only_map_char(int i, t_para *para);
-int				is_header(int i, t_para *para);
-int				is_header_complete(t_para *para);
+int						is_only_map_char(int i, t_para *para);
+int						is_header(int i, t_para *para);
+int						is_header_complete(t_para *para);
 
-void			pars_header(char *line, t_para *para);
-void			pars_color(char *line, int *color, t_para *para);
-void			pars_texture(char *line, char **path, t_para *para);
-int				color_split(char *tmp, t_para *para);
+void					pars_header(char *line, t_para *para);
+void					pars_color(char *line, int *color, t_para *para);
+void					pars_texture(char *line, char **path, t_para *para);
+int						color_split(char *tmp, t_para *para);
 
-void			map_validation(t_para *para);
-void			flood_fill(t_para *para);
+void					map_validation(t_para *para);
+void					flood_fill(t_para *para);
 
-int				count_comma(char *str, char c);
-void			verif_color(char **tab, t_para *para);
-void			end_split_color(char **tab, t_para *para);
-void			pars_texture_cut(char *line, char *tmp, int i, t_para *para);
-void			pars_color_cut(char *line, char *tmp, int i, t_para *para);
+int						count_comma(char *str, char c);
+void					verif_color(char **tab, t_para *para);
+void					end_split_color(char **tab, t_para *para);
+void					pars_texture_cut(char *line, char *tmp, int i,
+							t_para *para);
+void					pars_color_cut(char *line, char *tmp, int i,
+							t_para *para);
 
-void			add_line_map(char *line, t_para *para);
-void			malloc_map(char **line, int i, t_para *para);
+void					add_line_map(char *line, t_para *para);
+void					malloc_map(char **line, int i, t_para *para);
 
-int				is_player(char c);
-float			convert_angle(char c);
+int						is_player(char c);
+float					convert_angle(char c);
 
-void			error_pars(char *msg, t_para *para);
-int				is_line_space(char *str);
+void					error_pars(char *msg, t_para *para);
+int						is_line_space(char *str);
 
 #endif
