@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:38:28 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/20 16:02:17 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/27 10:51:00 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub.h"
-
-void	*ft_memset(void *b, int c, size_t len)
-{
-	unsigned char	*tmp;
-
-	tmp = (unsigned char *) b;
-	while (len > 0)
-	{
-		*tmp = (unsigned char) c;
-		tmp++;
-		len--;
-	}
-	return (b);
-}
+#include "../../includes/cub3d.h"
 
 void	init_player(t_player *player)
 {
@@ -61,7 +47,7 @@ char **get_map(void)
 void	open_win(t_cub *cub)
 {
 	init_player(cub->player);
-	cub->map = get_map();
+	cub->para->map = get_map();
 	cub->mlx = mlx_init();
 	if (!cub->mlx)
 	{

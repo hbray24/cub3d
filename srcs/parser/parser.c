@@ -6,13 +6,13 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:21 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/20 11:37:55 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/27 10:37:24 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../includes/cub3d.h"
 
-static int	count_line(char *path, t_para *para)
+static int	count_line_fd(char *path, t_para *para)
 {
 	int		fd;
 	char	*line;
@@ -43,7 +43,7 @@ void	do_gnl(t_para *para)
 	int		len;
 
 	i = 0;
-	para->stock = malloc(sizeof(char *) * (count_line(para->path, para) + 1));
+	para->stock = malloc(sizeof(char *) * (count_line_fd(para->path, para) + 1));
 	if (!para->stock)
 		error_pars("Error: malloc fail\n", para);
 	fd = open(para->path, O_RDONLY);
@@ -63,8 +63,9 @@ void	do_gnl(t_para *para)
 	close(fd);
 }
 
-void	parsing(char **av, t_para *para)
+void	parsing(t_para *para)
 {
 	do_gnl(para);
-	check_stock(para);
+	do_parsing(para);
+	map_validation(para);
 }

@@ -6,16 +6,16 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 17:00:15 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/20 17:31:24 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/21 16:40:21 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	pars_texture_cut(char *line, char *tmp, int i, t_para *para)
 {
-	int fd;
-	
+	int	fd;
+
 	while (line[i])
 	{
 		if (!ft_is_space(line[i]))
@@ -34,17 +34,65 @@ void	pars_texture_cut(char *line, char *tmp, int i, t_para *para)
 	close(fd);
 }
 
-
-static int count_comma(char *str, char c)
+int	count_comma(char *str, char c)
 {
-	
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			count++;
+		i++;
+	}
+	return (count);
 }
 
-void	color_split(char *line, char *tmp, int i, t_para *para)
+void	verif_color(char **tab, t_para *para)
 {
-	char	**tab;
 	int i;
+	int j;
 	
 	i = 0;
-	tab = ft_split(tmp, ",");
+	while (tab[i])
+		i++;
+	if (i != 3)
+		error_pars("Error: wrong color format\n", para);
+	i = 0;
+	while (tab[i])
+	{
+		if (tab[i][0] == '\0')
+			error_pars("Error: wrong color format\n", para);
+		j = 0;
+		while (tab[i][j])
+		{
+			if (tab[i][j] < '0' || tab[i][j] > '9')
+				error_pars("Error: wrong color format\n", para);
+			j++;
+			if (j > 3)
+				error_pars("Error: wrong color format\n", para);
+		}
+		i++;
+	}
+}
+
+void	pars_color_cut(char *line, char *tmp, int i, t_para *para)
+{
+	while (line[i])
+	{
+		if (!ft_is_space(line[i]))
+		{
+			free(tmp);
+			error_pars("Error: invalid content\n", para);
+		}
+		i++;
+	}
+}
+
+void end_split_color(char **tab, t_para *para)
+{
+	free_tab(tab);
+	error_pars("Error: wrong color format\n", para);
 }

@@ -19,11 +19,13 @@
 #  \_/ \__,_|_|  |_|\__,_|_.__/|_|\___||___/	||
 #================================================#
 
-NAME		= Cub3D
+NAME		= cub3D
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror -g3
 VALGRIND	= valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes
 RM			= rm -f
+MLX_DIR		= ./minilibx-linux
+MLX_FLAGS	= -L./minilibx-linux -lmlx -lXext -lX11
 
 MAKEFLAGS	+= --no-print-directory
 
@@ -98,13 +100,23 @@ SRCS	= \
 		\
 		srcs/main.c\
 		\
-		srcs/parser/parser.c
-		srcs/parser/parser_checker.c
-		srcs/parser/parser_utils.c
-		srcs/parser/parser_dispatch.c
+		srcs/parser/parser.c\
+		srcs/parser/parser_map.c\
+		srcs/parser/parser_validation.c\
+		srcs/parser/parser_validation_utils.c\
+		srcs/parser/parser_flood.c\
+		srcs/parser/parser_checker.c\
+		srcs/parser/parser_utils.c\
+		srcs/parser/parser_dispatch.c\
+		srcs/parser/parser_header.c\
+		srcs/parser/parser_header_utils.c\
 		\
-		srcs/exec/exec.c
-		srcs/exec/exec_utils.c
+		srcs/exec/exec.c\
+		srcs/exec/dda.c\
+		srcs/exec/free.c\
+		srcs/exec/keyboard.c\
+		srcs/exec/setup.c\
+		srcs/exec/exec_utils.c\
 
 
 SRCS_BONUS	= \
@@ -113,7 +125,7 @@ OBJS		= $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 OBJS_BONUS	= $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRCS_BONUS))
 
 
-INCLUDES	= -I ./includes
+INCLUDES	= -I ./includes -I ./minilibx-linux
 
 
 #================================#
@@ -134,7 +146,8 @@ all:
 
 $(NAME): $(OBJS)
 	@printf "\n"
-	@if $(CC) $(CFLAGS) $(OBJS) -lreadline -o $(NAME); then \
+	@$(MAKE) -C $(MLX_DIR) 2>/dev/null
+	@if $(CC) $(CFLAGS) $(OBJS) $(MLX_FLAGS) -lm -o $(NAME); then \
 		$(MAKE) name_ascii; \
 		$(MAKE) user42; \
 		printf "$(GREEN)$(GRAS)👌 Compilation terminée !$(RESET)\n\n"; \
@@ -182,7 +195,7 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(dir $@)
 	@$(eval INDEX=$(shell echo $$(($(INDEX)+1))))
 	@printf "\r$(BLUE)$(GRAS)[$(INDEX)/$(TOTAL)]$(RESET) $(GRAS)Compilation: %-30s$(RESET)" "$(notdir $<)"
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 #============================#
 # _____       _   _ _     	||
@@ -252,20 +265,20 @@ endef
 name_ascii:
 	@printf "\n"
 	@printf "$(call get_random_color)$(GRAS)"
-	@printf ":'######::'##::::'##:'########:::'#######::'########::
-	@printf "'##... ##: ##:::: ##: ##.... ##:'##.... ##: ##.... ##:
-	@printf " ##:::..:: ##:::: ##: ##:::: ##:..::::: ##: ##:::: ##:
-	@printf " ##::::::: ##:::: ##: ########:::'#######:: ##:::: ##:
-	@printf " ##::::::: ##:::: ##: ##.... ##::...... ##: ##:::: ##:
-	@printf " ##::: ##: ##:::: ##: ##:::: ##:'##:::: ##: ##:::: ##:
-	@printf ". ######::. #######:: ########::. #######:: ########::
-	@printf ":......::::.......:::........::::.......:::........:::
+	@printf ":'######::'##::::'##:'########:::'#######::'########::\n"
+	@printf "'##... ##: ##:::: ##: ##.... ##:'##.... ##: ##.... ##:\n"
+	@printf " ##:::..:: ##:::: ##: ##:::: ##:..::::: ##: ##:::: ##:\n"
+	@printf " ##::::::: ##:::: ##: ########:::'#######:: ##:::: ##:\n"
+	@printf " ##::::::: ##:::: ##: ##.... ##::...... ##: ##:::: ##:\n"
+	@printf " ##::: ##: ##:::: ##: ##:::: ##:'##:::: ##: ##:::: ##:\n"
+	@printf ". ######::. #######:: ########::. #######:: ########::\n"
+	@printf ":......::::.......:::........::::.......:::........:::\n"
 	@printf "$(RESET)\n"
 
 
 user42:
-#	@printf "$(call get_random_color)$(GRAS)"
-	@printf "                                                                                                             AW                                                          \n"
+	@printf "$(call get_random_color)$(GRAS)"
+	@printf "                                                                                                                                                                         \n"
 	@printf "$(COLOR_MAX)'##::::'##:'##::::'##:'##::::'##::'######:::'#######::'##::::'##:'########:'########:::::::::::'##::::'##::::'##:'########::'########:::::'###::::'##:::'##: \n"
 	@printf "$(COLOR_MAX) ###::'###: ###::'###: ##:::: ##:'##... ##:'##.... ##: ##:::: ##: ##.....:: ##.... ##:::::::::'##::::: ##:::: ##: ##.... ##: ##.... ##:::'## ##:::. ##:'##:: \n"
 	@printf "$(COLOR_MAX) ####'####: ####'####: ##:::: ##: ##:::..:: ##:::: ##: ##:::: ##: ##::::::: ##:::: ##::::::::'##:::::: ##:::: ##: ##:::: ##: ##:::: ##::'##:. ##:::. ####::: \n"
@@ -274,7 +287,7 @@ user42:
 	@printf "$(COLOR_MAX) ##:.:: ##: ##:.:: ##: ##:::: ##:'##::: ##: ##:.. ##:: ##:::: ##: ##::::::: ##::. ##::::::'##::::::::: ##:::: ##: ##:::: ##: ##::. ##:: ##.... ##:::: ##:::: \n"
 	@printf "$(COLOR_MAX) ##:::: ##: ##:::: ##:. #######::. ######::: ##### ##:. #######:: ########: ##:::. ##::::'##:::::::::: ##:::: ##: ########:: ##:::. ##: ##:::: ##:::: ##:::: \n"
 	@printf "$(COLOR_MAX)..:::::..::..:::::..:::.......::::......::::.....:..:::.......:::........::..:::::..:::::..:::::::::::..:::::..::........:::..:::::..::..:::::..:::::..::::: \n"
-	@printf "                                                              $(COLOR_MAX)'bood'$(RESET)                                   AW                                            \n"
+	@printf "                                                              $(COLOR_MAX)$(RESET)                                                                                       \n"
 	@printf "$(RESET)\n"
 
 error_ascii:
@@ -301,3 +314,5 @@ error_ascii:
 #====================================#
 
 .PHONY: all bonus clean fclean re norm lines name_ascii user42
+
+#makefile inspired by mvignes#

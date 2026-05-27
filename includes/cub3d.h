@@ -3,25 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:06 by mmusquer          #+#    #+#             */
-<<<<<<< HEAD:includes/cub3d.h
-/*   Updated: 2026/05/18 16:38:04 by mmusquer         ###   ########.fr       */
-=======
-/*   Updated: 2026/05/20 16:45:31 by hbray            ###   ########.fr       */
->>>>>>> origin/main:includes/cub.h
+/*   Updated: 2026/05/27 10:34:12 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-<<<<<<< HEAD:includes/cub3d.h
 # include "libft.h"
 # include "mlx.h"
-# include "parser.h"
 # include <fcntl.h>
+# include <math.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -30,11 +26,10 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-#endif
-=======
+
+
 # define WIDTH 1280
 # define HEIGHT 720
-
 # define W 119
 # define A 97
 # define S 115
@@ -45,12 +40,7 @@
 # define ANGLE_SPEED 0.05
 # define PI 3.14159265359
 
-# include "minilibx-linux/mlx.h"
-# include <math.h>
-# include <stdbool.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+
 
 typedef struct s_dda
 {
@@ -82,6 +72,8 @@ typedef struct s_player
 	bool		rotate_right;
 }				t_player;
 
+# include "parser.h"
+
 typedef struct s_cub
 {
 	t_player	*player;
@@ -92,7 +84,7 @@ typedef struct s_cub
 	int			bpp;
 	int			size_line;
 	int			endian;
-	char		**map;
+	t_para		*para;
 }				t_cub;
 
 t_cub			*create_cub(void);
@@ -111,4 +103,3 @@ int				draw_loop(t_cub *cub);
 
 
 #endif
->>>>>>> origin/main:includes/cub.h
