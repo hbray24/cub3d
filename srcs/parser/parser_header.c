@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 14:05:30 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/21 16:40:26 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/27 11:15:39 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	pars_header(char *line, t_para *para)
 
 void	pars_texture(char *line, char **path, t_para *para)
 {
-	int i;
-	int j;
-	char *tmp;
-	
+	int		i;
+	int		j;
+	char	*tmp;
+
 	i = 0;
 	if (*path != NULL)
 		error_pars("Error: duplicate identifier\n", para);
@@ -41,7 +41,7 @@ void	pars_texture(char *line, char **path, t_para *para)
 		i++;
 	i += 2;
 	while (line[i] && ft_is_space(line[i]))
-			i++;
+		i++;
 	if (line[i] == '\0')
 		error_pars("Error: empty path\n", para);
 	j = i;
@@ -56,14 +56,14 @@ void	pars_texture(char *line, char **path, t_para *para)
 
 int	color_split(char *tmp, t_para *para)
 {
-	char **tab;
-	int r;
-	int g;
-	int b;
-	
+	char	**tab;
+	int		r;
+	int		g;
+	int		b;
+
 	tab = NULL;
 	if (count_comma(tmp, ',') != 2 || tmp[0] == ',' || tmp[ft_strlen(tmp)
-		- 1] == ',' || ft_strnstr(tmp, ",,", ft_strlen(tmp)) != NULL)
+			- 1] == ',' || ft_strnstr(tmp, ",,", ft_strlen(tmp)) != NULL)
 		error_pars("Error: wrong color format\n", para);
 	tab = ft_split(tmp, ',');
 	verif_color(tab, para);
@@ -82,10 +82,10 @@ int	color_split(char *tmp, t_para *para)
 
 void	pars_color(char *line, int *color, t_para *para)
 {
-	int i;
-	int j;
-	char *tmp;
-	
+	int		i;
+	int		j;
+	char	*tmp;
+
 	i = 0;
 	if (*color != -1)
 		error_pars("Error: duplicate color\n", para);
@@ -93,7 +93,7 @@ void	pars_color(char *line, int *color, t_para *para)
 		i++;
 	i += 2;
 	while (line[i] && ft_is_space(line[i]))
-			i++;
+		i++;
 	if (line[i] == '\0')
 		error_pars("Error: empty color\n", para);
 	j = i;

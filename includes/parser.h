@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:03 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/27 10:37:55 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/27 11:13:09 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PARSER_H
 
 # include "cub3d.h"
+
 typedef struct e_para
 {
 	char		**stock;

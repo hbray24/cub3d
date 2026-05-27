@@ -3,17 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 10:58:27 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/21 16:39:47 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/27 11:28:20 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	key_press(int keycode, t_player *player)
+int	key_press(int keycode, t_cub *cub)
 {
+	t_player	*player;
+
+	player = cub->player;
+	if (keycode == ESC)
+		close_win(cub);
 	if (keycode == W)
 		player->key_up = true;
 	if (keycode == S)
@@ -29,7 +34,7 @@ int	key_press(int keycode, t_player *player)
 	return (0);
 }
 
-int	key_release(int	keycode, t_player *player)
+int	key_release(int keycode, t_player *player)
 {
 	if (keycode == W)
 		player->key_up = false;
