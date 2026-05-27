@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:34 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/27 16:47:08 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/27 16:57:43 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 int	is_line_space(char *str)
 {
 	int	i;
-	int j;
 
 	i = 0;
-	while (!ft_is_space(str[i]))
+	while (ft_is_space(str[i]))
 			i++;
 	if (str[i] == '\0')
 		return (1);

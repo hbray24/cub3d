@@ -6,13 +6,13 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 15:02:33 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/27 14:53:12 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/27 17:55:58 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static int	count_line(char **map)
+int	count_line(char **map)
 {
 	int	i;
 
@@ -58,7 +58,11 @@ static void	flood_fill_exec(char **map_cpy, int x, int y, t_para *para)
 	if (map_cpy[y][x] == 'R')
 		para->ff_collec++;
 	if (map_cpy[y][x] == 'X')
+	{
 		para->ff_exit++;
+		map_cpy[y][x] = 'V';
+		return ;
+	}
 	map_cpy[y][x] = 'V';
 	flood_fill_exec(map_cpy, x + 1, y, para);
 	flood_fill_exec(map_cpy, x - 1, y, para);

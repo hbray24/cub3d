@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_checker.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:08:39 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/27 16:32:30 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/27 17:00:02 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	is_only_map_char(int i, t_para *para)
 		if (ft_strchr("01NSWE DRX", para->stock[i][j]))
 			j++;
 		else
-			return (1);
+			return (0);
 	}
-	return (0);
+	return (1);
 }
 
 int	is_header(int i, t_para *para)
