@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:38:28 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/28 10:16:33 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/28 13:02:45 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void	init_win(t_cub *cub)
 {
-	cub->player->x = 3 * 64 + 32;
-	cub->player->y = 3 * 64 + 32;
-	cub->player->angle = 3 * PI / 2;
 	cub->texture[0].img = mlx_xpm_file_to_image(cub->mlx,
 			"sprites/path_to_the_north_texture.xpm", &cub->texture[0].width,
 			&cub->texture[0].height);

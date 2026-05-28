@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_flood.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 15:02:33 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/27 17:55:58 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/28 11:48:10 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static char	**copy_map(char **map, t_para *para)
 }
 
 static void	flood_fill_exec(char **map_cpy, int x, int y, t_para *para)
-{
+{	
 	if (x < 0 || y < 0 || y >= count_line(map_cpy)
 		|| (size_t)x >= ft_strlen(map_cpy[y]) || map_cpy[y][x] == ' ')
 	{
@@ -78,10 +78,10 @@ void	flood_fill(t_para *para)
 	if (!map_cpy)
 		error_pars("Error: map copy failed\n", para);
 	flood_fill_exec(map_cpy, para->cub->player->x, para->cub->player->y, para);
+	free_tab(map_cpy);
+	map_cpy = NULL;
 	if (para->ff_collec != para->nb_collec)
 		error_pars("Error: collectible unreachable\n", para);
 	if (para->ff_exit != para->nb_exit)
 		error_pars("Error: exit unreachable\n", para);
-	free_tab(map_cpy);
-	map_cpy = NULL;
 }

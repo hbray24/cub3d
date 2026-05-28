@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:33:40 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/28 10:15:32 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/28 14:44:21 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ void	draw_map(t_cub *cub)
 		{
 			if (map[y][x] == '1')
 			{
-				draw_square(x * 64, y * 64, 64, 0x0000FF, cub);
+				draw_square(x * 16, y * 16, 16, 0x0000FF, cub);
 			}
 			if (map[y][x] == '0')
-				draw_square(x * 64, y * 64, 64, 0xFFFFFF, cub);
+				draw_square(x * 16, y * 16, 16, 0xFFFFFF, cub);
 			x++;
 		}
 		y++;
@@ -92,9 +92,9 @@ int	draw_loop(t_cub *cub)
 		start_x += fraction;
 		i++;
 	}
-	// draw_map(cub);
-	// draw_square(player->x - 5, player->y - 5, 10, 0x00FF00, cub);
-	// draw_direction_ray(cub);
+	draw_map(cub);
+	draw_square((player->x / 4) - 4, (player->y / 4) - 4, 8, 0xFF0000, cub);
+	draw_direction_ray(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->screen.img, 0, 0);
 	return (0);
 }

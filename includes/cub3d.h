@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/28 10:14:07 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/28 14:05:09 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@
 # define D 100
 # define LEFT 65361
 # define RIGHT 65363
-# define SPEED 80
-# define ANGLE_SPEED 0.5
+# define SPEED 10
+# define ANGLE_SPEED 0.1
 # define PI 3.14159265359
 
 typedef struct e_para	t_para;

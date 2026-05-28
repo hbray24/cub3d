@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:01:08 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/28 09:01:29 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/28 14:39:46 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ void	run_dda(t_dda *dda, t_cub *cub)
 			dda->map_y += dda->step_y;
 			dda->side = 1;
 		}
-		if (dda->map_x < 0 || dda->map_x >= 10 || dda->map_y < 0
-			|| dda->map_y >= 10)
-			break ;
+		// if (dda->map_x < 0 || dda->map_x >= 10 || dda->map_y < 0
+		// 	|| dda->map_y >= 10)
+		// 	break ;
 		if (cub->para->map[dda->map_y][dda->map_x] == '1')
 			touch = 1;
 	}
@@ -72,18 +72,22 @@ void	draw_direction_ray(t_cub *cub)
 {
 	float	dir_x;
 	float	dir_y;
+	float	tmp_x;
+	float	tmp_y;
 	int		length;
 	int		i;
 
 	dir_x = cos(cub->player->angle);
 	dir_y = sin(cub->player->angle);
-	length = 30;
+	tmp_x = cub->player->x;
+	tmp_y = cub->player->y;
+	length = 50;
 	i = 0;
 	while (i < length)
 	{
-		put_pixel((int)cub->player->x, (int)cub->player->y, 0xFF0000, cub);
-		cub->player->x += dir_x;
-		cub->player->y += dir_y;
+		put_pixel((int)(tmp_x / 4), (int)(tmp_y / 4), 0xFF0000, cub);
+		tmp_x += dir_x;
+		tmp_y += dir_y;
 		i++;
 	}
 }
@@ -98,7 +102,7 @@ void	calcul_wall(float ray_dist, t_cub *cub, float start_x, int i)
 	dist = dist * cos(start_x - cub->player->angle);
 	if (dist < 0.1)
 		dist = 0.1;
-	cub->dda.wall_height = (64 / dist) * (cub->screen.width / 2);
+	cub->dda.wall_height = (64 / dist) * (cub->screen.width / 2) / (tan(PI / 6));
 	start_y = (cub->screen.height - cub->dda.wall_height) / 2;
 	end = start_y + cub->dda.wall_height;
 	if (start_y < 0)
@@ -136,6 +140,6 @@ void	draw_line(t_player *player, t_cub *cub, float start_x, int i)
 			cub->dda.texture = SOUTH;
 	}
 	wall_x -= floor(wall_x);
-	cub->dda.texture_x = (int)(wall_x * 64);
+	cub->dda.texture_x = (int)(wall_x * cub->texture[cub->dda.texture].width);
 	calcul_wall(ray_dist, cub, start_x, i);
 }

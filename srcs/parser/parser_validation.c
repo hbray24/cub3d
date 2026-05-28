@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_validation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 13:21:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/27 18:03:30 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/28 13:26:14 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,6 @@ void	map_validation(t_para *para)
 {
 	find_info(para);
 	flood_fill(para);
+	para->cub->player->x = (para->cub->player->x * 64) + 32;
+	para->cub->player->y = (para->cub->player->y * 64) + 32;
 }
