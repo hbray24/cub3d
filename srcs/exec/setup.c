@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:38:28 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/28 13:02:45 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/28 17:27:04 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	open_win(t_cub *cub)
 		close_win(cub);
 	}
 	init_win(cub);
+	init_img_1(cub);
 	mlx_get_screen_size(cub->mlx, &cub->screen.width, &cub->screen.height);
 	cub->win = mlx_new_window(cub->mlx, cub->screen.width, cub->screen.height,
 			"Cub3d");
