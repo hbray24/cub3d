@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 15:51:54 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/27 11:38:58 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/28 14:41:42 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	wall(t_cub *cub, float x, float y)
 {
 	int	marge;
 
-	marge = 10;
+	marge = 16;
 	if (cub->para->map[(int)(y - (marge / 2)) / 64][(int)(x - (marge / 2))
 		/ 64] == '1' || cub->para->map[(int)(y - (marge / 2)) / 64][(int)(x
 			+ (marge / 2)) / 64] == '1' || cub->para->map[(int)(y + (marge / 2))

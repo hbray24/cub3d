@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:34 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/27 13:34:49 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/28 10:11:22 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,22 @@ int	is_line_space(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i])
-	{
-		if (ft_is_space(str[i]))
-			return (0);
-		i++;
-	}
-	return (1);
+	while (ft_is_space(str[i]))
+			i++;
+	if (str[i] == '\0')
+		return (1);
+	return (0);
 }
 
 void	error_pars(char *msg, t_para *para)
 {
+	t_cub	*cub_tmp;
+
+	cub_tmp = NULL;
+	if (para)
+		cub_tmp = para->cub;
 	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(msg, 2);
-	all_free(&para);
+	all_free(&para, &cub_tmp);
 	exit(1);
 }

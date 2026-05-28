@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:03 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/27 13:02:59 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/27 17:56:09 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct e_para
 	int					nb_exit;
 	int					ff_exit;
 	t_cub				*cub;
-	t_player			*player;
 }						t_para;
 
 typedef enum e_head
@@ -70,6 +69,7 @@ int						color_split(char *tmp, t_para *para);
 
 void					map_validation(t_para *para);
 void					flood_fill(t_para *para);
+int						count_line(char **map);
 
 int						count_comma(char *str, char c);
 void					verif_color(char **tab, t_para *para);

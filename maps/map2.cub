@@ -1,14 +1,14 @@
 C 204,229,255
-NO ./sprites/wall_lab1.xpm
+NO ./sprites/path_to_the_north_texture.xpm
 
 
 
-WE ./sprites/wall_lab2.xpm
-SO ./sprites/wall_lab0.xpm
+WE ./sprites/path_to_the_west_texture.xpm
+SO ./sprites/path_to_the_south_texture.xpm
 
 F 100,100,0
 
-EA ./sprites/wall_lab3.xpm
+EA ./sprites/path_to_the_east_texture.xpm
 
                              1
                             1N1

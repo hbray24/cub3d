@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 11:27:53 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/27 11:43:32 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/28 14:24:46 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	draw_ceiling(int start_y, int i, t_cub *cub)
 	y = 0;
 	while (y < start_y)
 	{
-		put_pixel(i, y, 0xFFFF00, cub);
+		put_pixel(i, y, cub->para->ceiling_c, cub);
 		y++;
 	}
 }
@@ -41,9 +41,9 @@ void	draw_floor(int end, int i, t_cub *cub)
 	int	y;
 
 	y = end;
-	while (y < cub->texture->height)
+	while (y < cub->screen.height)
 	{
-		put_pixel(i, y, 0xFF0000, cub);
+		put_pixel(i, y, cub->para->floor_c, cub);
 		y++;
 	}
 }

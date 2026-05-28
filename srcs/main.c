@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 13:58:29 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/27 13:55:43 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/28 10:14:38 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	setup(int ac, char **av, t_para *para)
 {
-	int		i;
+	int	i;
 
 	para->floor_c = -1;
 	para->ceiling_c = -1;
@@ -28,10 +28,7 @@ static void	setup(int ac, char **av, t_para *para)
 		error_pars("Usage: path/name_map.cub\n", para);
 	if (para->path[i - 5] == '/')
 		error_pars("Usage: path/name_map.cub\n", para);
-
 }
-
-
 
 int	main(int ac, char **av)
 {
@@ -42,25 +39,22 @@ int	main(int ac, char **av)
 	para = create_para();
 	if (!cub || !para)
 	{
-		if (cub)
-			free_player(&cub->player);
-		free(cub);
-		free(para);
+		all_free(&para, &cub);
 		return (1);
 	}
 	para->cub = cub;
-	para->player = cub->player;
+	cub->para = para;
 	setup(ac, av, para);
 	parsing(para);
 	if (!cub)
 		return (1);
-	// open_win(cub);
-	// mlx_hook(cub->win, 17, 0, (int (*)(void))(void *)close_win, cub);
-	// mlx_hook(cub->win, 2, 1L << 0, (int (*)(void))(void *)key_press, cub);
-	// mlx_hook(cub->win, 3, 1L << 1, (int (*)(void))(void *)key_release,
-	// 	cub->player);
-	// mlx_loop_hook(cub->mlx, (int (*)(void))(void *)draw_loop, cub);
-	// mlx_loop(cub->mlx);
-	all_free(&para);
+	open_win(cub);
+	mlx_hook(cub->win, 17, 0, (int (*)(void))(void *)close_win, cub);
+	mlx_hook(cub->win, 2, 1L << 0, (int (*)(void))(void *)key_press, cub);
+	mlx_hook(cub->win, 3, 1L << 1, (int (*)(void))(void *)key_release,
+		cub->player);
+	mlx_loop_hook(cub->mlx, (int (*)(void))(void *)draw_loop, cub);
+	mlx_loop(cub->mlx);
+	all_free(&para, &cub);
 	return (0);
 }
