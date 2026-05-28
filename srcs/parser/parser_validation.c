@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_validation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 13:21:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/28 13:26:14 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/28 14:52:01 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@ static int	is_border(char **map, int y, int x)
 	return (0);
 }
 
+static void	find_info_cut(t_para *para)
+{
+	if (para->nb_player != 1)
+		error_pars("Error: wrong number of player\n", para);
+	if (para->nb_exit > 1)
+		error_pars("Error: too many exit\n", para);
+}
+
 static void	find_info(t_para *para)
 {
 	int	i;
@@ -61,10 +69,7 @@ static void	find_info(t_para *para)
 		}
 		i++;
 	}
-	if (para->nb_player != 1)
-		error_pars("Error: wrong number of player\n", para);
-	if (para->nb_exit > 1)
-		error_pars("Error: too many exit\n", para);
+	find_info_cut(para);
 }
 
 void	map_validation(t_para *para)

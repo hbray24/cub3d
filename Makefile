@@ -118,7 +118,13 @@ SRCS	= \
 		srcs/exec/keyboard.c\
 		srcs/exec/minimap.c\
 		srcs/exec/mouvement.c\
-		srcs/exec/setup.c\
+    srcs/exec/setup.c\
+		\
+		srcs/animation/animation.c\
+		srcs/animation/setup.c\
+		srcs/animation/init_img.c\
+		\
+		
 
 
 SRCS_BONUS	= \

@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:03 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/27 17:56:09 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/28 14:56:49 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 typedef struct s_cub	t_cub;
 typedef struct s_player	t_player;
 
-typedef struct e_para
+typedef struct s_para
 {
 	char				**stock;
 	char				**map;

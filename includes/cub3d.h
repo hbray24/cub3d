@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:06 by mmusquer          #+#    #+#             */
 /*   Updated: 2026/05/28 16:21:43 by hbray            ###   ########.fr       */
@@ -16,6 +16,7 @@
 # include "../minilibx-linux/mlx.h"
 # include "libft.h"
 # include "parser.h"
+# include "animation.h"
 # include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>
@@ -40,9 +41,11 @@
 # define SPEED 10
 # define ANGLE_SPEED 0.1
 # define PI 3.14159265359
+# define ANIM_SPEED 0.5
 # define LENGTH 50	
 
-typedef struct e_para	t_para;
+typedef struct s_para	t_para;
+typedef struct s_col	t_col;
 
 typedef enum s_dir
 {
@@ -101,9 +104,11 @@ typedef struct s_cub
 {
 	t_player			*player;
 	t_dda				dda;
+	t_img				col_texture[6];
 	t_img				texture[5];
 	t_img				screen;
 	t_para				*para;
+	t_col				*col;
 	void				*mlx;
 	void				*win;
 }						t_cub;

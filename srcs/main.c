@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 13:58:29 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/28 10:14:38 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/28 17:29:02 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	main(int ac, char **av)
 	if (!cub)
 		return (1);
 	open_win(cub);
+	pixar(cub);
 	mlx_hook(cub->win, 17, 0, (int (*)(void))(void *)close_win, cub);
 	mlx_hook(cub->win, 2, 1L << 0, (int (*)(void))(void *)key_press, cub);
 	mlx_hook(cub->win, 3, 1L << 1, (int (*)(void))(void *)key_release,
