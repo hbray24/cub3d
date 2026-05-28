@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:38:28 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/28 17:27:04 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/28 16:47:01 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,12 @@ void	init_win(t_cub *cub)
 	cub->texture[3].data = mlx_get_data_addr(cub->texture[3].img,
 			&cub->texture[3].bpp, &cub->texture[3].size_line,
 			&cub->texture[3].endian);
+	cub->texture[4].img = mlx_xpm_file_to_image(cub->mlx,
+			"sprites/door_texture.xpm", &cub->texture[4].width,
+			&cub->texture[4].height);
+	cub->texture[4].data = mlx_get_data_addr(cub->texture[4].img,
+			&cub->texture[4].bpp, &cub->texture[4].size_line,
+			&cub->texture[4].endian);
 }
 
 void	open_win(t_cub *cub)

@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/28 17:21:57 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/28 16:21:43 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # define ANGLE_SPEED 0.1
 # define PI 3.14159265359
 # define ANIM_SPEED 0.5
+# define LENGTH 50	
 
 typedef struct s_para	t_para;
 typedef struct s_col	t_col;
@@ -52,6 +53,7 @@ typedef enum s_dir
 	SOUTH,
 	EAST,
 	WEST,
+	DOOR,
 }						t_dir;
 
 typedef struct s_dda
@@ -102,8 +104,8 @@ typedef struct s_cub
 {
 	t_player			*player;
 	t_dda				dda;
-	t_img				texture[4];
 	t_img				col_texture[6];
+	t_img				texture[5];
 	t_img				screen;
 	t_para				*para;
 	t_col				*col;
@@ -120,9 +122,7 @@ void					open_win(t_cub *cub);
 void					put_pixel(int x, int y, int color, t_cub *cub);
 void					draw_line(t_player *player, t_cub *cub, float start_x,
 							int i);
-void					draw_square(int x, int y, int size, int color,
-							t_cub *cub);
-void					draw_direction_ray(t_cub *cub);
+void					draw_minimap(t_cub *cub);
 void					move_player(t_cub *cub);
 void					draw_wall(int end, int start_y, int i, t_cub *cub);
 void					draw_floor(int end, int i, t_cub *cub);
