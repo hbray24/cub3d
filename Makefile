@@ -112,12 +112,13 @@ SRCS	= \
 		srcs/parser/parser_header_utils.c\
 		\
 		srcs/exec/color.c\
-		srcs/exec/exec.c\
 		srcs/exec/dda.c\
+		srcs/exec/exec.c\
 		srcs/exec/free.c\
 		srcs/exec/keyboard.c\
-		srcs/exec/setup.c\
+		srcs/exec/minimap.c\
 		srcs/exec/mouvement.c\
+		srcs/exec/setup.c\
 
 
 SRCS_BONUS	= \

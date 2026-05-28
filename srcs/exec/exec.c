@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:33:40 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/28 14:44:21 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/28 15:02:03 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,50 +29,6 @@ void	clear_image(t_cub *cub)
 	ft_memset(cub->screen.data, 0, cub->screen.height * cub->screen.size_line);
 }
 
-void	draw_square(int x, int y, int size, int color, t_cub *cub)
-{
-	int	i;
-	int	a;
-
-	i = 0;
-	a = 0;
-	while (i < size)
-	{
-		a = 0;
-		while (a < size)
-		{
-			put_pixel(x + a, y + i, color, cub);
-			a++;
-		}
-		i++;
-	}
-}
-
-void	draw_map(t_cub *cub)
-{
-	char	**map;
-	int		y;
-	int		x;
-
-	map = cub->para->map;
-	y = 0;
-	while (map[y])
-	{
-		x = 0;
-		while (map[y][x])
-		{
-			if (map[y][x] == '1')
-			{
-				draw_square(x * 16, y * 16, 16, 0x0000FF, cub);
-			}
-			if (map[y][x] == '0')
-				draw_square(x * 16, y * 16, 16, 0xFFFFFF, cub);
-			x++;
-		}
-		y++;
-	}
-}
-
 int	draw_loop(t_cub *cub)
 {
 	t_player	*player;
@@ -92,9 +48,7 @@ int	draw_loop(t_cub *cub)
 		start_x += fraction;
 		i++;
 	}
-	draw_map(cub);
-	draw_square((player->x / 4) - 4, (player->y / 4) - 4, 8, 0xFF0000, cub);
-	draw_direction_ray(cub);
+	draw_minimap(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->screen.img, 0, 0);
 	return (0);
 }

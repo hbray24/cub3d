@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 10:13:18 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/28 10:06:18 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/28 15:55:36 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	free_cub(t_cub **cub)
 		mlx_destroy_image((*cub)->mlx, (*cub)->texture[2].img);
 	if ((*cub)->texture[3].img)
 		mlx_destroy_image((*cub)->mlx, (*cub)->texture[3].img);
+	if ((*cub)->texture[4].img)
+		mlx_destroy_image((*cub)->mlx, (*cub)->texture[4].img);
 	if ((*cub)->player)
 		free_player(&(*cub)->player);
 	free(*cub);
