@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 13:58:29 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/27 16:47:23 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/28 10:14:38 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	setup(int ac, char **av, t_para *para)
 {
-	int		i;
+	int	i;
 
 	para->floor_c = -1;
 	para->ceiling_c = -1;
@@ -28,10 +28,7 @@ static void	setup(int ac, char **av, t_para *para)
 		error_pars("Usage: path/name_map.cub\n", para);
 	if (para->path[i - 5] == '/')
 		error_pars("Usage: path/name_map.cub\n", para);
-
 }
-
-
 
 int	main(int ac, char **av)
 {
@@ -42,7 +39,7 @@ int	main(int ac, char **av)
 	para = create_para();
 	if (!cub || !para)
 	{
-		all_free(&para);
+		all_free(&para, &cub);
 		return (1);
 	}
 	para->cub = cub;
@@ -58,6 +55,6 @@ int	main(int ac, char **av)
 		cub->player);
 	mlx_loop_hook(cub->mlx, (int (*)(void))(void *)draw_loop, cub);
 	mlx_loop(cub->mlx);
-	all_free(&para);
+	all_free(&para, &cub);
 	return (0);
 }

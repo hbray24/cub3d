@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/27 15:59:42 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/28 10:14:07 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../minilibx-linux/mlx.h"
 # include "libft.h"
+# include "parser.h"
 # include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>
@@ -36,8 +37,8 @@
 # define D 100
 # define LEFT 65361
 # define RIGHT 65363
-# define SPEED 8
-# define ANGLE_SPEED 0.1
+# define SPEED 80
+# define ANGLE_SPEED 0.5
 # define PI 3.14159265359
 
 typedef struct e_para	t_para;
@@ -105,12 +106,10 @@ typedef struct s_cub
 	void				*win;
 }						t_cub;
 
-# include "parser.h"
-
 t_cub					*create_cub(void);
 t_player				*create_player(void);
 t_para					*create_para(void);
-void					all_free(t_para **para);
+void					all_free(t_para **para, t_cub **cub);
 void					free_player(t_player **player);
 void					open_win(t_cub *cub);
 void					put_pixel(int x, int y, int color, t_cub *cub);

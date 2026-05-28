@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 10:13:18 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/27 16:46:51 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/28 10:06:18 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	free_para(t_para **para)
 	free((*para)->ea_t);
 	(*para)->ea_t = NULL;
 	free(*para);
-	*para = NULL;
 }
 
 void	free_player(t_player **player)
@@ -37,37 +36,52 @@ void	free_player(t_player **player)
 	if (!player || !(*player))
 		return ;
 	free(*player);
-	*player = NULL;
 }
 
 void	free_cub(t_cub **cub)
 {
 	if (!cub || !(*cub))
 		return ;
+	if ((*cub)->texture[0].img)
+		mlx_destroy_image((*cub)->mlx, (*cub)->texture[0].img);
+	if ((*cub)->texture[1].img)
+		mlx_destroy_image((*cub)->mlx, (*cub)->texture[1].img);
+	if ((*cub)->texture[2].img)
+		mlx_destroy_image((*cub)->mlx, (*cub)->texture[2].img);
+	if ((*cub)->texture[3].img)
+		mlx_destroy_image((*cub)->mlx, (*cub)->texture[3].img);
+	if ((*cub)->player)
+		free_player(&(*cub)->player);
 	free(*cub);
-	*cub = NULL;
 }
 
-void	all_free(t_para **para)
+void	all_free(t_para **para, t_cub **cub)
 {
-	if (!para || !*para)
-		return ;
-	if ((*para)->cub->player)
-		free_player(&(*para)->cub->player);
-	if ((*para)->cub)
-		free_cub(&(*para)->cub);
 	free_para(para);
+	free_cub(cub);
 }
 
 int	close_win(t_cub *cub)
 {
-	if (cub->screen.img)
+	t_para	*para_tmp;
+	void	*mlx_tmp;
+
+	para_tmp = NULL;
+	mlx_tmp = NULL;
+	if (cub)
+	{
+		para_tmp = cub->para;
+		mlx_tmp = cub->mlx;
+	}
+	if (cub && cub->screen.img)
 		mlx_destroy_image(cub->mlx, cub->screen.img);
-	if (cub->win)
+	if (cub && cub->win)
 		mlx_destroy_window(cub->mlx, cub->win);
-	if (cub->mlx)
-		mlx_destroy_display(cub->mlx);
-	free(cub->mlx);
-	all_free(&cub->para);
+	all_free(&para_tmp, &cub);
+	if (mlx_tmp)
+	{
+		mlx_destroy_display(mlx_tmp);
+		free(mlx_tmp);
+	}
 	exit(0);
 }

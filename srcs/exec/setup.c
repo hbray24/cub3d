@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:38:28 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/27 16:25:33 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/28 10:16:33 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,6 @@ void	init_win(t_cub *cub)
 			&cub->texture[3].endian);
 }
 
-// char	**get_map(void)
-// {
-// 	char	**map;
-
-// 	map = malloc(sizeof(char *) * 10);
-// 	map[0] = ft_strdup("11111111111");
-// 	map[1] = ft_strdup("10000000001");
-// 	map[2] = ft_strdup("10111111101");
-// 	map[3] = ft_strdup("10100000101");
-// 	map[4] = ft_strdup("10101110101");
-// 	map[5] = ft_strdup("10100010101");
-// 	map[6] = ft_strdup("10111010101");
-// 	map[7] = ft_strdup("10000010001");
-// 	map[8] = ft_strdup("11111111111");
-// 	map[9] = NULL;
-// 	return (map);
-// }
-
 void	open_win(t_cub *cub)
 {
 	cub->mlx = mlx_init();
@@ -71,8 +53,8 @@ void	open_win(t_cub *cub)
 	}
 	init_win(cub);
 	mlx_get_screen_size(cub->mlx, &cub->screen.width, &cub->screen.height);
-	cub->win = mlx_new_window(cub->mlx, cub->screen.width,
-			cub->screen.height, "Cub3d");
+	cub->win = mlx_new_window(cub->mlx, cub->screen.width, cub->screen.height,
+			"Cub3d");
 	if (!cub->win)
 	{
 		write(2, "Error: Window creation failed\n", 31);
@@ -85,9 +67,8 @@ void	open_win(t_cub *cub)
 		write(2, "Error: Image creation failed\n", 30);
 		close_win(cub);
 	}
-	cub->screen.data = mlx_get_data_addr(cub->screen.img,
-			&cub->screen.bpp, &cub->screen.size_line,
-			&cub->screen.endian);
+	cub->screen.data = mlx_get_data_addr(cub->screen.img, &cub->screen.bpp,
+			&cub->screen.size_line, &cub->screen.endian);
 }
 
 t_cub	*create_cub(void)
@@ -124,7 +105,7 @@ t_player	*create_player(void)
 	return (player);
 }
 
-t_para		*create_para(void)
+t_para	*create_para(void)
 {
 	t_para	*para;
 

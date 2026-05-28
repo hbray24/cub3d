@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 11:27:53 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/27 11:43:32 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/28 08:54:45 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	draw_floor(int end, int i, t_cub *cub)
 	int	y;
 
 	y = end;
-	while (y < cub->texture->height)
+	while (y < cub->screen.height)
 	{
 		put_pixel(i, y, 0xFF0000, cub);
 		y++;

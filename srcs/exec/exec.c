@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:33:40 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/27 16:03:31 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/28 10:15:32 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ void	put_pixel(int x, int y, int color, t_cub *cub)
 
 void	clear_image(t_cub *cub)
 {
-	ft_memset(cub->screen.data, 0, cub->screen.height
-		* cub->screen.size_line);
+	ft_memset(cub->screen.data, 0, cub->screen.height * cub->screen.size_line);
 }
 
 void	draw_square(int x, int y, int size, int color, t_cub *cub)
@@ -85,7 +84,7 @@ int	draw_loop(t_cub *cub)
 	player = cub->player;
 	move_player(cub);
 	clear_image(cub);
-	fraction = PI / 3 / cub->texture->width;
+	fraction = PI / 3 / cub->screen.width;
 	start_x = player->angle - PI / 6;
 	while (i < cub->screen.width)
 	{
