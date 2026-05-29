@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/28 16:21:43 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/29 11:22:10 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 # define ANGLE_SPEED 0.1
 # define PI 3.14159265359
 # define ANIM_SPEED 0.5
-# define LENGTH 50	
+# define LENGTH 50
 
 typedef struct s_para	t_para;
 typedef struct s_col	t_col;
@@ -99,6 +99,12 @@ typedef struct s_img
 	int					width;
 	int					height;
 }						t_img;
+
+typedef struct s_pos
+{
+	int					x;
+	int					y;
+}						t_pos;
 
 typedef struct s_cub
 {

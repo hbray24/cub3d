@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:01:08 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/28 16:48:16 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/29 11:15:17 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,17 +93,12 @@ void	calcul_wall(float ray_dist, t_cub *cub, float start_x, int i)
 	draw_floor(end, i, cub);
 }
 
-void	draw_line(t_player *player, t_cub *cub, float start_x, int i)
+void	calcul_dist_wall(float *ray_dist, float *wall_x, t_cub *cub)
 {
-	float	ray_dist;
-	float	wall_x;
-
-	init_dda_step(start_x, &cub->dda, player);
-	run_dda(&cub->dda, cub);
 	if (cub->dda.side == 0)
 	{
-		ray_dist = cub->dda.side_dist_x - cub->dda.delta_dist_x;
-		wall_x = cub->dda.pos_y + ray_dist * cub->dda.angle_y;
+		*ray_dist = cub->dda.side_dist_x - cub->dda.delta_dist_x;
+		*wall_x = cub->dda.pos_y + *ray_dist * cub->dda.angle_y;
 		if (cub->dda.texture != DOOR)
 		{
 			if (cub->dda.step_x > 0)
@@ -114,8 +109,8 @@ void	draw_line(t_player *player, t_cub *cub, float start_x, int i)
 	}
 	else
 	{
-		ray_dist = cub->dda.side_dist_y - cub->dda.delta_dist_y;
-		wall_x = cub->dda.pos_x + ray_dist * cub->dda.angle_x;
+		*ray_dist = cub->dda.side_dist_y - cub->dda.delta_dist_y;
+		*wall_x = cub->dda.pos_x + *ray_dist * cub->dda.angle_x;
 		if (cub->dda.texture != DOOR)
 		{
 			if (cub->dda.step_y > 0)
@@ -124,7 +119,17 @@ void	draw_line(t_player *player, t_cub *cub, float start_x, int i)
 				cub->dda.texture = SOUTH;
 		}
 	}
-	wall_x -= floor(wall_x);
+	*wall_x -= floor(*wall_x);
+}
+
+void	draw_line(t_player *player, t_cub *cub, float start_x, int i)
+{
+	float	ray_dist;
+	float	wall_x;
+
+	init_dda_step(start_x, &cub->dda, player);
+	run_dda(&cub->dda, cub);
+	calcul_dist_wall(&ray_dist, &wall_x, cub);
 	cub->dda.texture_x = (int)(wall_x * cub->texture[cub->dda.texture].width);
 	calcul_wall(ray_dist, cub, start_x, i);
 }

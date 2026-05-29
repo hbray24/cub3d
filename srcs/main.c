@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 13:58:29 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/28 17:29:02 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/29 11:35:06 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,7 @@ int	main(int ac, char **av)
 	cub = create_cub();
 	para = create_para();
 	if (!cub || !para)
-	{
-		all_free(&para, &cub);
-		return (1);
-	}
+		return (all_free(&para, &cub), 1);
 	para->cub = cub;
 	cub->para = para;
 	setup(ac, av, para);
