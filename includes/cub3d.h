@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/29 11:22:10 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/29 15:54:12 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@
 # define D 100
 # define LEFT 65361
 # define RIGHT 65363
-# define SPEED 10
-# define ANGLE_SPEED 0.1
+# define SPEED 300
+# define ANGLE_SPEED 3.0
 # define PI 3.14159265359
 # define ANIM_SPEED 0.5
 # define LENGTH 50
@@ -117,6 +117,8 @@ typedef struct s_cub
 	t_col				*col;
 	void				*mlx;
 	void				*win;
+	double				time;
+	double				old_time;
 }						t_cub;
 
 t_cub					*create_cub(void);
@@ -129,7 +131,7 @@ void					put_pixel(int x, int y, int color, t_cub *cub);
 void					draw_line(t_player *player, t_cub *cub, float start_x,
 							int i);
 void					draw_minimap(t_cub *cub);
-void					move_player(t_cub *cub);
+void					move_player(t_cub *cub, float frametime);
 void					draw_wall(int end, int start_y, int i, t_cub *cub);
 void					draw_floor(int end, int i, t_cub *cub);
 void					draw_ceiling(int start_y, int i, t_cub *cub);

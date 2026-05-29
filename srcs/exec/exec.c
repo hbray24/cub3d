@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:33:40 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/28 15:02:03 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/29 16:09:16 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,30 @@ void	clear_image(t_cub *cub)
 	ft_memset(cub->screen.data, 0, cub->screen.height * cub->screen.size_line);
 }
 
+float	update_and_render(t_cub *cub)
+{
+	double	frametime;
+
+	cub->old_time = cub->time;
+	cub->time = get_time();
+	frametime = cub->time - cub->old_time;
+	if (frametime > 0.05 || frametime < 0.0)
+		frametime = 0.05;
+	return (frametime);
+}
+
 int	draw_loop(t_cub *cub)
 {
 	t_player	*player;
 	float		fraction;
 	float		start_x;
+	double		frametime;
 	int			i;
 
+	frametime = update_and_render(cub);
 	i = 0;
 	player = cub->player;
-	move_player(cub);
+	move_player(cub, frametime);
 	clear_image(cub);
 	fraction = PI / 3 / cub->screen.width;
 	start_x = player->angle - PI / 6;
