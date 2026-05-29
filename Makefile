@@ -122,6 +122,9 @@ SRCS	= \
 		\
 		srcs/animation/animation.c\
 		srcs/animation/setup.c\
+		srcs/animation/hud_exit.c\
+		srcs/animation/collectible.c\
+		srcs/animation/animation_utils.c\
 		srcs/animation/init_img.c\
 		\
 		

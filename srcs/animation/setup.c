@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 15:18:53 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/28 17:38:04 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/29 19:07:34 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	init_col(int i, int x, int y, t_col *col)
 	col[i].y = y;
 	col[i].anim.current_frame = 0;
 	col[i].anim.frame_count = 6;
+	col[i].collect = 0;
 	ft_memset(col[i].anim.frame, 0, sizeof(int) * 6);
 	while (j < col[i].anim.frame_count)
 	{
@@ -28,7 +29,7 @@ static void	init_col(int i, int x, int y, t_col *col)
 		j++;
 	}
 	col[i].anim.last_frame = get_time();
-	col[i].anim.time_b_frame = ANIM_SPEED;
+	col[i].anim.time_b_frame = ANIM_SPEED_COL;
 }
 
 t_col	*create_col(t_cub *cub)
@@ -58,4 +59,38 @@ t_col	*create_col(t_cub *cub)
 		y++;
 	}
 	return (col);
+}
+
+void init_hud(t_cub *cub)
+{
+	int j;
+
+	j = 0;
+	cub->hud_anim.current_frame = 0;
+	cub->hud_anim.frame_count = 6;
+	ft_memset(cub->hud_anim.frame, 0, sizeof(int) * 6);
+	while (j < cub->hud_anim.frame_count)
+	{
+		cub->hud_anim.frame[j] = j;
+		j++;
+	}
+	cub->hud_anim.last_frame = get_time();
+	cub->hud_anim.time_b_frame = ANIM_SPEED_HUD;
+}
+
+void init_exit(t_cub *cub)
+{
+	int j;
+
+	j = 0;
+	cub->exit_anim.current_frame = 0;
+	cub->exit_anim.frame_count = 6;
+	ft_memset(cub->exit_anim.frame, 0, sizeof(int) * 6);
+	while (j < cub->exit_anim.frame_count)
+	{
+		cub->exit_anim.frame[j] = j;
+		j++;
+	}
+	cub->exit_anim.last_frame = get_time();
+	cub->exit_anim.time_b_frame = ANIM_SPEED_COL;
 }

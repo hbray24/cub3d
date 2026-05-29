@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 13:21:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/28 14:52:01 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/29 19:01:39 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	find_info(t_para *para)
 				para->nb_collec++;
 			else if (para->map[i][j] == 'X')
 			{
-				if (!is_border(para->map, j, i))
+				if (!is_border(para->map, i, j))
 					error_pars("Error: exit must be on border", para);
 				para->nb_exit++;
 			}

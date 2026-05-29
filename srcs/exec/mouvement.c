@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouvement.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 15:51:54 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/28 14:41:42 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/29 19:05:51 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,12 @@ int	wall(t_cub *cub, float x, float y)
 		/ 64] == '1' || cub->para->map[(int)(y - (marge / 2)) / 64][(int)(x
 			+ (marge / 2)) / 64] == '1' || cub->para->map[(int)(y + (marge / 2))
 		/ 64][(int)(x - (marge / 2)) / 64] == '1' || cub->para->map[(int)(y
-			+ (marge / 2)) / 64][(int)(x + (marge / 2)) / 64] == '1')
+			+ (marge / 2)) / 64][(int)(x + (marge / 2)) / 64] == '1'
+		|| cub->para->map[(int)(y - (marge / 2)) / 64][(int)(x - (marge / 2))
+		/ 64] == 'X' || cub->para->map[(int)(y - (marge / 2)) / 64][(int)(x
+			+ (marge / 2)) / 64] == 'X' || cub->para->map[(int)(y + (marge / 2))
+		/ 64][(int)(x - (marge / 2)) / 64] == 'X' || cub->para->map[(int)(y
+			+ (marge / 2)) / 64][(int)(x + (marge / 2)) / 64] == 'X')
 		return (1);
 	return (0);
 }

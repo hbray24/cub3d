@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 15:08:53 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/28 17:30:12 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/05/29 19:07:48 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 void	pixar(t_cub *cub)
 {
 	t_col	*col;
+
 	col = create_col(cub);
+	init_hud(cub);
+	init_exit(cub);
 	cub->col = col;
-	
 }
 
 void	anim_maj(t_anim *anim, double time)
@@ -27,19 +29,11 @@ void	anim_maj(t_anim *anim, double time)
 	else
 	{
 		anim->last_frame = time;
-		if (anim->current_frame == anim->frame_count -1)
+		if (anim->current_frame == anim->frame_count - 1)
 			anim->current_frame = 0;
 		else
 			anim->current_frame++;
 	}
 }
 
-double	get_time(void)
-{
-	struct timeval	tv;
-	double			time;
 
-	gettimeofday(&tv, NULL);
-	time = ((tv.tv_sec)) + ((tv.tv_usec) / 1000000.0);
-	return (time);
-}

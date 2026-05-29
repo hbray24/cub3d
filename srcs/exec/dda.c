@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:01:08 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/28 16:48:16 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/29 19:09:57 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,24 @@ void	run_dda(t_dda *dda, t_cub *cub)
 			dda->map_y += dda->step_y;
 			dda->side = 1;
 		}
+		if (dda->map_x < 0 || dda->map_y < 0 || !cub->para->map[dda->map_y]
+			|| !cub->para->map[dda->map_y][dda->map_x])
+		{
+			cub->dda.texture = NORTH;
+			break ;
+		}
 		if (cub->para->map[dda->map_y][dda->map_x] == 'D')
 		{
 			cub->dda.texture = DOOR;
 			touch = 1;
 		}
-		if (cub->para->map[dda->map_y][dda->map_x] == '1')
+		if (cub->para->map[dda->map_y][dda->map_x] == 'X')
+		{
+			cub->dda.texture = EXIT;
+			touch = 1;
+		}
+		if (cub->para->map[dda->map_y][dda->map_x] == '1'
+			|| cub->para->map[dda->map_y][dda->map_x] == 'X')
 			touch = 1;
 	}
 }
@@ -80,8 +92,8 @@ void	calcul_wall(float ray_dist, t_cub *cub, float start_x, int i)
 	dist = dist * cos(start_x - cub->player->angle);
 	if (dist < 0.1)
 		dist = 0.1;
-	cub->dda.wall_height = (64 / dist) * (cub->screen.width / 2)
-		/ (tan(PI / 6));
+	cub->dda.wall_height = (64 / dist) * (cub->screen.width / 2) / (tan(PI
+				/ 6));
 	start_y = (cub->screen.height - cub->dda.wall_height) / 2;
 	end = start_y + cub->dda.wall_height;
 	if (start_y < 0)
@@ -98,13 +110,14 @@ void	draw_line(t_player *player, t_cub *cub, float start_x, int i)
 	float	ray_dist;
 	float	wall_x;
 
+	ray_dist = 0.1;
 	init_dda_step(start_x, &cub->dda, player);
 	run_dda(&cub->dda, cub);
 	if (cub->dda.side == 0)
 	{
 		ray_dist = cub->dda.side_dist_x - cub->dda.delta_dist_x;
 		wall_x = cub->dda.pos_y + ray_dist * cub->dda.angle_y;
-		if (cub->dda.texture != DOOR)
+		if (cub->dda.texture != DOOR && cub->dda.texture != EXIT)
 		{
 			if (cub->dda.step_x > 0)
 				cub->dda.texture = WEST;
@@ -116,7 +129,7 @@ void	draw_line(t_player *player, t_cub *cub, float start_x, int i)
 	{
 		ray_dist = cub->dda.side_dist_y - cub->dda.delta_dist_y;
 		wall_x = cub->dda.pos_x + ray_dist * cub->dda.angle_x;
-		if (cub->dda.texture != DOOR)
+		if (cub->dda.texture != DOOR && cub->dda.texture != EXIT)
 		{
 			if (cub->dda.step_y > 0)
 				cub->dda.texture = NORTH;
@@ -125,6 +138,11 @@ void	draw_line(t_player *player, t_cub *cub, float start_x, int i)
 		}
 	}
 	wall_x -= floor(wall_x);
-	cub->dda.texture_x = (int)(wall_x * cub->texture[cub->dda.texture].width);
+	if (cub->dda.texture == EXIT)
+		cub->dda.texture_x = (int)(wall_x * cub->exit_texture[0].width);
+	else
+		cub->dda.texture_x = (int)(wall_x
+				* cub->texture[cub->dda.texture].width);
 	calcul_wall(ray_dist, cub, start_x, i);
+	cub->wall_dist[i] = ray_dist;
 }

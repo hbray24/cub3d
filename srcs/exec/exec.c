@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:33:40 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/28 15:02:03 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/29 18:23:59 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	draw_loop(t_cub *cub)
 	float		fraction;
 	float		start_x;
 	int			i;
+	int			j;
 
 	i = 0;
 	player = cub->player;
@@ -48,7 +49,20 @@ int	draw_loop(t_cub *cub)
 		start_x += fraction;
 		i++;
 	}
+	j = 0;
+	while (j < cub->para->nb_collec)
+	{
+		if (!cub->col[j].collect)
+		{
+			anim_maj(&cub->col[j].anim, get_time());
+			draw_collectible(cub, &cub->col[j]);
+		}
+		j++;
+	}
 	draw_minimap(cub);
+	render_hud(cub);
+	anim_maj(&cub->hud_anim, get_time());
+	anim_maj(&cub->exit_anim, get_time());
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->screen.img, 0, 0);
 	return (0);
 }

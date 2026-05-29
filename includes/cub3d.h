@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/28 16:21:43 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/29 18:48:23 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define CUB3D_H
 
 # include "../minilibx-linux/mlx.h"
+# include "animation.h"
 # include "libft.h"
 # include "parser.h"
-# include "animation.h"
 # include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>
@@ -30,7 +30,7 @@
 
 # define ESC 65307
 
-# define WIDTH 1280
+# define WIDTH 4096
 # define HEIGHT 720
 # define W 119
 # define A 97
@@ -41,8 +41,13 @@
 # define SPEED 10
 # define ANGLE_SPEED 0.1
 # define PI 3.14159265359
-# define ANIM_SPEED 0.5
-# define LENGTH 50	
+# define ANIM_SPEED_COL 0.08
+# define ANIM_SPEED_HUD 0.1
+# define LENGTH 50
+# define SPRITE_SCALE 4
+# define SPRITE_HEIGHT 200
+# define BOB_SPEED 2.0
+# define BOB_AMPLITUDE 15.0 
 
 typedef struct s_para	t_para;
 typedef struct s_col	t_col;
@@ -54,6 +59,7 @@ typedef enum s_dir
 	EAST,
 	WEST,
 	DOOR,
+	EXIT
 }						t_dir;
 
 typedef struct s_dda
@@ -107,8 +113,14 @@ typedef struct s_cub
 	t_img				col_texture[6];
 	t_img				texture[5];
 	t_img				screen;
+	t_img				hud_texture[6];
+	t_img				*tex_w_e;
+	t_anim				hud_anim;
+	t_img				exit_texture[6];
+	t_anim				exit_anim;
 	t_para				*para;
 	t_col				*col;
+	float				wall_dist[WIDTH];
 	void				*mlx;
 	void				*win;
 }						t_cub;
@@ -124,6 +136,7 @@ void					draw_line(t_player *player, t_cub *cub, float start_x,
 							int i);
 void					draw_minimap(t_cub *cub);
 void					move_player(t_cub *cub);
+int						get_color(t_img *img, int x, int y);
 void					draw_wall(int end, int start_y, int i, t_cub *cub);
 void					draw_floor(int end, int i, t_cub *cub);
 void					draw_ceiling(int start_y, int i, t_cub *cub);
