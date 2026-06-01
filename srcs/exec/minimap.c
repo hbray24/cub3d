@@ -6,17 +6,17 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 14:53:28 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/28 16:32:25 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/29 11:17:49 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	draw_square(int x, int y, int size, int color, t_cub *cub)
+void	draw_square(t_pos pos, int size, int color, t_cub *cub)
 {
 	int	i;
 	int	a;
-	
+
 	i = 0;
 	a = 0;
 	while (i < size)
@@ -24,7 +24,7 @@ void	draw_square(int x, int y, int size, int color, t_cub *cub)
 		a = 0;
 		while (a < size)
 		{
-			put_pixel(x + a, y + i, color, cub);
+			put_pixel(pos.x + a, pos.y + i, color, cub);
 			a++;
 		}
 		i++;
@@ -38,7 +38,7 @@ void	draw_direction_ray(t_cub *cub)
 	float	tmp_x;
 	float	tmp_y;
 	int		i;
-	
+
 	dir_x = cos(cub->player->angle);
 	dir_y = sin(cub->player->angle);
 	tmp_x = cub->player->x;
@@ -67,18 +67,17 @@ void	draw_minimap(t_cub *cub)
 		while (map[y][x])
 		{
 			if (map[y][x] == '1')
-			{
-				draw_square(x * 16, y * 16, 16, 0x0000FF, cub);
-			}
+				draw_square((t_pos){x * 16, y * 16}, 16, 0x0000FF, cub);
 			if (map[y][x] == '0')
-				draw_square(x * 16, y * 16, 16, 0xFFFFFF, cub);
+				draw_square((t_pos){x * 16, y * 16}, 16, 0xFFFFFF, cub);
 			if (map[y][x] == 'D')
-				draw_square(x * 16, y * 16, 16, 0xFFFF00, cub); 
+				draw_square((t_pos){x * 16, y * 16}, 16, 0xFFFF00, cub);
 			x++;
 		}
 		y++;
 	}
-	draw_square((cub->player->x / 4) - 4, (cub->player->y / 4) - 4, 8, 0xFF0000, cub);
+	draw_square((t_pos){(cub->player->x / 4) - 4, (cub->player->y / 4) - 4}, 8,
+		0xFF0000, cub);
 	draw_direction_ray(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->screen.img, 0, 0);
 }

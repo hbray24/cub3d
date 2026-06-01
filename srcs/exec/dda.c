@@ -105,18 +105,12 @@ void	calcul_wall(float ray_dist, t_cub *cub, float start_x, int i)
 	draw_floor(end, i, cub);
 }
 
-void	draw_line(t_player *player, t_cub *cub, float start_x, int i)
+void	calcul_dist_wall(float *ray_dist, float *wall_x, t_cub *cub)
 {
-	float	ray_dist;
-	float	wall_x;
-
-	ray_dist = 0.1;
-	init_dda_step(start_x, &cub->dda, player);
-	run_dda(&cub->dda, cub);
 	if (cub->dda.side == 0)
 	{
-		ray_dist = cub->dda.side_dist_x - cub->dda.delta_dist_x;
-		wall_x = cub->dda.pos_y + ray_dist * cub->dda.angle_y;
+		*ray_dist = cub->dda.side_dist_x - cub->dda.delta_dist_x;
+		*wall_x = cub->dda.pos_y + *ray_dist * cub->dda.angle_y;
 		if (cub->dda.texture != DOOR && cub->dda.texture != EXIT)
 		{
 			if (cub->dda.step_x > 0)
@@ -127,8 +121,8 @@ void	draw_line(t_player *player, t_cub *cub, float start_x, int i)
 	}
 	else
 	{
-		ray_dist = cub->dda.side_dist_y - cub->dda.delta_dist_y;
-		wall_x = cub->dda.pos_x + ray_dist * cub->dda.angle_x;
+		*ray_dist = cub->dda.side_dist_y - cub->dda.delta_dist_y;
+		*wall_x = cub->dda.pos_x + *ray_dist * cub->dda.angle_x;
 		if (cub->dda.texture != DOOR && cub->dda.texture != EXIT)
 		{
 			if (cub->dda.step_y > 0)
@@ -137,8 +131,18 @@ void	draw_line(t_player *player, t_cub *cub, float start_x, int i)
 				cub->dda.texture = SOUTH;
 		}
 	}
-	wall_x -= floor(wall_x);
-	if (cub->dda.texture == EXIT)
+	*wall_x -= floor(*wall_x);
+}
+
+void	draw_line(t_player *player, t_cub *cub, float start_x, int i)
+{
+	float	ray_dist;
+	float	wall_x;
+
+	init_dda_step(start_x, &cub->dda, player);
+	run_dda(&cub->dda, cub);
+	calcul_dist_wall(&ray_dist, &wall_x, cub);
+  if (cub->dda.texture == EXIT)
 		cub->dda.texture_x = (int)(wall_x * cub->exit_texture[0].width);
 	else
 		cub->dda.texture_x = (int)(wall_x

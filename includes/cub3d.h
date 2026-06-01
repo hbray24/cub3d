@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:06 by mmusquer          #+#    #+#             */
 /*   Updated: 2026/06/01 12:21:09 by mmusquer         ###   ########.fr       */
@@ -38,8 +38,8 @@
 # define D 100
 # define LEFT 65361
 # define RIGHT 65363
-# define SPEED 10
-# define ANGLE_SPEED 0.1
+# define SPEED 300
+# define ANGLE_SPEED 3.0
 # define PI 3.14159265359
 # define ANIM_SPEED_COL 0.08
 # define ANIM_SPEED_HUD 0.2
@@ -106,6 +106,12 @@ typedef struct s_img
 	int					height;
 }						t_img;
 
+typedef struct s_pos
+{
+	int					x;
+	int					y;
+}						t_pos;
+
 typedef struct s_cub
 {
 	t_player			*player;
@@ -123,6 +129,8 @@ typedef struct s_cub
 	float				wall_dist[WIDTH];
 	void				*mlx;
 	void				*win;
+	double				time;
+	double				old_time;
 }						t_cub;
 
 t_cub					*create_cub(void);
