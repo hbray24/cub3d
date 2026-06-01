@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/06/01 12:21:09 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/06/01 14:14:36 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ void					put_pixel(int x, int y, int color, t_cub *cub);
 void					draw_line(t_player *player, t_cub *cub, float start_x,
 							int i);
 void					draw_minimap(t_cub *cub);
-void					move_player(t_cub *cub);
+void					move_player(t_cub *cub, double frametime);
 int						get_color(t_img *img, int x, int y);
 void					draw_wall(int end, int start_y, int i, t_cub *cub);
 void					draw_floor(int end, int i, t_cub *cub);

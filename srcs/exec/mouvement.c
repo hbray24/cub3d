@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouvement.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 15:51:54 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/29 15:53:20 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/01 14:18:06 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	wall(t_cub *cub, float x, float y)
 	return (0);
 }
 
-void	rotate_player(t_player *player, float frametime)
+void	rotate_player(t_player *player, double frametime)
 {
 	if (player->rotate_left)
 		player->angle -= (ANGLE_SPEED * frametime);
@@ -39,7 +39,7 @@ void	rotate_player(t_player *player, float frametime)
 		player->angle += (ANGLE_SPEED * frametime);
 }
 
-void	move_x(t_cub *cub, float cos_angle, float sin_angle, float frametime)
+void	move_x(t_cub *cub, float cos_angle, float sin_angle, double frametime)
 {
 	t_player	*player;
 	float	next_x;
@@ -68,7 +68,7 @@ void	move_x(t_cub *cub, float cos_angle, float sin_angle, float frametime)
 	}
 }
 
-void	move_y(t_cub *cub, float cos_angle, float sin_angle, float frametime)
+void	move_y(t_cub *cub, float cos_angle, float sin_angle, double frametime)
 {
 	t_player	*player;
 	float	next_x;
@@ -97,7 +97,7 @@ void	move_y(t_cub *cub, float cos_angle, float sin_angle, float frametime)
 	}
 }
 
-void	move_player(t_cub *cub, float frametime)
+void	move_player(t_cub *cub, double frametime)
 {
 	t_player	*player;
 	float		cos_angle;
