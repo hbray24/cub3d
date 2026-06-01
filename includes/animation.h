@@ -3,15 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   animation.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 14:55:10 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/29 19:08:01 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/06/01 17:43:19 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ANIMATION_H
 # define ANIMATION_H
+
+# define SPRITE_SCALE 4
+# define SPRITE_HEIGHT 200
+# define BOB_SPEED 2.0
+# define BOB_AMPLITUDE 30.0
+# define ANIM_SPEED_COL 0.08
+# define ANIM_SPEED_HUD 0.2
+# define HUD_SIZE 64
+# define HUD_SPACING 5
+# define HUD_MARGE 10
 
 typedef struct s_cub	t_cub;
 typedef struct s_anim
@@ -40,6 +50,8 @@ void					pixar(t_cub *cub);
 void					anim_maj(t_anim *anim, double time);
 double					get_time(void);
 void					draw_collectible(t_cub *cub, t_col *col);
+void					check_collectibles(t_cub *cub);
+void					finish_game(t_cub *cub);
 
 void					init_hud(t_cub *cub);
 void					init_exit(t_cub *cub);

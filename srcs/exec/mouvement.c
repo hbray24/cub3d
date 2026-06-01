@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouvement.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 15:51:54 by hbray             #+#    #+#             */
-/*   Updated: 2026/06/01 14:18:06 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/01 15:59:48 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,4 +109,5 @@ void	move_player(t_cub *cub, double frametime)
 	rotate_player(player, frametime);
 	move_x(cub, cos_angle, sin_angle, frametime);
 	move_y(cub, cos_angle, sin_angle, frametime);
+	check_collectibles(cub);
 }

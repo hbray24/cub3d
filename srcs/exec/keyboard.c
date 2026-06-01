@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 10:58:27 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/27 11:28:20 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/01 16:44:06 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	key_press(int keycode, t_cub *cub)
 		player->rotate_left = true;
 	if (keycode == RIGHT)
 		player->rotate_right = true;
+	if (keycode == SPACE)
+		finish_game(cub);
 	return (0);
 }
 

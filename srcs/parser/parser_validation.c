@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 13:21:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/06/01 15:27:18 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/06/01 15:55:26 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ static void	find_info(t_para *para)
 				if (!is_border(para->map, i, j))
 					error_pars("Error: exit must be on border", para);
 				para->nb_exit++;
+				para->cub->is_exit = 1;
 			}
 			j++;
 		}

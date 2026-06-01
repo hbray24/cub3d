@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 15:22:27 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/06/01 10:36:27 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/06/01 17:06:35 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,47 @@ void	draw_collectible(t_cub *cub, t_col *col)
 	col->sprite_height = col->sprite_height / SPRITE_SCALE;
 	col->bob = sin(get_time() * BOB_SPEED) * BOB_AMPLITUDE;
 	render_collectible_x(cub, col);
+}
+
+void	check_collectibles(t_cub *cub)
+{
+	int	x;
+	int	y;
+	int i;
+	
+	y = (int)(cub->player->y / 64);
+	x = (int)(cub->player->x / 64);
+	if (cub->para->map[y][x] == 'R')
+	{
+		cub->para->map[y][x] = '0';
+		cub->c_col++;
+		i = 0;
+		while (i < cub->para->nb_collec)
+		{
+			if (cub->col[i].x == x && cub->col[i].y == y)
+			{
+				cub->col[i].collect = 1;
+				break ;
+			}
+			i++;
+		}
+	}
+	else
+		return ;
+}
+
+void finish_game(t_cub *cub)
+{
+	int x;
+	int y;
+
+	y = (int)((cub->player->y + sin(cub->player->angle) * 64) / 64);
+	x = (int)((cub->player->x + cos(cub->player->angle) * 64) / 64);
+	if (cub->para->map[y][x] == 'X')
+	{
+		if (cub->c_col >= cub->para->nb_collec)
+			close_win(cub);
+		else
+			return ;
+	}
 }

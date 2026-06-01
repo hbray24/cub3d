@@ -6,11 +6,46 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 17:45:50 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/29 18:00:48 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/06/01 17:42:50 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+static void	draw_hud_col(int index, int collected, t_cub *cub)
+{
+	int x;
+	int y;
+	int color;
+	int gray;
+
+	y = 0;
+	color = 0;
+	gray = 0;
+	while (y < HUD_SIZE)
+	{
+		x = 0;
+		while (x < HUD_SIZE)
+		{
+			color = get_color(&cub->col_texture[0], x
+					* cub->col_texture[0].width / HUD_SIZE, y
+					* cub->col_texture[0].height / HUD_SIZE);
+			if (color == -16777216 || color == 0)
+			{
+				x++;
+				continue ;
+			}
+			if (collected == 1)
+			{
+				gray = (((color >> 16) & 0xFF) + ((color >> 8) & 0xFF) + (color & 0xFF)) / 3;
+				color = (gray << 16) | (gray << 8) | gray;
+			}
+			put_pixel(cub->screen.width - HUD_MARGE - (index + 1) * (HUD_SIZE + HUD_SPACING) + x, HUD_MARGE + y, color, cub);
+			x++;
+		}
+		y++;
+	}
+}
 
 void	render_hud(t_cub *cub)
 {
@@ -36,4 +71,7 @@ void	render_hud(t_cub *cub)
 		}
 		y++;
 	}
+	x = -1;
+	while (++x < cub->para->nb_collec)
+		draw_hud_col(x, cub->col[x].collect, cub);
 }
