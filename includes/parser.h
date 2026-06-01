@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:03 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/28 14:56:49 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/06/01 15:27:41 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_para
 	int					ff_collec;
 	int					nb_exit;
 	int					ff_exit;
+	int					nb_door;
 	t_cub				*cub;
 }						t_para;
 
