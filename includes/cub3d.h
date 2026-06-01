@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/29 18:48:23 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/06/01 12:21:09 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@
 # define ANGLE_SPEED 0.1
 # define PI 3.14159265359
 # define ANIM_SPEED_COL 0.08
-# define ANIM_SPEED_HUD 0.1
+# define ANIM_SPEED_HUD 0.2
 # define LENGTH 50
 # define SPRITE_SCALE 4
 # define SPRITE_HEIGHT 200
 # define BOB_SPEED 2.0
-# define BOB_AMPLITUDE 15.0 
+# define BOB_AMPLITUDE 30.0
 
 typedef struct s_para	t_para;
 typedef struct s_col	t_col;
@@ -144,5 +144,7 @@ int						close_win(t_cub *cub);
 int						key_press(int keycode, t_cub *cub);
 int						key_release(int keycode, t_player *player);
 int						draw_loop(t_cub *cub);
+void					destroy_image_1(t_cub **cub);
+void					destroy_image_2(t_cub **cub);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 10:13:18 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/29 10:21:26 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/06/01 13:52:47 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,10 @@ void	free_cub(t_cub **cub)
 {
 	if (!cub || !(*cub))
 		return ;
-	if ((*cub)->texture[0].img)
-		mlx_destroy_image((*cub)->mlx, (*cub)->texture[0].img);
-	if ((*cub)->texture[1].img)
-		mlx_destroy_image((*cub)->mlx, (*cub)->texture[1].img);
-	if ((*cub)->texture[2].img)
-		mlx_destroy_image((*cub)->mlx, (*cub)->texture[2].img);
-	if ((*cub)->texture[3].img)
-		mlx_destroy_image((*cub)->mlx, (*cub)->texture[3].img);
-  if ((*cub)->texture[4].img)
-		mlx_destroy_image((*cub)->mlx, (*cub)->texture[4].img);
-	if ((*cub)->col_texture[0].img)
-		mlx_destroy_image((*cub)->mlx, (*cub)->col_texture[0].img);
-	if ((*cub)->col_texture[1].img)
-		mlx_destroy_image((*cub)->mlx, (*cub)->col_texture[1].img);
-	if ((*cub)->col_texture[2].img)
-		mlx_destroy_image((*cub)->mlx, (*cub)->col_texture[2].img);
-	if ((*cub)->col_texture[3].img)
-		mlx_destroy_image((*cub)->mlx, (*cub)->col_texture[3].img);
-	if ((*cub)->col_texture[4].img)
-		mlx_destroy_image((*cub)->mlx, (*cub)->col_texture[4].img);
-	if ((*cub)->col_texture[5].img)
-		mlx_destroy_image((*cub)->mlx, (*cub)->col_texture[5].img);
+	destroy_image_1(cub);
+	destroy_image_2(cub);
+	if ((*cub)->col)
+		free((*cub)->col);
 	if ((*cub)->player)
 		free_player(&(*cub)->player);
 	free(*cub);
