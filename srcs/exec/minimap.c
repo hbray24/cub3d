@@ -72,6 +72,10 @@ void	draw_minimap(t_cub *cub)
 				draw_square((t_pos){x * 16, y * 16}, 16, 0xFFFFFF, cub);
 			if (map[y][x] == 'D')
 				draw_square((t_pos){x * 16, y * 16}, 16, 0xFFFF00, cub);
+			if (map[y][x] == 'R')
+				draw_square((t_pos){x * 16, y * 16}, 16, 0x00FF00, cub);
+			if (map[y][x] == 'X')
+				draw_square((t_pos){x * 16, y * 16}, 16, 0xFF0000, cub);
 			x++;
 		}
 		y++;
