@@ -1,39 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   animation.c                                        :+:      :+:    :+:   */
+/*   animation_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/28 15:08:53 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/29 19:07:48 by mmusquer         ###   ########.fr       */
+/*   Created: 2026/05/29 10:26:30 by mmusquer          #+#    #+#             */
+/*   Updated: 2026/05/29 10:27:11 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	pixar(t_cub *cub)
+double	get_time(void)
 {
-	t_col	*col;
+	struct timeval	tv;
+	double			time;
 
-	col = create_col(cub);
-	init_hud(cub);
-	init_exit(cub);
-	cub->col = col;
+	gettimeofday(&tv, NULL);
+	time = ((tv.tv_sec)) + ((tv.tv_usec) / 1000000.0);
+	return (time);
 }
-
-void	anim_maj(t_anim *anim, double time)
-{
-	if ((time - anim->last_frame) < anim->time_b_frame)
-		return ;
-	else
-	{
-		anim->last_frame = time;
-		if (anim->current_frame == anim->frame_count - 1)
-			anim->current_frame = 0;
-		else
-			anim->current_frame++;
-	}
-}
-
-

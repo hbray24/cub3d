@@ -118,19 +118,18 @@ SRCS	= \
 		srcs/exec/keyboard.c\
 		srcs/exec/minimap.c\
 		srcs/exec/mouvement.c\
-    srcs/exec/setup.c\
+    	srcs/exec/setup.c\
+		srcs/exec/destroy_mlx.c\
 		\
 		srcs/animation/animation.c\
 		srcs/animation/setup.c\
+		srcs/animation/hud_exit.c\
+		srcs/animation/collectible.c\
+		srcs/animation/animation_utils.c\
 		srcs/animation/init_img.c\
 		\
-		
-
-
-SRCS_BONUS	= \
 
 OBJS		= $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
-OBJS_BONUS	= $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRCS_BONUS))
 
 
 INCLUDES	= -I ./includes -I ./minilibx-linux

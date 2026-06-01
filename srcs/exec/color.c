@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 11:27:53 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/28 14:24:46 by hbray            ###   ########.fr       */
+/*   Updated: 2026/05/29 18:28:26 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,11 @@ void	draw_wall(int start_y, int end, int i, t_cub *cub)
 	float	tex_pos;
 	int		color;
 
-	step = (float)cub->texture[cub->dda.texture].height / cub->dda.wall_height;
+	if (cub->dda.texture == EXIT)
+		cub->tex_w_e = &cub->exit_texture[cub->exit_anim.current_frame];
+	else
+		cub->tex_w_e = &cub->texture[cub->dda.texture];
+	step = (float)cub->tex_w_e->height / cub->dda.wall_height;
 	if (start_y < 0)
 		start_y = 0;
 	tex_pos = (start_y - cub->screen.height / 2 + cub->dda.wall_height / 2)
@@ -67,10 +71,10 @@ void	draw_wall(int start_y, int end, int i, t_cub *cub)
 		tex_y = (int)tex_pos;
 		if (tex_y < 0)
 			tex_y = 0;
-		if (tex_y >= cub->texture[cub->dda.texture].height)
-			tex_y = cub->texture[cub->dda.texture].height - 1;
+		if (tex_y >= cub->tex_w_e->height)
+			tex_y = cub->tex_w_e->height - 1;
 		tex_pos += step;
-		color = get_color(&cub->texture[cub->dda.texture], cub->dda.texture_x,
+		color = get_color(cub->tex_w_e, cub->dda.texture_x,
 				tex_y);
 		put_pixel(i, y, color, cub);
 		y++;
