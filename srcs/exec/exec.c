@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:33:40 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/29 18:23:59 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/06/01 16:28:38 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-void	put_pixel(int x, int y, int color, t_cub *cub)
-{
-	char	*dst;
-
-	if (x > 0 && y > 0 && cub->screen.width > x && cub->screen.height > y)
-	{
-		dst = cub->screen.data + (y * cub->screen.size_line + x
-				* (cub->screen.bpp / 8));
-		*(unsigned int *)dst = color;
-	}
-}
 
 void	clear_image(t_cub *cub)
 {
@@ -40,6 +28,8 @@ float	update_and_render(t_cub *cub)
 		frametime = 0.05;
 	return (frametime);
 }
+
+
 
 int	draw_loop(t_cub *cub)
 {
@@ -77,6 +67,7 @@ int	draw_loop(t_cub *cub)
 	render_hud(cub);
 	anim_maj(&cub->hud_anim, get_time());
 	anim_maj(&cub->exit_anim, get_time());
+	uptade_doors(cub, frametime);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->screen.img, 0, 0);
 	return (0);
 }

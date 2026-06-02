@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_validation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 13:21:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/29 19:01:39 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/06/01 15:36:09 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ static void	find_info(t_para *para)
 				player_info(i, j, para);
 			else if (para->map[i][j] == 'R')
 				para->nb_collec++;
+			else if (para->map[i][j] == 'D')
+				para->nb_door++;
 			else if (para->map[i][j] == 'X')
 			{
 				if (!is_border(para->map, i, j))

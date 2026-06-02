@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 11:27:53 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/29 18:28:26 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/06/02 09:30:16 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,18 @@ int	get_color(t_img *img, int x, int y)
 		return (*(int *)src);
 	}
 	return (0);
+}
+
+void	put_pixel(int x, int y, int color, t_cub *cub)
+{
+	char	*dst;
+
+	if (x > 0 && y > 0 && cub->screen.width > x && cub->screen.height > y)
+	{
+		dst = cub->screen.data + (y * cub->screen.size_line + x
+				* (cub->screen.bpp / 8));
+		*(unsigned int *)dst = color;
+	}
 }
 
 void	draw_ceiling(int start_y, int i, t_cub *cub)
@@ -48,6 +60,17 @@ void	draw_floor(int end, int i, t_cub *cub)
 	}
 }
 
+int	draw_open_door(t_cub *cub, int start_y)
+{
+	float	lvl;
+	int		offset;
+
+	lvl = get_door_lvl(cub, cub->dda.map_x, cub->dda.map_y);
+	offset = (int)(cub->dda.wall_height * lvl);
+	start_y += offset;
+	return (start_y);
+}
+
 void	draw_wall(int start_y, int end, int i, t_cub *cub)
 {
 	int		y;
@@ -61,6 +84,8 @@ void	draw_wall(int start_y, int end, int i, t_cub *cub)
 	else
 		cub->tex_w_e = &cub->texture[cub->dda.texture];
 	step = (float)cub->tex_w_e->height / cub->dda.wall_height;
+	if (cub->dda.texture == DOOR)
+		start_y = draw_open_door(cub, start_y);
 	if (start_y < 0)
 		start_y = 0;
 	tex_pos = (start_y - cub->screen.height / 2 + cub->dda.wall_height / 2)

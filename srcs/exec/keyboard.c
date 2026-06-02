@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 10:58:27 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/27 11:28:20 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/01 16:27:39 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	key_press(int keycode, t_cub *cub)
 	player = cub->player;
 	if (keycode == ESC)
 		close_win(cub);
+	if (keycode == SPACE)
+		open_door(cub);
 	if (keycode == W)
 		player->key_up = true;
 	if (keycode == S)

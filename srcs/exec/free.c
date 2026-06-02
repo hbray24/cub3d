@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 10:13:18 by hbray             #+#    #+#             */
-/*   Updated: 2026/06/01 14:23:48 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/02 09:51:24 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ void	free_player(t_player **player)
 	free(*player);
 }
 
+void	free_door(t_door **door)
+{
+	if (!door || !(*door))
+		return ;
+	free(*door);
+}
+
 void	free_cub(t_cub **cub)
 {
 	if (!cub || !(*cub))
@@ -48,6 +55,8 @@ void	free_cub(t_cub **cub)
 		free((*cub)->col);
 	if ((*cub)->player)
 		free_player(&(*cub)->player);
+	if ((*cub)->door)
+		free_door(&(*cub)->door);
 	free(*cub);
 }
 

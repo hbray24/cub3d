@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collectible.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 15:22:27 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/06/01 10:36:27 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/06/01 14:43:11 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void	draw_collectible(t_cub *cub, t_col *col)
 	float angle_to_sprite;
 	
 	
-	sprite_x = col->x * 64 - cub->player->x;
-	sprite_y = col->y * 64 - cub->player->y;
+	sprite_x = col->x * 64 + 32 - cub->player->x;
+	sprite_y = col->y * 64 + 32 - cub->player->y;
 	angle_to_sprite = atan2(sprite_y, sprite_x) - cub->player->angle;
 	while (angle_to_sprite > PI)
 		angle_to_sprite -= 2 * PI;

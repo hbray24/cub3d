@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 15:51:54 by hbray             #+#    #+#             */
-/*   Updated: 2026/06/01 14:18:06 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/02 09:53:32 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,20 @@ int	wall(t_cub *cub, float x, float y)
 		/ 64] == '1' || cub->para->map[(int)(y - (marge / 2)) / 64][(int)(x
 			+ (marge / 2)) / 64] == '1' || cub->para->map[(int)(y + (marge / 2))
 		/ 64][(int)(x - (marge / 2)) / 64] == '1' || cub->para->map[(int)(y
-			+ (marge / 2)) / 64][(int)(x + (marge / 2)) / 64] == '1'
-		|| cub->para->map[(int)(y - (marge / 2)) / 64][(int)(x - (marge / 2))
+			+ (marge / 2)) / 64][(int)(x + (marge / 2)) / 64] == '1')
+		return (1);
+	if (cub->para->map[(int)(y - (marge / 2)) / 64][(int)(x - (marge / 2))
 		/ 64] == 'X' || cub->para->map[(int)(y - (marge / 2)) / 64][(int)(x
 			+ (marge / 2)) / 64] == 'X' || cub->para->map[(int)(y + (marge / 2))
 		/ 64][(int)(x - (marge / 2)) / 64] == 'X' || cub->para->map[(int)(y
 			+ (marge / 2)) / 64][(int)(x + (marge / 2)) / 64] == 'X')
+		return (1);
+	if ((cub->para->map[(int)(y - (marge / 2)) / 64][(int)(x - (marge / 2))
+		/ 64] == 'D' || cub->para->map[(int)(y - (marge / 2)) / 64][(int)(x
+		+ (marge / 2)) / 64] == 'D' || cub->para->map[(int)(y + (marge / 2))
+		/ 64][(int)(x - (marge / 2)) / 64] == 'D' || cub->para->map[(int)(y
+		+ (marge / 2)) / 64][(int)(x + (marge / 2)) / 64] == 'D')
+		&& get_door_lvl(cub, (int)(x / 64), (int)(y / 64)) < 0.8)
 		return (1);
 	return (0);
 }
@@ -42,9 +50,9 @@ void	rotate_player(t_player *player, double frametime)
 void	move_x(t_cub *cub, float cos_angle, float sin_angle, double frametime)
 {
 	t_player	*player;
-	float	next_x;
-	float	next_y;
-	double	speed;
+	float		next_x;
+	float		next_y;
+	double		speed;
 
 	player = cub->player;
 	speed = SPEED * frametime;
@@ -71,9 +79,9 @@ void	move_x(t_cub *cub, float cos_angle, float sin_angle, double frametime)
 void	move_y(t_cub *cub, float cos_angle, float sin_angle, double frametime)
 {
 	t_player	*player;
-	float	next_x;
-	float	next_y;
-	double	speed;
+	float		next_x;
+	float		next_y;
+	double		speed;
 
 	player = cub->player;
 	speed = SPEED * frametime;

@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:38:28 by hbray             #+#    #+#             */
-/*   Updated: 2026/06/01 14:28:19 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/02 10:08:20 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,45 @@ void	open_win(t_cub *cub)
 			&cub->screen.size_line, &cub->screen.endian);
 }
 
+void	init_doors(t_cub *cub, t_para *para)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	i = 0;
+	k = 0;
+	while (para->map[i])
+	{
+		j = 0;
+		while (para->map[i][j])
+		{
+			if (para->map[i][j] == 'D')
+			{
+				cub->door[k].x = j;
+				cub->door[k].y = i;
+				k++;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+t_door	*create_door(void)
+{
+	t_door	*door;
+
+	door = malloc(sizeof(t_door));
+	if (!door)
+	{
+		write(2, "Error: Malloc failed\n", 22);
+		return (NULL);
+	}
+	ft_memset(door, 0, sizeof(t_door));
+	return(door);
+}
+
 t_cub	*create_cub(void)
 {
 	t_cub	*cub;
@@ -84,10 +123,10 @@ t_cub	*create_cub(void)
 	ft_memset(cub, 0, sizeof(t_cub));
 	cub->player = create_player();
 	if (!cub->player)
-	{
-		free(cub);
-		return (NULL);
-	}
+		return (free(cub), NULL);
+	cub->door = create_door();
+	if (!cub->door)
+		return(all_free(NULL, &cub), NULL);
 	return (cub);
 }
 

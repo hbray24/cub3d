@@ -6,12 +6,17 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 14:55:10 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/29 19:08:01 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/06/01 16:33:37 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ANIMATION_H
 # define ANIMATION_H
+
+# define CLOSE 0
+# define OPENING 1
+# define OPEN 2
+# define CLOSING 3
 
 typedef struct s_cub	t_cub;
 typedef struct s_anim

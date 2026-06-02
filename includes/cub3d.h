@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/06/01 14:14:36 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/02 10:08:36 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define A 97
 # define S 115
 # define D 100
+# define SPACE 32
 # define LEFT 65361
 # define RIGHT 65363
 # define SPEED 300
@@ -112,6 +113,16 @@ typedef struct s_pos
 	int					y;
 }						t_pos;
 
+typedef struct s_door
+{
+	int					x;
+	int					y;
+	int					state;
+	float				open_lvl;
+	double				timer;
+	bool				is_open;
+}						t_door;
+
 typedef struct s_cub
 {
 	t_player			*player;
@@ -126,6 +137,7 @@ typedef struct s_cub
 	t_anim				exit_anim;
 	t_para				*para;
 	t_col				*col;
+	t_door				*door;
 	float				wall_dist[WIDTH];
 	void				*mlx;
 	void				*win;
@@ -154,5 +166,10 @@ int						key_release(int keycode, t_player *player);
 int						draw_loop(t_cub *cub);
 void					destroy_image_1(t_cub **cub);
 void					destroy_image_2(t_cub **cub);
+void					open_door(t_cub *cub);
+void					uptade_doors(t_cub *cub, double frametime);
+void					init_doors(t_cub *cub, t_para *para);
+float					get_door_lvl(t_cub *cub, int x, int y);
+
 
 #endif

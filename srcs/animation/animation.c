@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 15:08:53 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/29 19:07:48 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/06/01 16:22:16 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,3 @@ void	anim_maj(t_anim *anim, double time)
 			anim->current_frame++;
 	}
 }
-
-
