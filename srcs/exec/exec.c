@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:33:40 by hbray             #+#    #+#             */
-/*   Updated: 2026/06/01 16:28:38 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/02 15:27:26 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,30 +29,27 @@ float	update_and_render(t_cub *cub)
 	return (frametime);
 }
 
-
-
-int	draw_loop(t_cub *cub)
+void	cast_rays(t_cub *cub)
 {
-	t_player	*player;
 	float		fraction;
 	float		start_x;
-	double		frametime;
 	int			i;
-	int			j;
 
-	frametime = update_and_render(cub);
 	i = 0;
-	player = cub->player;
-	move_player(cub, frametime);
-	clear_image(cub);
 	fraction = PI / 3 / cub->screen.width;
-	start_x = player->angle - PI / 6;
+	start_x = cub->player->angle - PI / 6;
 	while (i < cub->screen.width)
 	{
-		draw_line(player, cub, start_x, i);
+		draw_line(cub->player, cub, start_x, i);
 		start_x += fraction;
 		i++;
 	}
+}
+
+void	render_sprites_hud(t_cub *cub, double frametime)
+{
+	int			j;
+
 	j = 0;
 	while (j < cub->para->nb_collec)
 	{
@@ -67,7 +64,18 @@ int	draw_loop(t_cub *cub)
 	render_hud(cub);
 	anim_maj(&cub->hud_anim, get_time());
 	anim_maj(&cub->exit_anim, get_time());
-	uptade_doors(cub, frametime);
+	update_doors(cub, frametime);
+}
+
+int	draw_loop(t_cub *cub)
+{
+	double		frametime;
+
+	frametime = update_and_render(cub);
+	move_player(cub, frametime);
+	clear_image(cub);
+	cast_rays(cub);
+	render_sprites_hud(cub, frametime);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->screen.img, 0, 0);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroy_mlx.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 11:35:10 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/06/01 12:18:55 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/06/02 15:06:54 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,3 @@ void	destroy_image_2(t_cub **cub)
 	if ((*cub)->exit_texture[5].img)
 		mlx_destroy_image((*cub)->mlx, (*cub)->exit_texture[5].img);
 }
-

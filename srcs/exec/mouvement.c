@@ -6,37 +6,19 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 15:51:54 by hbray             #+#    #+#             */
-/*   Updated: 2026/06/02 09:53:32 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/02 15:14:27 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	wall(t_cub *cub, float x, float y)
+void	mouse(t_cub *cub)
 {
-	int	marge;
-
-	marge = 16;
-	if (cub->para->map[(int)(y - (marge / 2)) / 64][(int)(x - (marge / 2))
-		/ 64] == '1' || cub->para->map[(int)(y - (marge / 2)) / 64][(int)(x
-			+ (marge / 2)) / 64] == '1' || cub->para->map[(int)(y + (marge / 2))
-		/ 64][(int)(x - (marge / 2)) / 64] == '1' || cub->para->map[(int)(y
-			+ (marge / 2)) / 64][(int)(x + (marge / 2)) / 64] == '1')
-		return (1);
-	if (cub->para->map[(int)(y - (marge / 2)) / 64][(int)(x - (marge / 2))
-		/ 64] == 'X' || cub->para->map[(int)(y - (marge / 2)) / 64][(int)(x
-			+ (marge / 2)) / 64] == 'X' || cub->para->map[(int)(y + (marge / 2))
-		/ 64][(int)(x - (marge / 2)) / 64] == 'X' || cub->para->map[(int)(y
-			+ (marge / 2)) / 64][(int)(x + (marge / 2)) / 64] == 'X')
-		return (1);
-	if ((cub->para->map[(int)(y - (marge / 2)) / 64][(int)(x - (marge / 2))
-		/ 64] == 'D' || cub->para->map[(int)(y - (marge / 2)) / 64][(int)(x
-		+ (marge / 2)) / 64] == 'D' || cub->para->map[(int)(y + (marge / 2))
-		/ 64][(int)(x - (marge / 2)) / 64] == 'D' || cub->para->map[(int)(y
-		+ (marge / 2)) / 64][(int)(x + (marge / 2)) / 64] == 'D')
-		&& get_door_lvl(cub, (int)(x / 64), (int)(y / 64)) < 0.8)
-		return (1);
-	return (0);
+	cub->mouse_locked = (cub->mouse_locked + 1) % 2;
+	if (cub->mouse_locked == 0)
+		mlx_mouse_show(cub->mlx, cub->win);
+	if (cub->mouse_locked == 1)
+		mlx_mouse_hide(cub->mlx, cub->win);
 }
 
 void	rotate_player(t_player *player, double frametime)
