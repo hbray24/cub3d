@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animation.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 14:55:10 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/06/03 10:36:46 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/03 11:20:12 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,17 @@ typedef struct s_col
 
 void					pixar(t_cub *cub);
 void					anim_maj(t_anim *anim, double time);
-double					get_time(void);
+
 void					draw_collectible(t_cub *cub, t_col *col);
 void					check_collectibles(t_cub *cub);
-void					finish_game(t_cub *cub);
-
-void					init_hud(t_cub *cub);
-void					init_exit(t_cub *cub);
 void					render_hud(t_cub *cub);
 
 t_col					*create_col(t_cub *cub);
+void					init_hud(t_cub *cub);
+void					init_exit(t_cub *cub);
 void					init_img_1(t_cub *cub);
+
+void					finish_game(t_cub *cub);
+double					get_time(void);
 
 #endif

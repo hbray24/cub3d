@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:03 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/06/03 10:35:29 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/03 11:09:21 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int						color_split(char *tmp, t_para *para);
 
 void					map_validation(t_para *para);
 void					flood_fill(t_para *para);
+int						is_border(char **map, int y, int x);
 int						count_line(char **map);
 
 int						count_comma(char *str, char c);
