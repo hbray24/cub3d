@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_dispatch.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 11:35:25 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/28 09:03:57 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/03 11:00:20 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void	build_map(int i, t_para *para)
 
 static int	dispatch_sprite(int i, int *mode, t_para *para)
 {
-
 	if (is_line_space(para->stock[i]))
 		return (1);
 	else if (is_header(i, para) > 0)

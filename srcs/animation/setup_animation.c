@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_animation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 10:38:55 by hbray             #+#    #+#             */
-/*   Updated: 2026/06/03 10:38:57 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/03 11:40:40 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	init_col(int i, int x, int y, t_col *col)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	col[i].x = x;
@@ -35,9 +35,9 @@ static void	init_col(int i, int x, int y, t_col *col)
 t_col	*create_col(t_cub *cub)
 {
 	t_col	*col;
-	int	i;
-	int y;
-	int x;
+	int		i;
+	int		y;
+	int		x;
 
 	i = 0;
 	y = 0;
@@ -61,9 +61,9 @@ t_col	*create_col(t_cub *cub)
 	return (col);
 }
 
-void init_hud(t_cub *cub)
+void	init_hud(t_cub *cub)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	cub->hud_anim.current_frame = 0;
@@ -78,9 +78,9 @@ void init_hud(t_cub *cub)
 	cub->hud_anim.time_b_frame = ANIM_SPEED_HUD;
 }
 
-void init_exit(t_cub *cub)
+void	init_exit(t_cub *cub)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	cub->exit_anim.current_frame = 0;

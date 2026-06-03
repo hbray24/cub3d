@@ -6,23 +6,34 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 17:45:50 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/06/01 17:42:50 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/06/03 11:39:25 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+static void	draw_hud_col_color(int *color, int collected, t_cub *cub)
+{
+	int	gray;
+
+	gray = 0;
+	if (collected == 1)
+	{
+		gray = (((*color >> 16) & 0xFF) + ((*color >> 8) & 0xFF)
+				+ (*color & 0xFF)) / 3;
+		*color = (gray << 16) | (gray << 8) | gray;
+	}
+}
+
 static void	draw_hud_col(int index, int collected, t_cub *cub)
 {
-	int x;
-	int y;
-	int color;
-	int gray;
+	int	x;
+	int	y;
+	int	color;
 
-	y = 0;
+	y = -1;
 	color = 0;
-	gray = 0;
-	while (y < HUD_SIZE)
+	while (++y < HUD_SIZE)
 	{
 		x = 0;
 		while (x < HUD_SIZE)
@@ -35,15 +46,11 @@ static void	draw_hud_col(int index, int collected, t_cub *cub)
 				x++;
 				continue ;
 			}
-			if (collected == 1)
-			{
-				gray = (((color >> 16) & 0xFF) + ((color >> 8) & 0xFF) + (color & 0xFF)) / 3;
-				color = (gray << 16) | (gray << 8) | gray;
-			}
-			put_pixel(cub->screen.width - HUD_MARGE - (index + 1) * (HUD_SIZE + HUD_SPACING) + x, HUD_MARGE + y, color, cub);
+			draw_hud_col_color(&color, collected, cub);
+			put_pixel(cub->screen.width - HUD_MARGE - (index + 1) * (HUD_SIZE
+					+ HUD_SPACING) + x, HUD_MARGE + y, color, cub);
 			x++;
 		}
-		y++;
 	}
 }
 

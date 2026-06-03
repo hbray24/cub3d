@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_validation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 13:21:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/06/03 10:35:14 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/03 11:41:36 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,20 @@ static void	player_info(int i, int j, t_para *para)
 	para->nb_player++;
 }
 
-static int	is_border(char **map, int y, int x)
-{
-	if (y == 0 || x == 0)
-		return (1);
-	if (y == count_line(map) - 1)
-		return (1);
-	if ((size_t)(x + 1) >= ft_strlen(map[y]) || (size_t)x >= ft_strlen(map[y - 1])
-		|| (size_t)x >= ft_strlen(map[y + 1]))
-		return (1);
-	if (map[y - 1][x] == ' ' || map[y + 1][x] == ' ' || map[y][x - 1] == ' '
-		|| map[y][x + 1] == ' ')
-		return (1);
-	return (0);
-}
-
-static void	find_info_cut(t_para *para)
+static void	find_info_error(t_para *para)
 {
 	if (para->nb_player != 1)
 		error_pars("Error: wrong number of player\n", para);
 	if (para->nb_exit > 1)
 		error_pars("Error: too many exit\n", para);
+}
+
+static void	find_info_exit(int i, int j, t_para *para)
+{
+	if (!is_border(para->map, i, j))
+		error_pars("Error: exit must be on border", para);
+	para->nb_exit++;
+	para->cub->is_exit = 1;
 }
 
 static void	find_info(t_para *para)
@@ -62,17 +55,12 @@ static void	find_info(t_para *para)
 			else if (para->map[i][j] == 'D')
 				para->nb_door++;
 			else if (para->map[i][j] == 'X')
-			{
-				if (!is_border(para->map, i, j))
-					error_pars("Error: exit must be on border", para);
-				para->nb_exit++;
-				para->cub->is_exit = 1;
-			}
+				find_info_exit(i, j, para);
 			j++;
 		}
 		i++;
 	}
-	find_info_cut(para);
+	find_info_error(para);
 }
 
 void	map_validation(t_para *para)

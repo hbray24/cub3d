@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 17:07:40 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/29 18:27:19 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/06/03 11:25:09 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	init_img_4(t_cub *cub)
 
 static void	init_img_3(t_cub *cub)
 {
-		cub->hud_texture[2].img = mlx_xpm_file_to_image(cub->mlx,
+	cub->hud_texture[2].img = mlx_xpm_file_to_image(cub->mlx,
 			"sprites/character_frame_3.xpm", &cub->hud_texture[2].width,
 			&cub->hud_texture[2].height);
 	cub->hud_texture[2].data = mlx_get_data_addr(cub->hud_texture[2].img,

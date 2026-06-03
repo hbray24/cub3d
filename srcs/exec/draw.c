@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 13:54:39 by hbray             #+#    #+#             */
-/*   Updated: 2026/06/03 10:08:34 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/03 10:54:32 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ void	draw_wall(int start_y, int end, int i, t_cub *cub)
 		tex_pos += step;
 		color = get_color(cub->tex_w_e, cub->dda.texture_x,
 				tex_y);
-		put_pixel(i, y, color, cub);
+		if (color != 0 && color != -16777216)
+			put_pixel(i, y, color, cub);
 		y++;
 	}
 }
