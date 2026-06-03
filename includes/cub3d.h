@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/06/01 14:14:36 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/01 17:19:30 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,14 @@
 # define A 97
 # define S 115
 # define D 100
+# define SPACE 32
 # define LEFT 65361
 # define RIGHT 65363
 # define SPEED 300
 # define ANGLE_SPEED 3.0
 # define PI 3.14159265359
-# define ANIM_SPEED_COL 0.08
-# define ANIM_SPEED_HUD 0.2
 # define LENGTH 50
-# define SPRITE_SCALE 4
-# define SPRITE_HEIGHT 200
-# define BOB_SPEED 2.0
-# define BOB_AMPLITUDE 30.0
+
 
 typedef struct s_para	t_para;
 typedef struct s_col	t_col;
@@ -126,6 +122,9 @@ typedef struct s_cub
 	t_anim				exit_anim;
 	t_para				*para;
 	t_col				*col;
+	int					c_col;
+	int					is_exit;
+	int					exit_open;
 	float				wall_dist[WIDTH];
 	void				*mlx;
 	void				*win;
