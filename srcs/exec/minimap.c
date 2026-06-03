@@ -1,4 +1,4 @@
-	/* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 14:53:28 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/29 11:17:49 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/02 15:29:21 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,30 +55,26 @@ void	draw_direction_ray(t_cub *cub)
 
 void	draw_minimap(t_cub *cub)
 {
-	char	**map;
 	int		y;
 	int		x;
 
-	map = cub->para->map;
-	y = 0;
-	while (map[y])
+	y = -1;
+	while (cub->para->map[++y])
 	{
-		x = 0;
-		while (map[y][x])
+		x = -1;
+		while (cub->para->map[y][++x])
 		{
-			if (map[y][x] == '1')
+			if (cub->para->map[y][x] == '1')
 				draw_square((t_pos){x * 16, y * 16}, 16, 0x0000FF, cub);
-			if (map[y][x] == '0')
+			if (cub->para->map[y][x] == '0')
 				draw_square((t_pos){x * 16, y * 16}, 16, 0xFFFFFF, cub);
-			if (map[y][x] == 'D')
+			if (cub->para->map[y][x] == 'D')
 				draw_square((t_pos){x * 16, y * 16}, 16, 0xFFFF00, cub);
-			if (map[y][x] == 'R')
+			if (cub->para->map[y][x] == 'R')
 				draw_square((t_pos){x * 16, y * 16}, 16, 0x00FF00, cub);
-			if (map[y][x] == 'X')
+			if (cub->para->map[y][x] == 'X')
 				draw_square((t_pos){x * 16, y * 16}, 16, 0xFF0000, cub);
-			x++;
 		}
-		y++;
 	}
 	draw_square((t_pos){(cub->player->x / 4) - 4, (cub->player->y / 4) - 4}, 8,
 		0xFF0000, cub);

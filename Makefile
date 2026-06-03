@@ -100,33 +100,38 @@ SRCS	= \
 		\
 		srcs/main.c\
 		\
-		srcs/parser/parser.c\
-		srcs/parser/parser_map.c\
-		srcs/parser/parser_validation.c\
-		srcs/parser/parser_validation_utils.c\
-		srcs/parser/parser_flood.c\
 		srcs/parser/parser_checker.c\
-		srcs/parser/parser_utils.c\
 		srcs/parser/parser_dispatch.c\
-		srcs/parser/parser_header.c\
+		srcs/parser/parser_flood.c\
 		srcs/parser/parser_header_utils.c\
+		srcs/parser/parser_header.c\
+		srcs/parser/parser_map.c\
+		srcs/parser/parser_utils.c\
+		srcs/parser/parser_validation_utils.c\
+		srcs/parser/parser_validation.c\
+		srcs/parser/parser.c\
 		\
+		srcs/exec/check_wall.c\
 		srcs/exec/color.c\
+		srcs/exec/dda_utils.c\
 		srcs/exec/dda.c\
+		srcs/exec/destroy_mlx.c\
+		srcs/exec/doors.c\
+		srcs/exec/draw.c\
 		srcs/exec/exec.c\
 		srcs/exec/free.c\
 		srcs/exec/keyboard.c\
+		srcs/exec/malloc_struct.c\
 		srcs/exec/minimap.c\
 		srcs/exec/mouvement.c\
     	srcs/exec/setup.c\
-		srcs/exec/destroy_mlx.c\
 		\
-		srcs/animation/animation.c\
-		srcs/animation/setup.c\
-		srcs/animation/hud.c\
-		srcs/animation/collectible.c\
 		srcs/animation/animation_utils.c\
+		srcs/animation/animation.c\
+		srcs/animation/collectible.c\
+		srcs/animation/hud.c\
 		srcs/animation/init_img.c\
+		srcs/animation/setup_animation.c\
 		\
 
 OBJS		= $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)

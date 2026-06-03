@@ -6,11 +6,26 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:38:28 by hbray             #+#    #+#             */
-/*   Updated: 2026/06/01 14:28:19 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/03 10:37:15 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+void	init_win2(t_cub *cub)
+{
+	cub->texture[3].img = mlx_xpm_file_to_image(cub->mlx, cub->para->ea_t,
+			&cub->texture[3].width, &cub->texture[3].height);
+	cub->texture[3].data = mlx_get_data_addr(cub->texture[3].img,
+			&cub->texture[3].bpp, &cub->texture[3].size_line,
+			&cub->texture[3].endian);
+	cub->texture[4].img = mlx_xpm_file_to_image(cub->mlx,
+			"sprites/door_texture.xpm", &cub->texture[4].width,
+			&cub->texture[4].height);
+	cub->texture[4].data = mlx_get_data_addr(cub->texture[4].img,
+			&cub->texture[4].bpp, &cub->texture[4].size_line,
+			&cub->texture[4].endian);
+}
 
 void	init_win(t_cub *cub)
 {
@@ -29,17 +44,7 @@ void	init_win(t_cub *cub)
 	cub->texture[2].data = mlx_get_data_addr(cub->texture[2].img,
 			&cub->texture[2].bpp, &cub->texture[2].size_line,
 			&cub->texture[2].endian);
-	cub->texture[3].img = mlx_xpm_file_to_image(cub->mlx, cub->para->ea_t,
-			&cub->texture[3].width, &cub->texture[3].height);
-	cub->texture[3].data = mlx_get_data_addr(cub->texture[3].img,
-			&cub->texture[3].bpp, &cub->texture[3].size_line,
-			&cub->texture[3].endian);
-	cub->texture[4].img = mlx_xpm_file_to_image(cub->mlx,
-			"sprites/door_texture.xpm", &cub->texture[4].width,
-			&cub->texture[4].height);
-	cub->texture[4].data = mlx_get_data_addr(cub->texture[4].img,
-			&cub->texture[4].bpp, &cub->texture[4].size_line,
-			&cub->texture[4].endian);
+	init_win2(cub);
 }
 
 void	open_win(t_cub *cub)
@@ -71,50 +76,30 @@ void	open_win(t_cub *cub)
 			&cub->screen.size_line, &cub->screen.endian);
 }
 
-t_cub	*create_cub(void)
+int	init_doors(t_cub *cub, t_para *para)
 {
-	t_cub	*cub;
+	int	i;
+	int	j;
+	int	k;
 
-	cub = malloc(sizeof(t_cub));
-	if (!cub)
+	cub->door = malloc(sizeof(t_door) * para->nb_door);
+	if (!cub->door)
+		return (1);
+	ft_memset(cub->door, 0, sizeof(t_door) * para->nb_door);
+	i = -1;
+	k = 0;
+	while (para->map[++i])
 	{
-		write(2, "Error: Malloc failed\n", 22);
-		return (NULL);
+		j = -1;
+		while (para->map[i][++j])
+		{
+			if (para->map[i][j] == 'D')
+			{
+				cub->door[k].x = j;
+				cub->door[k].y = i;
+				k++;
+			}
+		}
 	}
-	ft_memset(cub, 0, sizeof(t_cub));
-	cub->player = create_player();
-	if (!cub->player)
-	{
-		free(cub);
-		return (NULL);
-	}
-	return (cub);
-}
-
-t_player	*create_player(void)
-{
-	t_player	*player;
-
-	player = malloc(sizeof(t_player));
-	if (!player)
-	{
-		write(2, "Error: Malloc failed\n", 22);
-		return (NULL);
-	}
-	ft_memset(player, 0, sizeof(t_player));
-	return (player);
-}
-
-t_para	*create_para(void)
-{
-	t_para	*para;
-
-	para = malloc(sizeof(t_para));
-	if (!para)
-	{
-		write(2, "Error: Malloc failed\n", 22);
-		return (NULL);
-	}
-	ft_memset(para, 0, sizeof(t_para));
-	return (para);
+	return (0);
 }

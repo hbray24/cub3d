@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 10:58:27 by hbray             #+#    #+#             */
-/*   Updated: 2026/06/01 16:44:06 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/06/03 10:34:20 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ int	key_press(int keycode, t_cub *cub)
 	player = cub->player;
 	if (keycode == ESC)
 		close_win(cub);
+	if (keycode == SPACE)
+		open_door(cub);
+	if (keycode == C)
+		mouse(cub);
 	if (keycode == W)
 		player->key_up = true;
 	if (keycode == S)

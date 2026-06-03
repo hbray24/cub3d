@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 10:13:18 by hbray             #+#    #+#             */
-/*   Updated: 2026/06/01 14:23:48 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/02 13:34:43 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	free_cub(t_cub **cub)
 		free((*cub)->col);
 	if ((*cub)->player)
 		free_player(&(*cub)->player);
+	free((*cub)->door);
 	free(*cub);
 }
 

@@ -3,42 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:01:08 by hbray             #+#    #+#             */
-/*   Updated: 2026/05/29 19:09:57 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/06/03 10:08:27 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	init_dda_step(float start_x, t_dda *dda, t_player *player)
+int	check_touch(t_dda *dda, t_cub *cub)
 {
-	ft_memset(dda, 0, sizeof(t_dda));
-	dda->angle_x = cos(start_x);
-	dda->angle_y = sin(start_x);
-	dda->pos_x = player->x / 64;
-	dda->pos_y = player->y / 64;
-	dda->map_x = (int)dda->pos_x;
-	dda->map_y = (int)dda->pos_y;
-	dda->delta_dist_x = fabs(1 / dda->angle_x);
-	dda->delta_dist_y = fabs(1 / dda->angle_y);
-	if (dda->angle_x < 0)
-		dda->step_x = -1;
-	else
-		dda->step_x = 1;
-	if (dda->angle_y < 0)
-		dda->step_y = -1;
-	else
-		dda->step_y = 1;
-	if (dda->angle_x < 0)
-		dda->side_dist_x = (dda->pos_x - dda->map_x) * dda->delta_dist_x;
-	else
-		dda->side_dist_x = (dda->map_x + 1.0 - dda->pos_x) * dda->delta_dist_x;
-	if (dda->angle_y < 0)
-		dda->side_dist_y = (dda->pos_y - dda->map_y) * dda->delta_dist_y;
-	else
-		dda->side_dist_y = (dda->map_y + 1.0 - dda->pos_y) * dda->delta_dist_y;
+	if (dda->map_x < 0 || dda->map_y < 0 || !cub->para->map[dda->map_y]
+		|| !cub->para->map[dda->map_y][dda->map_x])
+	{
+		cub->dda.texture = NORTH;
+		return (1);
+	}
+	if (cub->para->map[dda->map_y][dda->map_x] == 'D' && get_door_lvl(cub,
+			dda->map_x, dda->map_y) < 1.0)
+	{
+		cub->dda.texture = DOOR;
+		return (1);
+	}
+	if (cub->para->map[dda->map_y][dda->map_x] == '1'
+		|| cub->para->map[dda->map_y][dda->map_x] == 'X')
+	{
+		if (cub->para->map[dda->map_y][dda->map_x] == 'X')
+			cub->dda.texture = EXIT;
+		return (1);
+	}
+	return (0);
 }
 
 void	run_dda(t_dda *dda, t_cub *cub)
@@ -48,37 +43,8 @@ void	run_dda(t_dda *dda, t_cub *cub)
 	touch = 0;
 	while (touch == 0)
 	{
-		if (dda->side_dist_x < dda->side_dist_y)
-		{
-			dda->side_dist_x += dda->delta_dist_x;
-			dda->map_x += dda->step_x;
-			dda->side = 0;
-		}
-		else
-		{
-			dda->side_dist_y += dda->delta_dist_y;
-			dda->map_y += dda->step_y;
-			dda->side = 1;
-		}
-		if (dda->map_x < 0 || dda->map_y < 0 || !cub->para->map[dda->map_y]
-			|| !cub->para->map[dda->map_y][dda->map_x])
-		{
-			cub->dda.texture = NORTH;
-			break ;
-		}
-		if (cub->para->map[dda->map_y][dda->map_x] == 'D')
-		{
-			cub->dda.texture = DOOR;
-			touch = 1;
-		}
-		if (cub->para->map[dda->map_y][dda->map_x] == 'X')
-		{
-			cub->dda.texture = EXIT;
-			touch = 1;
-		}
-		if (cub->para->map[dda->map_y][dda->map_x] == '1'
-			|| cub->para->map[dda->map_y][dda->map_x] == 'X')
-			touch = 1;
+		step_dda(dda);
+		touch = check_touch(dda, cub);
 	}
 }
 
@@ -105,35 +71,6 @@ void	calcul_wall(float ray_dist, t_cub *cub, float start_x, int i)
 	draw_floor(end, i, cub);
 }
 
-void	calcul_dist_wall(float *ray_dist, float *wall_x, t_cub *cub)
-{
-	if (cub->dda.side == 0)
-	{
-		*ray_dist = cub->dda.side_dist_x - cub->dda.delta_dist_x;
-		*wall_x = cub->dda.pos_y + *ray_dist * cub->dda.angle_y;
-		if (cub->dda.texture != DOOR && cub->dda.texture != EXIT)
-		{
-			if (cub->dda.step_x > 0)
-				cub->dda.texture = WEST;
-			else
-				cub->dda.texture = EAST;
-		}
-	}
-	else
-	{
-		*ray_dist = cub->dda.side_dist_y - cub->dda.delta_dist_y;
-		*wall_x = cub->dda.pos_x + *ray_dist * cub->dda.angle_x;
-		if (cub->dda.texture != DOOR && cub->dda.texture != EXIT)
-		{
-			if (cub->dda.step_y > 0)
-				cub->dda.texture = NORTH;
-			else
-				cub->dda.texture = SOUTH;
-		}
-	}
-	*wall_x -= floor(*wall_x);
-}
-
 void	draw_line(t_player *player, t_cub *cub, float start_x, int i)
 {
 	float	ray_dist;
@@ -142,7 +79,7 @@ void	draw_line(t_player *player, t_cub *cub, float start_x, int i)
 	init_dda_step(start_x, &cub->dda, player);
 	run_dda(&cub->dda, cub);
 	calcul_dist_wall(&ray_dist, &wall_x, cub);
-  if (cub->dda.texture == EXIT)
+	if (cub->dda.texture == EXIT)
 		cub->dda.texture_x = (int)(wall_x * cub->exit_texture[0].width);
 	else
 		cub->dda.texture_x = (int)(wall_x

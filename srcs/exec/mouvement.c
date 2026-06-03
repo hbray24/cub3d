@@ -3,32 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   mouvement.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 15:51:54 by hbray             #+#    #+#             */
-/*   Updated: 2026/06/01 15:59:48 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/06/03 10:34:27 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	wall(t_cub *cub, float x, float y)
+void	mouse(t_cub *cub)
 {
-	int	marge;
-
-	marge = 16;
-	if (cub->para->map[(int)(y - (marge / 2)) / 64][(int)(x - (marge / 2))
-		/ 64] == '1' || cub->para->map[(int)(y - (marge / 2)) / 64][(int)(x
-			+ (marge / 2)) / 64] == '1' || cub->para->map[(int)(y + (marge / 2))
-		/ 64][(int)(x - (marge / 2)) / 64] == '1' || cub->para->map[(int)(y
-			+ (marge / 2)) / 64][(int)(x + (marge / 2)) / 64] == '1'
-		|| cub->para->map[(int)(y - (marge / 2)) / 64][(int)(x - (marge / 2))
-		/ 64] == 'X' || cub->para->map[(int)(y - (marge / 2)) / 64][(int)(x
-			+ (marge / 2)) / 64] == 'X' || cub->para->map[(int)(y + (marge / 2))
-		/ 64][(int)(x - (marge / 2)) / 64] == 'X' || cub->para->map[(int)(y
-			+ (marge / 2)) / 64][(int)(x + (marge / 2)) / 64] == 'X')
-		return (1);
-	return (0);
+	cub->mouse_locked = (cub->mouse_locked + 1) % 2;
+	if (cub->mouse_locked == 0)
+		mlx_mouse_show(cub->mlx, cub->win);
+	if (cub->mouse_locked == 1)
+		mlx_mouse_hide(cub->mlx, cub->win);
 }
 
 void	rotate_player(t_player *player, double frametime)
@@ -42,9 +32,9 @@ void	rotate_player(t_player *player, double frametime)
 void	move_x(t_cub *cub, float cos_angle, float sin_angle, double frametime)
 {
 	t_player	*player;
-	float	next_x;
-	float	next_y;
-	double	speed;
+	float		next_x;
+	float		next_y;
+	double		speed;
 
 	player = cub->player;
 	speed = SPEED * frametime;
@@ -71,9 +61,9 @@ void	move_x(t_cub *cub, float cos_angle, float sin_angle, double frametime)
 void	move_y(t_cub *cub, float cos_angle, float sin_angle, double frametime)
 {
 	t_player	*player;
-	float	next_x;
-	float	next_y;
-	double	speed;
+	float		next_x;
+	float		next_y;
+	double		speed;
 
 	player = cub->player;
 	speed = SPEED * frametime;

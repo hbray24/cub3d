@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 13:58:29 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/29 16:54:58 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/02 13:53:18 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,20 @@ static void	setup(int ac, char **av, t_para *para)
 int	mouse_handler(int x, int y, t_cub *cub)
 {
 	int	delta_x;
-	float	rot_speed;
+	int	center_x;
+	int	center_y;
 
-	(void)y;
-	if(x == WIDTH / 2)
+	if (cub->mouse_locked == 0)
 		return (0);
-	delta_x = x - (WIDTH / 2);
-	rot_speed = delta_x * 0.0001;
-	cub->player->angle += rot_speed;
-	mlx_mouse_move(cub->mlx, cub->win, WIDTH / 2, HEIGHT / 2);
-	return (0);	
+	(void)y;
+	center_x = cub->screen.width / 2;
+	center_y = cub->screen.height / 2;
+	if (x == center_x)
+		return (0);
+	delta_x = x - center_x;
+	cub->player->angle += delta_x * 0.0002;
+	mlx_mouse_move(cub->mlx, cub->win, center_x, center_y);
+	return (0);
 }
 
 int	main(int ac, char **av)
@@ -59,19 +63,16 @@ int	main(int ac, char **av)
 	cub->para = para;
 	setup(ac, av, para);
 	parsing(para);
-	if (!cub)
-		return (1);
+	if (init_doors(cub, para))
+		return (all_free(&para, &cub), 1);
 	open_win(cub);
 	pixar(cub);
-	mlx_mouse_move(cub->mlx, cub->win, WIDTH / 2, HEIGHT / 2);
-	mlx_mouse_hide(cub->mlx, cub->win);
 	mlx_hook(cub->win, 17, 0, (int (*)(void))(void *)close_win, cub);
 	mlx_hook(cub->win, 2, 1L << 0, (int (*)(void))(void *)key_press, cub);
 	mlx_hook(cub->win, 3, 1L << 1, (int (*)(void))(void *)key_release,
 		cub->player);
 	mlx_hook(cub->win, 6, 1L << 6, (int (*)(void))(void *)mouse_handler, cub);
 	mlx_loop_hook(cub->mlx, (int (*)(void))(void *)draw_loop, cub);
-	mlx_mouse_move(cub->mlx, cub->win, WIDTH / 2, HEIGHT / 2);
 	mlx_loop(cub->mlx);
 	all_free(&para, &cub);
 	return (0);

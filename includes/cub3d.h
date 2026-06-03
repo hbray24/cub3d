@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/06/01 17:19:30 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/06/03 10:36:11 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define S 115
 # define D 100
 # define SPACE 32
+# define C 99
 # define LEFT 65361
 # define RIGHT 65363
 # define SPEED 300
@@ -108,6 +109,16 @@ typedef struct s_pos
 	int					y;
 }						t_pos;
 
+typedef struct s_door
+{
+	int					x;
+	int					y;
+	int					state;
+	float				open_lvl;
+	double				timer;
+	bool				is_open;
+}						t_door;
+
 typedef struct s_cub
 {
 	t_player			*player;
@@ -125,11 +136,13 @@ typedef struct s_cub
 	int					c_col;
 	int					is_exit;
 	int					exit_open;
+	t_door				*door;
 	float				wall_dist[WIDTH];
 	void				*mlx;
 	void				*win;
 	double				time;
 	double				old_time;
+	int					mouse_locked;
 }						t_cub;
 
 t_cub					*create_cub(void);
@@ -153,5 +166,17 @@ int						key_release(int keycode, t_player *player);
 int						draw_loop(t_cub *cub);
 void					destroy_image_1(t_cub **cub);
 void					destroy_image_2(t_cub **cub);
+void					open_door(t_cub *cub);
+void					update_doors(t_cub *cub, double frametime);
+int						init_doors(t_cub *cub, t_para *para);
+void					mouse(t_cub *cub);
+float					get_door_lvl(t_cub *cub, int x, int y);
+int						get_door_start_y(t_cub *cub, int start_y);
+void					init_dda_step(float start_x, t_dda *dda,
+							t_player *player);
+void					step_dda(t_dda *dda);
+void					calcul_dist_wall(float *ray_dist, float *wall_x,
+							t_cub *cub);
+int						wall(t_cub *cub, float x, float y);
 
 #endif
