@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/06/03 10:36:11 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/04 11:58:11 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 # include <unistd.h>
 
 # define ESC 65307
-
 # define WIDTH 4096
 # define HEIGHT 720
 # define W 119
@@ -44,6 +43,10 @@
 # define ANGLE_SPEED 3.0
 # define PI 3.14159265359
 # define LENGTH 50
+# define MINI_MAP_SIZE 252
+# define MINI_MAP_CELL 12
+# define MINI_MAP_PLAYER 8
+
 
 
 typedef struct s_para	t_para;
