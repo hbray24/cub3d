@@ -53,6 +53,7 @@ make re
 ### References
 [Lode's Raycasting Tutorial](https://lodev.org/cgtutor/raycasting.html) — main reference for the DDA algorithm and raycasting engine
 [Wolfenstein 3D](http://users.atw.hu/wolf3d/) — Original game test and inspired
+[Raycasting in C | 42 Cub3d](https://www.youtube.com/watch?v=G9i78WoBBIU&t=7s) — Help understanding the subject
 [MiniLibX Documentation](https://harm-smits.github.io/42docs/libs/minilibx) — MiniLibX usage and functions
 
 ### AI usage
