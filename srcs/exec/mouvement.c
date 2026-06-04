@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 15:51:54 by hbray             #+#    #+#             */
-/*   Updated: 2026/06/03 10:34:27 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/04 13:27:51 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ void	mouse(t_cub *cub)
 	if (cub->mouse_locked == 0)
 		mlx_mouse_show(cub->mlx, cub->win);
 	if (cub->mouse_locked == 1)
+	{
 		mlx_mouse_hide(cub->mlx, cub->win);
+		mlx_mouse_move(cub->mlx, cub->win, cub->screen.width / 2,
+			cub->screen.height / 2);
+	}
 }
 
 void	rotate_player(t_player *player, double frametime)

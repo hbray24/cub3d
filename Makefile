@@ -117,6 +117,7 @@ SRCS	= \
 		srcs/exec/dda.c\
 		srcs/exec/destroy_mlx.c\
 		srcs/exec/doors.c\
+		srcs/exec/doors2.c\
 		srcs/exec/draw.c\
 		srcs/exec/exec.c\
 		srcs/exec/free.c\

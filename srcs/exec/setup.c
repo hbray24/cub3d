@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:38:28 by hbray             #+#    #+#             */
-/*   Updated: 2026/06/03 10:37:15 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/04 10:23:22 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,16 @@ void	open_win(t_cub *cub)
 			&cub->screen.size_line, &cub->screen.endian);
 }
 
+int	init_ray_mem(t_cub *cub, t_para *para)
+{
+	cub->ray_mem->x = malloc(sizeof(int) * para->nb_door);
+	cub->ray_mem->y = malloc(sizeof(int) * para->nb_door);
+	cub->ray_mem->dda = malloc(sizeof(t_dda) * para->nb_door);
+	if (!cub->ray_mem->x || !cub->ray_mem->y || !cub->ray_mem->dda)
+		return (1);
+	return (0);
+}
+
 int	init_doors(t_cub *cub, t_para *para)
 {
 	int	i;
@@ -83,7 +93,7 @@ int	init_doors(t_cub *cub, t_para *para)
 	int	k;
 
 	cub->door = malloc(sizeof(t_door) * para->nb_door);
-	if (!cub->door)
+	if (!cub->door || init_ray_mem(cub, para) == 1)
 		return (1);
 	ft_memset(cub->door, 0, sizeof(t_door) * para->nb_door);
 	i = -1;
