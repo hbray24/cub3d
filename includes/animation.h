@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 14:55:10 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/06/03 10:36:46 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/04 11:44:37 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,13 @@
 # define HUD_SPACING 5
 # define HUD_MARGE 10
 
-# define CLOSE 0
-# define OPENING 1
-# define OPEN 2
-# define CLOSING 3
+typedef enum e_state
+{
+	CLOSE,
+	OPENING,
+	OPEN,
+	CLOSING,
+}						t_state;
 
 typedef struct s_cub	t_cub;
 typedef struct s_anim

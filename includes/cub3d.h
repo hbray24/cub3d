@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/06/03 10:36:11 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/04 14:43:05 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@
 # define ANGLE_SPEED 3.0
 # define PI 3.14159265359
 # define LENGTH 50
-
+# define MAX_DIST 99999.0
 
 typedef struct s_para	t_para;
 typedef struct s_col	t_col;
 
-typedef enum s_dir
+typedef enum e_dir
 {
 	NORTH,
 	SOUTH,
@@ -109,6 +109,21 @@ typedef struct s_pos
 	int					y;
 }						t_pos;
 
+typedef struct s_door_cal
+{
+	float				dist;
+	float				door_dist;
+	float				door_wall_x;
+	float				end;
+	float				start_y;
+	float				door_height;
+	float				lvl;
+	float				step;
+	float				tex_pos;
+	int					texture_x;
+	int					draw_start_y;
+}						t_door_cal;
+
 typedef struct s_door
 {
 	int					x;
@@ -116,8 +131,21 @@ typedef struct s_door
 	int					state;
 	float				open_lvl;
 	double				timer;
-	bool				is_open;
+	int					hit_door;
+	int					door_map_x;
+	int					door_map_y;
+	float				door_dist_screen[WIDTH];
+	int					door_solid_top[WIDTH];
+	t_dda				door_dda;
 }						t_door;
+
+typedef struct s_ray
+{
+	int					count;
+	int					*x;
+	int					*y;
+	t_dda				*dda;
+}						t_ray;
 
 typedef struct s_cub
 {
@@ -133,10 +161,11 @@ typedef struct s_cub
 	t_anim				exit_anim;
 	t_para				*para;
 	t_col				*col;
+	t_door				*door;
+	t_ray				*ray_mem;
 	int					c_col;
 	int					is_exit;
 	int					exit_open;
-	t_door				*door;
 	float				wall_dist[WIDTH];
 	void				*mlx;
 	void				*win;
@@ -148,35 +177,49 @@ typedef struct s_cub
 t_cub					*create_cub(void);
 t_player				*create_player(void);
 t_para					*create_para(void);
-void					all_free(t_para **para, t_cub **cub);
-void					free_player(t_player **player);
 void					open_win(t_cub *cub);
-void					put_pixel(int x, int y, int color, t_cub *cub);
+
+void					all_free(t_para **para, t_cub **cub);
+int						close_win(t_cub *cub);
+void					destroy_image_1(t_cub **cub);
+void					destroy_image_2(t_cub **cub);
+void					free_player(t_player **player);
+
 void					draw_line(t_player *player, t_cub *cub, float start_x,
 							int i);
 void					draw_minimap(t_cub *cub);
-void					move_player(t_cub *cub, double frametime);
-int						get_color(t_img *img, int x, int y);
 void					draw_wall(int end, int start_y, int i, t_cub *cub);
 void					draw_floor(int end, int i, t_cub *cub);
 void					draw_ceiling(int start_y, int i, t_cub *cub);
-int						close_win(t_cub *cub);
+int						draw_loop(t_cub *cub);
+void					draw_door(t_cub *cub, float start_x, int i, int m);
+int						get_color(t_img *img, int x, int y);
+void					put_pixel(int x, int y, int color, t_cub *cub);
+
 int						key_press(int keycode, t_cub *cub);
 int						key_release(int keycode, t_player *player);
-int						draw_loop(t_cub *cub);
-void					destroy_image_1(t_cub **cub);
-void					destroy_image_2(t_cub **cub);
-void					open_door(t_cub *cub);
+
+void					calc_door_height(t_cub *cub, float start_x,
+							t_door_cal *d, int m);
+void					door_open(t_cub *cub, t_pos pos, double frametime,
+							int i);
 void					update_doors(t_cub *cub, double frametime);
 int						init_doors(t_cub *cub, t_para *para);
-void					mouse(t_cub *cub);
-float					get_door_lvl(t_cub *cub, int x, int y);
 int						get_door_start_y(t_cub *cub, int start_y);
+float					get_door_lvl(t_cub *cub, int x, int y);
+void					open_door(t_cub *cub);
+void					update_doors(t_cub *cub, double frametime);
+int						setup_door_render(t_cub *cub, t_door_cal *d, int m);
+int						is_door(t_cub *cub, int dx, int dy);
+
+void					calcul_dist_wall(float *ray_dist, float *wall_x,
+							t_cub *cub);
 void					init_dda_step(float start_x, t_dda *dda,
 							t_player *player);
 void					step_dda(t_dda *dda);
-void					calcul_dist_wall(float *ray_dist, float *wall_x,
-							t_cub *cub);
+
+void					move_player(t_cub *cub, double frametime);
+void					mouse(t_cub *cub);
 int						wall(t_cub *cub, float x, float y);
 
 #endif

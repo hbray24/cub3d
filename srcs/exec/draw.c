@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 13:54:39 by hbray             #+#    #+#             */
-/*   Updated: 2026/06/03 10:08:34 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/04 14:43:32 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,35 @@ void	draw_floor(int end, int i, t_cub *cub)
 	{
 		put_pixel(i, y, cub->para->floor_c, cub);
 		y++;
+	}
+}
+
+void	draw_door(t_cub *cub, float start_x, int i, int m)
+{
+	t_door_cal	d;
+	int			y;
+	int			tex_y;
+	int			color;
+
+	calc_door_height(cub, start_x, &d, m);
+	if (setup_door_render(cub, &d, m))
+		return ;
+	if (d.door_dist < cub->door->door_dist_screen[i])
+	{
+		cub->door->door_dist_screen[i] = d.door_dist;
+		cub->door->door_solid_top[i] = d.draw_start_y;
+	}
+	y = d.draw_start_y - 1;
+	while (++y < d.end)
+	{
+		tex_y = (int)d.tex_pos;
+		if (tex_y < 0)
+			tex_y = 0;
+		if (tex_y >= cub->texture[DOOR].height)
+			tex_y = cub->texture[DOOR].height - 1;
+		d.tex_pos += d.step;
+		color = get_color(&cub->texture[DOOR], d.texture_x, tex_y);
+		put_pixel(i, y, color, cub);
 	}
 }
 
@@ -69,8 +98,7 @@ void	draw_wall(int start_y, int end, int i, t_cub *cub)
 		if (tex_y >= cub->tex_w_e->height)
 			tex_y = cub->tex_w_e->height - 1;
 		tex_pos += step;
-		color = get_color(cub->tex_w_e, cub->dda.texture_x,
-				tex_y);
+		color = get_color(cub->tex_w_e, cub->dda.texture_x, tex_y);
 		put_pixel(i, y, color, cub);
 		y++;
 	}
