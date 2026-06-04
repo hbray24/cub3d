@@ -6,13 +6,13 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 17:45:50 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/06/03 11:39:25 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/06/03 12:48:04 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static void	draw_hud_col_color(int *color, int collected, t_cub *cub)
+static void	draw_hud_col_color(int *color, int collected)
 {
 	int	gray;
 
@@ -46,7 +46,7 @@ static void	draw_hud_col(int index, int collected, t_cub *cub)
 				x++;
 				continue ;
 			}
-			draw_hud_col_color(&color, collected, cub);
+			draw_hud_col_color(&color, collected);
 			put_pixel(cub->screen.width - HUD_MARGE - (index + 1) * (HUD_SIZE
 					+ HUD_SPACING) + x, HUD_MARGE + y, color, cub);
 			x++;

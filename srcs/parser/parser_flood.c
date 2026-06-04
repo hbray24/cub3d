@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 15:02:33 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/06/03 10:59:23 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/06/03 17:01:03 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static char	**copy_map(char **map, t_para *para)
 		error_pars("Error: malloc failed\n", para);
 	while (map[i])
 	{
+		if (ft_strlen(map[i]) > 1000)
+			error_pars("Error: map too big\n", para);
 		tmp_map[i] = ft_strdup(map[i]);
 		if (!tmp_map[i])
 		{

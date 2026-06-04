@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 14:53:28 by hbray             #+#    #+#             */
-/*   Updated: 2026/06/02 15:29:21 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/04 13:42:47 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,38 +46,64 @@ void	draw_direction_ray(t_cub *cub)
 	i = 0;
 	while (i < LENGTH)
 	{
-		put_pixel((int)(tmp_x / 4), (int)(tmp_y / 4), 0xFF0000, cub);
+		put_pixel(MINI_MAP_SIZE / 2 + (int)(tmp_x - cub->player->x) / (64
+				/ MINI_MAP_CELL), MINI_MAP_SIZE / 2 + (int)(tmp_y
+				- cub->player->y) / (64 / MINI_MAP_CELL), 0xFF0000, cub);
 		tmp_x += dir_x;
 		tmp_y += dir_y;
 		i++;
 	}
 }
 
+static int	choose_color(int map_x, int map_y, t_cub *cub)
+{
+	int	color;
+
+	color = 0x0000FF;
+	if (map_y < 0 || map_y >= count_line(cub->para->map) || map_x < 0
+		|| map_x >= (int)ft_strlen(cub->para->map[map_y]))
+		color = 0x0000FF;
+	else
+	{
+		if (cub->para->map[map_y][map_x] == '1')
+			color = 0x0000FF;
+		if (cub->para->map[map_y][map_x] == '0')
+			color = 0xFFFFFF;
+		if (cub->para->map[map_y][map_x] == 'D')
+			color = 0xFFFF00;
+		if (cub->para->map[map_y][map_x] == 'R')
+			color = 0x00FF00;
+		if (cub->para->map[map_y][map_x] == 'X')
+			color = 0xFF0000;
+	}
+	return (color);
+}
+
 void	draw_minimap(t_cub *cub)
 {
-	int		y;
-	int		x;
+	int	y;
+	int	x;
+	int	map_x;
+	int	map_y;
+	int	color;
 
 	y = -1;
-	while (cub->para->map[++y])
+	while (++y < MINI_MAP_SIZE / MINI_MAP_CELL)
 	{
 		x = -1;
-		while (cub->para->map[y][++x])
+		while (++x < MINI_MAP_SIZE / MINI_MAP_CELL)
 		{
-			if (cub->para->map[y][x] == '1')
-				draw_square((t_pos){x * 16, y * 16}, 16, 0x0000FF, cub);
-			if (cub->para->map[y][x] == '0')
-				draw_square((t_pos){x * 16, y * 16}, 16, 0xFFFFFF, cub);
-			if (cub->para->map[y][x] == 'D')
-				draw_square((t_pos){x * 16, y * 16}, 16, 0xFFFF00, cub);
-			if (cub->para->map[y][x] == 'R')
-				draw_square((t_pos){x * 16, y * 16}, 16, 0x00FF00, cub);
-			if (cub->para->map[y][x] == 'X')
-				draw_square((t_pos){x * 16, y * 16}, 16, 0xFF0000, cub);
+			map_x = (cub->player->x / 64) - (MINI_MAP_SIZE / MINI_MAP_CELL / 2)
+				+ x;
+			map_y = (cub->player->y / 64) - (MINI_MAP_SIZE / MINI_MAP_CELL / 2)
+				+ y;
+			color = choose_color(map_x, map_y, cub);
+			draw_square((t_pos){x * MINI_MAP_CELL, y * MINI_MAP_CELL},
+				MINI_MAP_CELL, color, cub);
 		}
 	}
-	draw_square((t_pos){(cub->player->x / 4) - 4, (cub->player->y / 4) - 4}, 8,
-		0xFF0000, cub);
+	draw_square((t_pos){(MINI_MAP_SIZE / 2) - (MINI_MAP_PLAYER / 2),
+		(MINI_MAP_SIZE / 2) - (MINI_MAP_PLAYER / 2)}, MINI_MAP_PLAYER, 0xFF0000,
+		cub);
 	draw_direction_ray(cub);
-	mlx_put_image_to_window(cub->mlx, cub->win, cub->screen.img, 0, 0);
 }
