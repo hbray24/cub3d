@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/06/05 09:19:25 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/05 12:05:22 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,6 @@ typedef struct s_door
 	int					hit_door;
 	int					door_map_x;
 	int					door_map_y;
-	float				door_dist_screen[WIDTH];
-	int					door_solid_top[WIDTH];
 	t_dda				door_dda;
 }						t_door;
 
@@ -174,6 +172,8 @@ typedef struct s_cub
 	double				time;
 	double				old_time;
 	int					mouse_locked;
+	float				door_dist_screen[WIDTH];
+	int					door_solid_top[WIDTH];
 }						t_cub;
 
 t_cub					*create_cub(void);

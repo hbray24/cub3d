@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:01:08 by hbray             #+#    #+#             */
-/*   Updated: 2026/06/05 09:45:10 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/05 12:06:04 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ void	draw_line(t_player *player, t_cub *cub, float start_x, int i)
 	int		m;
 
 	cub->ray_mem->count = 0;
-	cub->door->door_solid_top[i] = cub->screen.height;
-	cub->door->door_dist_screen[i] = MAX_DIST;
+	cub->door_solid_top[i] = cub->screen.height;
+	cub->door_dist_screen[i] = MAX_DIST;
 	init_dda_step(start_x, &cub->dda, player);
 	run_dda(&cub->dda, cub);
 	calcul_dist_wall(&ray_dist, &wall_x, cub);

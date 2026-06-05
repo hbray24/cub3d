@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collectible.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 15:22:27 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/06/05 09:06:35 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/05 12:06:37 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static void	render_collectible_y(float texture_x, int x, t_cub *cub, t_col *col)
 	{
 		if (y >= cub->screen.height || x >= cub->screen.width)
 			break ;
-		if (col->dist / 64 > cub->door->door_dist_screen[x]
-			&& y >= cub->door->door_solid_top[x])
+		if (col->dist / 64 > cub->door_dist_screen[x]
+			&& y >= cub->door_solid_top[x])
 			continue ;
 		texture_y = (y - start_y) / col->sprite_height
 			* cub->col_texture[0].height;

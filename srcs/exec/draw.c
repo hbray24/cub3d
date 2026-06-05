@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 13:54:39 by hbray             #+#    #+#             */
-/*   Updated: 2026/06/04 14:54:53 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/05 12:06:14 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ void	draw_door(t_cub *cub, float start_x, int i, int m)
 	calc_door_height(cub, start_x, &d, m);
 	if (setup_door_render(cub, &d, m))
 		return ;
-	if (d.door_dist < cub->door->door_dist_screen[i])
+	if (d.door_dist < cub->door_dist_screen[i])
 	{
-		cub->door->door_dist_screen[i] = d.door_dist;
-		cub->door->door_solid_top[i] = d.draw_start_y;
+		cub->door_dist_screen[i] = d.door_dist;
+		cub->door_solid_top[i] = d.draw_start_y;
 	}
 	y = d.draw_start_y - 1;
 	while (++y < d.end)
