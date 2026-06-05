@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collectible.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 15:22:27 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/06/04 15:01:49 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/06/05 09:06:35 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,22 @@ static void	render_collectible_y(float texture_x, int x, t_cub *cub, t_col *col)
 
 	start_y = cub->screen.height * 0.6 + col->bob;
 	end_y = start_y + col->sprite_height;
-	y = start_y;
-	if (y < 0)
-		y = 0;
-	while (y < end_y)
+	y = (int)start_y - 1;
+	if (y < -1)
+		y = -1;
+	while (++y < end_y)
 	{
 		if (y >= cub->screen.height || x >= cub->screen.width)
 			break ;
 		if (col->dist / 64 > cub->door->door_dist_screen[x]
 			&& y >= cub->door->door_solid_top[x])
-		{
-			y++;
 			continue ;
-		}
 		texture_y = (y - start_y) / col->sprite_height
 			* cub->col_texture[0].height;
 		color = get_color(&cub->col_texture[col->anim.current_frame], texture_x,
 				texture_y);
 		if (color != 0 && color != -16777216)
 			put_pixel(x, y, color, cub);
-		y++;
 	}
 }
 
@@ -54,25 +50,18 @@ static void	render_collectible_x(t_cub *cub, t_col *col)
 
 	start_x = col->sprite_screen_x - (col->sprite_height / 2);
 	end_x = col->sprite_screen_x + (col->sprite_height / 2);
-	x = start_x;
-	if (x < 0)
-		x = 0;
-	while (x < end_x)
+	x = (int)start_x - 1;
+	if (x < -1)
+		x = -1;
+	while (++x < end_x)
 	{
 		if (x < 0 || x >= cub->screen.width)
-		{
-			x++;
 			continue ;
-		}
 		if (col->dist / 64 > cub->wall_dist[x])
-		{
-			x++;
 			continue ;
-		}
 		texture_x = (x - start_x) / col->sprite_height
 			* cub->col_texture[0].width;
 		render_collectible_y(texture_x, x, cub, col);
-		x++;
 	}
 }
 

@@ -6,24 +6,11 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 15:51:54 by hbray             #+#    #+#             */
-/*   Updated: 2026/06/04 13:27:51 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/05 09:18:54 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-void	mouse(t_cub *cub)
-{
-	cub->mouse_locked = (cub->mouse_locked + 1) % 2;
-	if (cub->mouse_locked == 0)
-		mlx_mouse_show(cub->mlx, cub->win);
-	if (cub->mouse_locked == 1)
-	{
-		mlx_mouse_hide(cub->mlx, cub->win);
-		mlx_mouse_move(cub->mlx, cub->win, cub->screen.width / 2,
-			cub->screen.height / 2);
-	}
-}
 
 void	rotate_player(t_player *player, double frametime)
 {

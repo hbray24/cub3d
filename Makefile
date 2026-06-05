@@ -124,6 +124,7 @@ SRCS	= \
 		srcs/exec/keyboard.c\
 		srcs/exec/malloc_struct.c\
 		srcs/exec/minimap.c\
+		srcs/exec/mouse.c\
 		srcs/exec/mouvement.c\
     	srcs/exec/setup.c\
 		\

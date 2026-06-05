@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 10:13:18 by hbray             #+#    #+#             */
-/*   Updated: 2026/06/04 11:00:05 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/05 09:20:49 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,29 +71,4 @@ void	all_free(t_para **para, t_cub **cub)
 {
 	free_para(para);
 	free_cub(cub);
-}
-
-int	close_win(t_cub *cub)
-{
-	t_para	*para_tmp;
-	void	*mlx_tmp;
-
-	para_tmp = NULL;
-	mlx_tmp = NULL;
-	if (cub)
-	{
-		para_tmp = cub->para;
-		mlx_tmp = cub->mlx;
-	}
-	if (cub && cub->screen.img)
-		mlx_destroy_image(cub->mlx, cub->screen.img);
-	if (cub && cub->win)
-		mlx_destroy_window(cub->mlx, cub->win);
-	all_free(&para_tmp, &cub);
-	if (mlx_tmp)
-	{
-		mlx_destroy_display(mlx_tmp);
-		free(mlx_tmp);
-	}
-	exit(0);
 }

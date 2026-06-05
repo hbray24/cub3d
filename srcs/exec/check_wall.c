@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_wall.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:13:26 by hbray             #+#    #+#             */
-/*   Updated: 2026/06/04 11:59:37 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/06/05 08:55:00 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	check_collision(t_cub *cub, float x, float y)
 	c = cub->para->map[map_y][map_x];
 	if (c == '1' || c == 'X')
 		return (1);
-	if (c == 'D' && get_door_lvl(cub, map_x, map_y) < 0.8)
+	if (c == 'D' && get_door_lvl(cub, map_x, map_y) < 1.0)
 		return (1);
 	return (0);
 }

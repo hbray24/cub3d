@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 15:11:12 by hbray             #+#    #+#             */
-/*   Updated: 2026/06/04 14:28:05 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/05 09:52:29 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	door_open(t_cub *cub, t_pos pos, double frametime, int i)
 {
+	(void)pos;
 	if (cub->door[i].state == OPENING)
 	{
 		cub->door[i].open_lvl += (1.5 * frametime);
@@ -27,8 +28,8 @@ void	door_open(t_cub *cub, t_pos pos, double frametime, int i)
 	else if (cub->door[i].state == OPEN)
 	{
 		cub->door[i].timer += frametime;
-		if (cub->door[i].timer > 3.0 && !(pos.x == cub->door[i].x
-				&& pos.y == cub->door[i].y))
+		if (cub->door[i].timer > 3.0 && !is_door(cub, cub->door[i].x,
+				cub->door[i].y))
 			cub->door[i].state = CLOSING;
 	}
 }
@@ -54,7 +55,7 @@ int	setup_door_render(t_cub *cub, t_door_cal *d, int m)
 	int	offset;
 
 	d->lvl = get_door_lvl(cub, cub->ray_mem->x[m], cub->ray_mem->y[m]);
-	if (d->lvl >= 1.0)
+	if (d->lvl == 1.0)
 		return (1);
 	offset = (int)(d->door_height * d->lvl);
 	d->draw_start_y = d->start_y + offset;

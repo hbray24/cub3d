@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:01:08 by hbray             #+#    #+#             */
-/*   Updated: 2026/06/04 13:25:45 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/05 09:45:10 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_touch(t_dda *dda, t_cub *cub)
 		return (cub->dda.texture = NORTH, 1);
 	if (cub->para->map[dda->map_y][dda->map_x] == 'D')
 	{
-		if (get_door_lvl(cub, dda->map_x, dda->map_y) >= 1.0)
+		if (get_door_lvl(cub, dda->map_x, dda->map_y) == 1.0)
 			return (0);
 		if (cub->ray_mem->count < cub->para->nb_door)
 		{

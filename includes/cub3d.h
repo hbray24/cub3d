@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/06/04 14:56:41 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/05 09:19:25 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,7 +220,8 @@ void					init_dda_step(float start_x, t_dda *dda,
 void					step_dda(t_dda *dda);
 
 void					move_player(t_cub *cub, double frametime);
-void					mouse(t_cub *cub);
 int						wall(t_cub *cub, float x, float y);
+void					mouse(t_cub *cub);
+int						mouse_handler(int x, int y, t_cub *cub);
 
 #endif

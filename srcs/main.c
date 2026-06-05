@@ -6,7 +6,7 @@
 /*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 13:58:29 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/06/04 10:08:25 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/05 09:21:03 by hbray            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,29 @@ static void	setup(int ac, char **av, t_para *para)
 		error_pars("Usage: path/name_map.cub\n", para);
 }
 
-int	mouse_handler(int x, int y, t_cub *cub)
+int	close_win(t_cub *cub)
 {
-	int	delta_x;
-	int	center_x;
-	int	center_y;
+	t_para	*para_tmp;
+	void	*mlx_tmp;
 
-	if (cub->mouse_locked == 0)
-		return (0);
-	(void)y;
-	center_x = cub->screen.width / 2;
-	center_y = cub->screen.height / 2;
-	if (x == center_x)
-		return (0);
-	delta_x = x - center_x;
-	cub->player->angle += delta_x * 0.0002;
-	mlx_mouse_move(cub->mlx, cub->win, center_x, center_y);
-	return (0);
+	para_tmp = NULL;
+	mlx_tmp = NULL;
+	if (cub)
+	{
+		para_tmp = cub->para;
+		mlx_tmp = cub->mlx;
+	}
+	if (cub && cub->screen.img)
+		mlx_destroy_image(cub->mlx, cub->screen.img);
+	if (cub && cub->win)
+		mlx_destroy_window(cub->mlx, cub->win);
+	all_free(&para_tmp, &cub);
+	if (mlx_tmp)
+	{
+		mlx_destroy_display(mlx_tmp);
+		free(mlx_tmp);
+	}
+	exit(0);
 }
 
 int	main(int ac, char **av)
