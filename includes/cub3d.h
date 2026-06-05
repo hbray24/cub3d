@@ -6,7 +6,7 @@
 /*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 11:00:06 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/06/05 12:05:22 by mmusquer         ###   ########.fr       */
+/*   Updated: 2026/06/05 13:07:39 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,7 @@ void					free_player(t_player **player);
 void					draw_line(t_player *player, t_cub *cub, float start_x,
 							int i);
 void					draw_minimap(t_cub *cub);
-void					draw_wall(int end, int start_y, int i, t_cub *cub);
+void					draw_wall(int start_y, int end, int i, t_cub *cub);
 void					draw_floor(int end, int i, t_cub *cub);
 void					draw_ceiling(int start_y, int i, t_cub *cub);
 int						draw_loop(t_cub *cub);

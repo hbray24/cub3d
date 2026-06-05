@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_header_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 17:00:15 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/05/27 11:34:54 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/05 13:31:57 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,20 +59,20 @@ void	verif_color(char **tab, t_para *para)
 	while (tab[i])
 		i++;
 	if (i != 3)
-		error_pars("Error: wrong color format\n", para);
+		end_split_color(tab, para);
 	i = 0;
 	while (tab[i])
 	{
 		if (tab[i][0] == '\0')
-			error_pars("Error: wrong color format\n", para);
+			end_split_color(tab, para);
 		j = 0;
 		while (tab[i][j])
 		{
 			if (tab[i][j] < '0' || tab[i][j] > '9')
-				error_pars("Error: wrong color format\n", para);
+				end_split_color(tab, para);
 			j++;
 			if (j > 3)
-				error_pars("Error: wrong color format\n", para);
+				end_split_color(tab, para);
 		}
 		i++;
 	}

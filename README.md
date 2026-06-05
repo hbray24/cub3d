@@ -24,6 +24,7 @@ make re
 ./cub3d maps/map_c.cub
 ./cub3d maps/map_medium.cub
 ./cub3d maps/map_cool.cub
+valgrind --leak-check=full --suppressions=mlx.supp ./cub3D maps/invalid/map_cool.cub
 ```
 
 ### Controls
