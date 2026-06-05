@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbray <hbray@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmusquer <mmusquer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 13:58:29 by mmusquer          #+#    #+#             */
-/*   Updated: 2026/06/05 09:21:03 by hbray            ###   ########.fr       */
+/*   Updated: 2026/06/05 10:01:43 by mmusquer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	setup(int ac, char **av, t_para *para)
 	para->floor_c = -1;
 	para->ceiling_c = -1;
 	if (ac != 2)
-		error_pars("Error: too many arguments\n", para);
+		error_pars("Error: invalid arguments\n", para);
 	para->path = av[1];
 	i = ft_strlen(para->path);
 	if (i < 5)
