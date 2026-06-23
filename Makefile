@@ -21,7 +21,7 @@
 
 NAME		= cub3D
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -g3
+CFLAGS		= -Wall -Wextra -Werror -g3 -O3
 VALGRIND	= valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes
 RM			= rm -f
 MLX_DIR		= ./minilibx-linux
